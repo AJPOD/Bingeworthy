@@ -1,6 +1,7 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 # Create your models here.
@@ -21,16 +22,33 @@ class UserAccount(models.Model):  ## called user because User is already a defau
 class Show(models.Model):
     title = models.CharField(max_length=60)
     genre = models.CharField(max_length=30)
-    star_rating = models.FloatField()
-    like_ration = models.IntegerField()
     blurb = models.CharField(max_length=200)
     starring = models.CharField(max_length=100)
-    picture = models.ImageField()
+    picture = models.ImageField(upload_to='show_images', blank=True)
     platform = models.CharField(max_length=30)
-    views_total = models.IntegerField()
-    ep_runtime = models.IntegerField()
-    num_episodes = models.IntegerField()
-    num_season = models.IntegerField()
+
+    @property
+    def star_rating(self):
+        stars=0
+        for r in Review.objects.filter(show__exact=self):
+            stars+= r.star_rating
+        return stars/Review.objects.filter(show__exact=self).count()
+
+    @property
+    def like_ratio(self):
+        likes=0
+        for v in Viewership.objects.filter(show__exact=self):
+            if v.judgement:
+                likes+=1
+        return round(likes/Viewership.objects.filter(show__exact=self).count(), 2)*100
+    
+    @property
+    def views_total(self):
+        return Viewership.objects.filter(show__exact=self).count()
+
+    ep_runtime = models.IntegerField(validators=[MinValueValidator(0)])
+    num_episodes = models.IntegerField(validators=[MinValueValidator(1)])
+    num_season = models.IntegerField(validators=[MinValueValidator(1)])
     year_released = models.IntegerField()
     
     viewers = models.ManyToManyField(UserAccount, through='Viewership') # M-N field with judgement variable
@@ -56,7 +74,7 @@ class Review(models.Model):
     # namely using UserAccount as foreign key.
     # using related_name solves the conflict which stopped the migration working
     reviewer = models.ForeignKey(UserAccount, related_name='reviewer_user')
-    star_rating = models.IntegerField()
+    star_rating = models.IntegerField(validators=[MinValueValidator(0),MaxValueValidator(10)])
     review_body = models.CharField(max_length=1000)
     
     votes = models.ManyToManyField(UserAccount, through='VotesOnReview', related_name='voter_user')
@@ -68,6 +86,8 @@ class Review(models.Model):
         # doesn't work if you declare up and down on same line
         up = 0
         down = 0
+        # don't question the following code, took me forever and a lot of 
+        # python shell pain to get it so let's just pray it works
         for v in self.votes.all():
             if VotesOnReview.objects.get(voter__exact=v, review__exact=self).judgement == True:
                 up+=1
