@@ -36,7 +36,7 @@ class Show(models.Model):
     viewers = models.ManyToManyField(UserAccount, through='Viewership') # M-N field with judgement variable
 
     def __str__(self):
-        return self.name 
+        return self.title 
 
 class Viewership(models.Model):
     # the whole idea of this and especially models.CASCADE part is from the django docs
@@ -65,9 +65,11 @@ class Review(models.Model):
     # taken from a reddit thread https://www.reddit.com/r/django/comments/8tyv4n/calculated_model_fields/
     @property
     def upvote_count(self):
-        up,down=0
+        # doesn't work if you declare up and down on same line
+        up = 0
+        down = 0
         for v in self.votes.all():
-            if v.judgement == True:
+            if VotesOnReview.objects.get(voter__exact=v, review__exact=self).judgement == True:
                 up+=1
             else:
                 down+=1
@@ -75,7 +77,7 @@ class Review(models.Model):
 
 
     def __str__(self):
-        return self.name
+        return self.title
 
 class VotesOnReview(models.Model):
     voter = models.ForeignKey(UserAccount, on_delete = models.CASCADE)
