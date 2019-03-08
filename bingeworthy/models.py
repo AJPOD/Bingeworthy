@@ -56,9 +56,9 @@ class Show(models.Model):
     def __str__(self):
         return self.title 
 		
-	def save(self, *args, **kwargs):
-		self.slug = slugify(self.name)
-		super(Show, self).save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+	self.slug = slugify(self.name)
+	super(Show, self).save(*args, **kwargs)
 
 class Viewership(models.Model):
     # the whole idea of this and especially models.CASCADE part is from the django docs
