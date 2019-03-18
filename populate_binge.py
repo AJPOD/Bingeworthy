@@ -22,7 +22,7 @@ def populate():
 			show["year_released"])
 	
 #######################user list begins here#################################
-	userID = 1
+
 	ajpod_test = {"username": "ajpod", "password":"ajpodtest"}
 	gemma_test = {"username": "gemma", "password":"gemmatest"}
 	
@@ -30,12 +30,11 @@ def populate():
 	print(users)
 	
 	for user in users:
-		user_added = add_user(user["username"], user["password"], userID)
-		userID += 1
+		user_added = add_user(user["username"], user["password"])
 	
 ####################review list begins here####################################
 
-	office_good = {"reviewer": "ajpod", "title": "It's good", "show": Show.objects.get(title = "The Office (US)"), "star_rating": 8,
+	office_good = {"reviewer": UserAccount.objects.get(user__username = "ajpod"), "title": "It's good", "show": Show.objects.get(title = "The Office (US)"), "star_rating": 8,
 	"review_body": "I thought this show was great, best ive watched in a long time"}
 	
 	reviews = [office_good]
@@ -71,14 +70,15 @@ num_season, year_released):
 	show.save()
 	return show
 	
-def add_user(username, password, id):
-	u = UserAccount.objects.get_or_create(user__username = username, user__password = password)[0]
-	print(u)
+def add_user(username, password):
+	u = UserAccount.objects.get_or_create(user__username = username)[0]
+	print("TEST")
+	u.user__password = password
 	u.save()
 	return u
 	
 def add_review(reviewer, title, show, star_rating, review_body):
-	review = Review.objects.get_or_create(reviewer = UserAccount.objects.get(user__username = reviewer), title = title,
+	review = Review.objects.get_or_create(reviewer = reviewer, title = title,
 	show = show, star_rating = star_rating, review_body = review_body)[0]
 	review.save()
 	return review

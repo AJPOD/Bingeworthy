@@ -12,8 +12,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 # Maybe add Meta subclasses like in Rango
 
 class UserAccount(models.Model):  ## called user because User is already a default thing imported above
-    user = models.OneToOneField(User)
-    # username = user.username
+    user = models.OneToOneField(User, primary_key = True)
 
     picture = models.ImageField(upload_to='profile_images', blank=True)
 
@@ -40,6 +39,7 @@ class Show(models.Model):
             return stars/Review.objects.filter(show__exact=self).count()
         else:
             return 0
+
     @property
     def like_ratio(self):
         likes=0
@@ -50,7 +50,7 @@ class Show(models.Model):
             return round(likes/Viewership.objects.filter(show__exact=self).count(), 2)*100
         else:
             return 0
-    
+
     @property
     def views_total(self):
         return Viewership.objects.filter(show__exact=self).count()
