@@ -7,6 +7,8 @@ from bingeworthy.models import *
 
 def populate():
 
+######################show list begins here################################
+
 	theOffice = {"title": "The Office(US)",
 		"genre":"Comedy", "blurb": "A faux docuseries on the lives of workers at a paper company", 
 		"starring": "Steve Carell", "platform": "Amazon Prime", "ep_runtime": 20, "num_episodes": 201, 
@@ -18,30 +20,46 @@ def populate():
 		show_added = add_show(show["title"], show["genre"], show["blurb"], show["starring"],
 			show["platform"], show["ep_runtime"], show["num_episodes"], show["num_season"],
 			show["year_released"])
-		
 	
-	user_account = [
-	{"username":"testAccount",
-	"password":"testpassword"},
-	]
+#######################user list begins here#################################
 	
-	viewership = [
-	{"viewer":"testAccount",
-	"show":"title", "views": 62},
-	 ]
+	ajpod_test = {"username": "ajpod", "password":"ajpodtest"}
+	gemma_test = {"username": "gemma", "password":"gemmatest"}
 	
-	cats = {"Python": {"pages": python_pages, "likes":64, "views":128},
-	"Django": {"pages": django_pages, "likes": 32, "views":64},
-	"Other Frameworks": {"pages": other_pages, "likes":16, "views":32} }
+	users = [ajpod_test, gemma_test]
 	
-	for cat, cat_data in cats.items():
-		c = add_cat(cat, cat_data["likes"], cat_data["views"])
-		for p in cat_data["pages"]:
-			add_page(c, p["title"], p["url"], p["views"])
+	for user in users:
+		user_added = add_user(user["username"], user["password"])
+	
+####################review list begins here####################################
+	
+	office_good = {"reviewer": "ajpod", "title": "It's good", "show": "theofficeus", "star_rating": 8,
+	"review_body": "I thought this show was great, best ive watched in a long time"}
+	
+	reviews = [office_good]
+	
+	for review in reviews:
+		review_added = add_review(review["reviewer"], review["title"], revivew["show"], review["star_rating"], review["review_body"])
 
-	for c in Category.objects.all():
-		for p in Page.objects.filter(category=c):
-			print("- {0} - {1}".format(str(c), str(p)))
+######################viewership begins here####################################
+
+	gemma_office = {"viewer": "gemma", "show": "theofficeus", "judgement": True}
+	
+	viewerships = [gemma_office]
+	
+	for viewer in viewerships:
+		viewer_added = add_viewership(viewer["viewer"], viewer["show"], viewer["judgement"])
+		
+######################votes on review#######################################
+
+	gem_office_votes = {"review": 1, "voter": "gemma", "judgement": True}
+	
+	votes = [gem_office_votes]
+	
+	for vote in votes:
+		vote_added = add_vote(vote["review"], vote["voter"], vote["judgement"])
+		
+
 	
 def add_show(title, genre, blurb, starring, platform, ep_runtime, num_episodes, 
 num_season, year_released):
@@ -51,11 +69,29 @@ num_season, year_released):
 	show.save()
 	return show
 	
-def add_cat(name, likes, views):
-	c = Category.objects.get_or_create(name=name, likes=likes, views=views)[0]
-	c.save()
-	return c
+def add_user(username, password):
+	user = User.objects.get_or_create(username = username, password = password)
+	user.save()
+	return user
+	
+def add_review(reviewer, title, show, star_rating, review_body):
+	review = Review.objects.get_or_create(reviewer = reviewer, title = title,
+	show = show, star_rating = star_rating, review_body = review_body)
+	review.save()
+	return review
+	
+def add_viewership(viewer, show, judgement):
+	view = Viewership.objects.get_or_create(viewer = viewer, show = show, judgement = judgement)
+	view.save()
+	return view
+	
+def add_vote(review, voter, judgement):
+	vote = VotesOnReview.objects.get_or_create(review = review, voter = voter, judgement = judgement)
+	vote.save()
+	return vote
+	
+	
 		
 if __name__ == '__main__':
-	print("Starting Rango population script...")
+	print("Starting Bingeworthy population script...")
 	populate()
