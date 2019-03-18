@@ -13,6 +13,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 class UserAccount(models.Model):  ## called user because User is already a default thing imported above
     user = models.OneToOneField(User)
+    # username = user.username
 
     picture = models.ImageField(upload_to='profile_images', blank=True)
 
@@ -21,6 +22,7 @@ class UserAccount(models.Model):  ## called user because User is already a defau
 
 class Show(models.Model):
     title = models.CharField(max_length=60)
+    slug = models.SlugField(unique=True)
     genre = models.CharField(max_length=30)
     blurb = models.CharField(max_length=200)
     starring = models.CharField(max_length=100)
@@ -57,8 +59,8 @@ class Show(models.Model):
         return self.title 
 		
     def save(self, *args, **kwargs):
-	self.slug = slugify(self.name)
-	super(Show, self).save(*args, **kwargs)
+	    self.slug = slugify(self.name)
+	    super(Show, self).save(*args, **kwargs)
 
 class Viewership(models.Model):
     # the whole idea of this and especially models.CASCADE part is from the django docs

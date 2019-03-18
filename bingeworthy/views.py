@@ -1,33 +1,31 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from bingeworthy.models import *
 
 def index(request):
 	return HttpResponse("TEST INDEX")
 
 def user_login(request):
-	# PLACEHOLDER - COPIED FROM RANGO
-	# 
-	# Not sure exactly what needs changed, original design has both login
-	# and signup on same page, login and signup URLs both point to this view for now
-	#
-	# if request.method == 'POST':
-    #     username = request.POST.get('username')
-    #     password = request.POST.get('password')
+	# copied from rango for now
+	# change final line to commented line for proper usage
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
-    #     user = authenticate(username=username, password=password)
+        user = authenticate(username=username, password=password)
 
-    #     if user:
-    #         if user.is_active:
-    #             login(request, user)
-    #             return HttpResponseRedirect(reverse('index'))
-    #         else:
-    #             return HttpResponse("Your Bingeworthy account is disabled.")
-    #     else:
-    #         print("Invalid login details: {0}, {1}".format(username, password))
-    #         return HttpResponse("Invalid login details supplied.")
-    # else:
-    #     return render(request, 'rango/login.html', {})
-	return HttpResponse("TEST LOGIN")
+        if user:
+            if user.is_active:
+                login(request, user)
+                return HttpResponseRedirect(reverse('index'))
+            else:
+                return HttpResponse("Your Bingeworthy account is disabled.")
+        else:
+            print("Invalid login details: {0}, {1}".format(username, password))
+            return HttpResponse("Invalid login details supplied.")
+    else:
+        return HttpResponse("TEST login details supplied.")
+		# return render(request, 'bingeworthy/login.html', {})
 
 
 def user_logout(request):
@@ -40,19 +38,24 @@ def user_logout(request):
 	return HttpResponse("TEST LOGOUT")
 
 def contact_us(request):
-	return HttpResponse("TEST CONTACT US")
+	context_dict = {}
+	return render(request, 'bingeworthy/contact-us.html', context=context_dict)
 
 def faq(request):
-	return HttpResponse("TEST FAQ")
-
+	context_dict = {}
+	return render(request, 'bingeworthy/faq.html', context=context_dict)
+	
 def about(request):
-	return HttpResponse("TEST ABOUT")
+	context_dict = {}
+	return render(request, 'bingeworthy/about-us.html', context=context_dict)
 
 def search_results(request):
 	# not sure how we're going to do this one
 	return HttpResponse("TEST SEARCH RESULTS")
 
 def genres(request):
+	# genres and platforms are not in models, not stored
+	# probably best to just show them front-end
 	return HttpResponse("TEST GENRES")
 
 def show_genre(request, genre_name_slug):
@@ -67,23 +70,58 @@ def show_platform(request, platform_name_slug):
 	return HttpResponse("TEST PLATFORM PAGE " + platform_name_slug)
 
 def shows(request):
+	# not entirely sure what to put here, every single show?
+	# shows_all covers this
+	# might want to make it a splash page for featured shows,
+	# prefer to keep it as it's in design spec and all show urls
+	# derive from it
 	return HttpResponse("TEST SHOWS")
 
 def shows_top(request):
-	return HttpResponse("TEST TOP SHOWS")
+	# change slicer to get more shows, might need to change to
+	# -Show.like_ratio if it doesn't work as is because calculated field
+	shows_list = Show.objects.order_by('-like_ratio')[:10]
+	context_dict = {'shows': shows_list}
+	return render(request, 'bingeworthy/shows-top', context_dict)
+	# return HttpResponse("TEST TOP SHOWS")
 
 def shows_all(request):
-	return HttpResponse("TEST ALL SHOWS")
+	shows_list = Show.objects.order_by('-title')
+	context_dict = {'shows': shows_list}
+	return render(request, 'bingeworthy/shows-all', context_dict)
+	# return HttpResponse("TEST ALL SHOWS")
 
 def shows_show(request, show_name_slug):
-	return HttpResponse("TEST SHOW PAGE " + show_name_slug)
+	context_dict = {}
+
+	try:
+		show = Show.objects.get(slug=show_name_slug)
+		reviews = Review.objects.filter(show=show)
+		
+		context_dict['show'] = show 
+		context_dict['reviews'] = reviews 
+	except Show.DoesNotExist:
+		context_dict['show'] = None 
+		context_dict['reviews'] = None 
+	return render(request, 'bingeworthy/show.html', context_dict)
 
 def make_review(request, show_name_slug):
 	return HttpResponse("TEST MAKE REVIEW OF " + show_name_slug)
 
 def user_profile(request, username):
 	# see show_genre
-	return HttpResponse("TEST USER PROFILE OF " + username)
+
+	try:
+		user = UserAccount.objects.get(user__username=username)
+		shows_watched = Viewership.objects.filter(viewer_id=user)
+		reviews = Review.objects.filter(reviewer=user)
+		
+		context_dict = {'user': user, 'shows_watched': shows_watched, 'reviews': reviews}
+	except User.DoesNotExist:
+		context_dict = {'user': None, 'shows_watched': None, 'reviews': None}
+	
+	return render(request, 'bingeworthy/user-profile.html', context_dict)
+	# return HttpResponse("TEST USER PROFILE OF " + username)
 
 def my_account(request):
 	return HttpResponse("TEST MY ACCOUNT")
