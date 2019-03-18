@@ -20,6 +20,8 @@ class UserAccount(models.Model):  ## called user because User is already a defau
     def __str__(self):
         return self.user.username
 
+		
+
 class Show(models.Model):
     title = models.CharField(max_length=60)
     slug = models.SlugField(unique=True)
@@ -34,15 +36,20 @@ class Show(models.Model):
         stars=0
         for r in Review.objects.filter(show__exact=self):
             stars+= r.star_rating
-        return stars/Review.objects.filter(show__exact=self).count()
-
+        if Review.objects.filter(show__exact=self).count() > 0:		
+            return stars/Review.objects.filter(show__exact=self).count()
+        else:
+            return 0
     @property
     def like_ratio(self):
         likes=0
         for v in Viewership.objects.filter(show__exact=self):
             if v.judgement:
                 likes+=1
-        return round(likes/Viewership.objects.filter(show__exact=self).count(), 2)*100
+        if Viewership.objects.filter(show__exact=self).count() > 0:
+            return round(likes/Viewership.objects.filter(show__exact=self).count(), 2)*100
+        else:
+            return 0
     
     @property
     def views_total(self):
@@ -59,7 +66,7 @@ class Show(models.Model):
         return self.title 
 		
     def save(self, *args, **kwargs):
-	    self.slug = slugify(self.name)
+	    self.slug = slugify(self.title)
 	    super(Show, self).save(*args, **kwargs)
 
 class Viewership(models.Model):

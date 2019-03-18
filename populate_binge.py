@@ -9,7 +9,7 @@ def populate():
 
 ######################show list begins here################################
 
-	theOffice = {"title": "The Office(US)",
+	theOffice = {"title": "The Office (US)",
 		"genre":"Comedy", "blurb": "A faux docuseries on the lives of workers at a paper company", 
 		"starring": "Steve Carell", "platform": "Amazon Prime", "ep_runtime": 20, "num_episodes": 201, 
 		"num_season": 9, "year_released": 2005}
@@ -22,28 +22,30 @@ def populate():
 			show["year_released"])
 	
 #######################user list begins here#################################
-	
+	userID = 1
 	ajpod_test = {"username": "ajpod", "password":"ajpodtest"}
 	gemma_test = {"username": "gemma", "password":"gemmatest"}
 	
 	users = [ajpod_test, gemma_test]
+	print(users)
 	
 	for user in users:
-		user_added = add_user(user["username"], user["password"])
+		user_added = add_user(user["username"], user["password"], userID)
+		userID += 1
 	
 ####################review list begins here####################################
-	
-	office_good = {"reviewer": "ajpod", "title": "It's good", "show": "theofficeus", "star_rating": 8,
+
+	office_good = {"reviewer": "ajpod", "title": "It's good", "show": Show.objects.get(title = "The Office (US)"), "star_rating": 8,
 	"review_body": "I thought this show was great, best ive watched in a long time"}
 	
 	reviews = [office_good]
 	
 	for review in reviews:
-		review_added = add_review(review["reviewer"], review["title"], revivew["show"], review["star_rating"], review["review_body"])
+		review_added = add_review(review["reviewer"], review["title"], review["show"], review["star_rating"], review["review_body"])
 
 ######################viewership begins here####################################
 
-	gemma_office = {"viewer": "gemma", "show": "theofficeus", "judgement": True}
+	gemma_office = {"viewer": UserAccount.objects.get(user__username = "gemma"), "show": Show.objects.get(title = "The Office (US)"), "judgement": True}
 	
 	viewerships = [gemma_office]
 	
@@ -52,7 +54,7 @@ def populate():
 		
 ######################votes on review#######################################
 
-	gem_office_votes = {"review": 1, "voter": "gemma", "judgement": True}
+	gem_office_votes = {"review": Review.objects.get(reviewer = UserAccount.objects.get(user__username = "ajpod"), show = Show.objects.get(title = "The Office (US)")), "voter": UserAccount.objects.get(user__username = "gemma"), "judgement": True}
 	
 	votes = [gem_office_votes]
 	
@@ -65,28 +67,29 @@ def add_show(title, genre, blurb, starring, platform, ep_runtime, num_episodes,
 num_season, year_released):
 	show = Show.objects.get_or_create(title = title, genre = genre, blurb = blurb,
 		starring = starring, platform = platform, ep_runtime = ep_runtime, num_episodes = num_episodes,
-		num_season = num_season, year_released = year_released)
+		num_season = num_season, year_released = year_released)[0]
 	show.save()
 	return show
 	
-def add_user(username, password):
-	user = User.objects.get_or_create(username = username, password = password)
-	user.save()
-	return user
+def add_user(username, password, id):
+	u = UserAccount.objects.get_or_create(user__username = username, user__password = password)[0]
+	print(u)
+	u.save()
+	return u
 	
 def add_review(reviewer, title, show, star_rating, review_body):
-	review = Review.objects.get_or_create(reviewer = reviewer, title = title,
-	show = show, star_rating = star_rating, review_body = review_body)
+	review = Review.objects.get_or_create(reviewer = UserAccount.objects.get(user__username = reviewer), title = title,
+	show = show, star_rating = star_rating, review_body = review_body)[0]
 	review.save()
 	return review
 	
 def add_viewership(viewer, show, judgement):
-	view = Viewership.objects.get_or_create(viewer = viewer, show = show, judgement = judgement)
+	view = Viewership.objects.get_or_create(viewer = viewer, show = show, judgement = judgement)[0]
 	view.save()
 	return view
 	
 def add_vote(review, voter, judgement):
-	vote = VotesOnReview.objects.get_or_create(review = review, voter = voter, judgement = judgement)
+	vote = VotesOnReview.objects.get_or_create(review = review, voter = voter, judgement = judgement)[0]
 	vote.save()
 	return vote
 	
