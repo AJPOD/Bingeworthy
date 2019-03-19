@@ -20,5 +20,5 @@ from bingeworthy import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^bingeworthy/', include('bingeworthy.urls')), # maps all bingeworthy/ URLs to be
-	url(r'^$', views.index, name='index'),              # handled in bingeworthy/urls.py
+    url(r'^$', views.index, name='index'),              # handled in bingeworthy/urls.py
 ]

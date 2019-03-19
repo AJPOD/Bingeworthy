@@ -3,10 +3,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 from bingeworthy.models import *
 
 def index(request):
-	return HttpResponse("TEST INDEX")
+        context_dict = {}
+        return render(request, 'bingeworthy/index.html', context_dict)
 
 def user_login(request):
-	# copied from rango for now
+        	# copied from rango for now
 	# change final line to commented line for proper usage
     if request.method == 'POST':
         username = request.POST.get('username')

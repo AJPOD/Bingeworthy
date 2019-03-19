@@ -1,0 +1,41 @@
+{% extends 'bingeworthy/base.html' %}
+
+{% load staticfiles %}
+
+<html>
+<head>
+    
+
+</head>
+
+{% block body_block %}
+<div class="container">
+      <div class="row">
+						<div class="card">
+							<img src={% static "images/TWDThumb.jpg" %}>
+							<p class="card-text">Top Rated Shows</p>
+						</div>
+	
+						<div class="card">
+								<img src={% static "images/B99Thumb.jpg" %}>
+							<p class="card-text">Genres</p>
+						</div>
+						<div class="card">
+								<img src={% static "images/GOTThumb.jpg" %}>
+							<p class="card-text">Reviews</p>
+						</div>
+						<div class="card">
+								<img src={% static "images/WWThumb.jpg" %}>
+							<p class="card-text">All Shows</p>
+						</div>
+					</div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+</body>
+</html>

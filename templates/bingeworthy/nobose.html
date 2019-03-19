@@ -1,0 +1,137 @@
+{% load staticfiles %}
+
+<html>
+<head>
+<style>
+div.topleft {
+  position: absolute;
+  top: 5;
+  left: 5;
+}
+
+
+div.topcentre {
+  width: 150px;
+	height: 55px;
+	
+	position: absolute;
+	top:5;
+	
+	left: 0;
+	right: 0;
+  	
+	margin: auto;
+
+}
+
+div.middlecenter {
+  width: 150px;
+	height: 55px;
+	
+	position: absolute;
+	top: 25%;
+	
+	left: 0;
+	right: 0;
+  	
+	margin: auto;
+
+}
+
+
+div.topright {
+  position: absolute;
+  top: 5;
+  right: 5;
+  
+}
+
+
+
+
+
+div.bottomrow {
+  width: 60%;
+	height: 20px;
+	
+	position: absolute;
+	top:95%;
+	left:0;
+	right:0;
+	
+	margin: auto;
+	
+	
+}
+
+div.imagegang {
+  
+	height: 55px;
+	display:inline-block;
+	width:33.3%;
+	text-align:center;
+	left :0;
+	right:0;
+	
+	margin: auto;
+
+float:left;
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class = "topleft">
+
+<form action="/bingeworthy/login/">
+    <input type="submit" value="Login/Signup" />
+</form>
+
+
+</div>
+
+<div class = "topcentre" >
+	
+	<img src={% static "images/logo.png" %} >
+	
+</div>
+
+<div class = "topright">
+
+
+
+ 
+<form action="/bingeworthy/">
+    <input type="submit" value="Login/Signup"/>
+</form>
+
+
+</div>
+
+
+
+<div class = "bottomrow">
+	<div class = "imagegang">
+	<a href="/bingeworthy/about-us/">About us</a>
+	</div>
+	<div class = "imagegang">
+	<a href="/bingeworthy/contact-us/">Contact us</a>
+	</div>
+	<div class = "imagegang">
+	<a href="/bingeworthy/faq/">FAQ</a>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
