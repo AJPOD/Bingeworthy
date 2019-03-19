@@ -112,9 +112,15 @@
 				{% endblock %} 
 		</div>
     <div class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+			{% if user.is_authenticated %}
 			<form action="/bingeworthy/">
-				<a class="btn btn-secondary" href="/bingeworthy/login/" role="button">Login/Signup </a>
+				<a class="btn btn-secondary" href="/bingeworthy/logout/" role="button">Logout</a>
 			</form>
+			{% else %}
+			<form action="/bingeworthy/">
+				<a class="btn btn-secondary" href="/bingeworthy/login/" role="button">Login/Signup</a>
+			</form>
+			{% endif %}
 			<div class = "topright">
 			<input type="text" placeholder="Search">
 			<button type="submit">Search</button>
