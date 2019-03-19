@@ -12,7 +12,7 @@ class ShowAdmin(admin.ModelAdmin):
     # made to test calculated fields in show
     list_display = ('title', 'views_total', 'star_rating', 'like_ratio')
 
-admin.site.register(UserAccount)
+admin.site.register(UserPicture)
 admin.site.register(Show, ShowAdmin)
 admin.site.register(Viewership)
 admin.site.register(Review, ReviewAdmin)

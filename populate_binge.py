@@ -33,8 +33,8 @@ def populate():
 		user_added = add_user(user["username"], user["password"])
 	
 ####################review list begins here####################################
-
-	office_good = {"reviewer": UserAccount.objects.get(user__username = "ajpod"), "title": "It's good", "show": Show.objects.get(title = "The Office (US)"), "star_rating": 8,
+	print(User.objects.all())
+	office_good = {"reviewer": User.objects.get(username = "ajpod"), "title": "It's good", "show": Show.objects.get(title = "The Office (US)"), "star_rating": 8,
 	"review_body": "I thought this show was great, best ive watched in a long time"}
 	
 	reviews = [office_good]
@@ -44,7 +44,7 @@ def populate():
 
 ######################viewership begins here####################################
 
-	gemma_office = {"viewer": UserAccount.objects.get(user__username = "gemma"), "show": Show.objects.get(title = "The Office (US)"), "judgement": True}
+	gemma_office = {"viewer": User.objects.get(username = "gemma"), "show": Show.objects.get(title = "The Office (US)"), "judgement": True}
 	
 	viewerships = [gemma_office]
 	
@@ -53,7 +53,7 @@ def populate():
 		
 ######################votes on review#######################################
 
-	gem_office_votes = {"review": Review.objects.get(reviewer = UserAccount.objects.get(user__username = "ajpod"), show = Show.objects.get(title = "The Office (US)")), "voter": UserAccount.objects.get(user__username = "gemma"), "judgement": True}
+	gem_office_votes = {"review": Review.objects.get(reviewer = User.objects.get(username = "ajpod"), show = Show.objects.get(title = "The Office (US)")), "voter": User.objects.get(username = "gemma"), "judgement": True}
 	
 	votes = [gem_office_votes]
 	
@@ -71,9 +71,9 @@ num_season, year_released):
 	return show
 	
 def add_user(username, password):
-	u = UserAccount.objects.get_or_create(user__username = username)[0]
-	print("TEST")
-	u.user__password = password
+	u = User.objects.get_or_create(username=username)[0]
+	print(u)
+	u.password = password
 	u.save()
 	return u
 	

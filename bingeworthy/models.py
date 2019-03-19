@@ -11,13 +11,10 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 # Test it actually works
 # Maybe add Meta subclasses like in Rango
 
-class UserAccount(models.Model):  ## called user because User is already a default thing imported above
+class UserPicture(models.Model):  ## decided to just use main User model for everything
     user = models.OneToOneField(User, primary_key = True)
 
     picture = models.ImageField(upload_to='profile_images', blank=True)
-
-    def __str__(self):
-        return self.user.username
 
 		
 
@@ -60,7 +57,7 @@ class Show(models.Model):
     num_season = models.IntegerField(validators=[MinValueValidator(1)])
     year_released = models.IntegerField()
     
-    viewers = models.ManyToManyField(UserAccount, through='Viewership') # M-N field with judgement variable
+    viewers = models.ManyToManyField(User, through='Viewership') # M-N field with judgement variable
 
     def __str__(self):
         return self.title 
@@ -71,7 +68,7 @@ class Show(models.Model):
 
 class Viewership(models.Model):
     # the whole idea of this and especially models.CASCADE part is from the django docs
-    viewer = models.ForeignKey(UserAccount, on_delete = models.CASCADE)
+    viewer = models.ForeignKey(User, on_delete = models.CASCADE)
     show = models.ForeignKey(Show, on_delete=models.CASCADE)
     judgement = models.BooleanField()
 
@@ -86,11 +83,11 @@ class Review(models.Model):
     # this is because reviewer and votes both refer to the same field, 
     # namely using UserAccount as foreign key.
     # using related_name solves the conflict which stopped the migration working
-    reviewer = models.ForeignKey(UserAccount, related_name='reviewer_user')
+    reviewer = models.ForeignKey(User, related_name='reviewer_user')
     star_rating = models.IntegerField(validators=[MinValueValidator(0),MaxValueValidator(10)])
     review_body = models.CharField(max_length=1000)
     
-    votes = models.ManyToManyField(UserAccount, through='VotesOnReview', related_name='voter_user')
+    votes = models.ManyToManyField(User, through='VotesOnReview', related_name='voter_user')
 
     # call Review.upvote_count to get, like a normal field, sort of
     # taken from a reddit thread https://www.reddit.com/r/django/comments/8tyv4n/calculated_model_fields/
@@ -113,6 +110,6 @@ class Review(models.Model):
         return self.title
 
 class VotesOnReview(models.Model):
-    voter = models.ForeignKey(UserAccount, on_delete = models.CASCADE)
+    voter = models.ForeignKey(User, on_delete = models.CASCADE)
     review = models.ForeignKey(Review, on_delete = models.CASCADE)
     judgement = models.BooleanField()
