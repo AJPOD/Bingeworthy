@@ -1,5 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth import authenticate, login, logout
+from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required
+from bingeworthy.forms import *
 from bingeworthy.models import *
 
 def index(request):
@@ -25,10 +29,10 @@ def user_login(request):
             print("Invalid login details: {0}, {1}".format(username, password))
             return HttpResponse("Invalid login details supplied.")
     else:
-        return HttpResponse("TEST login details supplied.")
-		# return render(request, 'bingeworthy/login.html', {})
+        return render(request, 'bingeworthy/login.html', {})
 
 
+@login_required
 def user_logout(request):
 	# PLACEHOLDER - COPIED FROM RANGO
 	# Don't think it requires changing
@@ -36,7 +40,9 @@ def user_logout(request):
 	#
 	# logout(request)
     # return HttpResponseRedirect(reverse('index'))
-	return HttpResponse("TEST LOGOUT")
+	logout(request)
+	return HttpResponseRedirect(reverse('index'))
+	# return HttpResponse("TEST LOGOUT")
 
 def contact_us(request):
 	context_dict = {}
