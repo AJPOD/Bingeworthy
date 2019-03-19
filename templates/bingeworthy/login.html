@@ -38,18 +38,14 @@ div.half{
 <div class= "half">
 <div class="container">
 
-    <form class="form-signin">
+    <form class="form-signin" method="post" action="{% url 'login' %}">
+      {% csrf_token %}
       <h2 class="form-signin-heading">Please sign in</h2>
       <label for="inputUsername" class="sr-only">Username</label>
-      <input type="username" id="inputUsername" class="form-control" placeholder="User name" required autofocus>
+      <input name="username" type="username" class="form-control" placeholder="User name" required autofocus>
       <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-      </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      <input name="password" type="password" class="form-control" placeholder="Password" required>
+      <button class="btn btn-lg btn-primary btn-block" type="submit" value="submit">Sign in</button>
     </form>
 
   </div> <!-- /container -->
@@ -72,11 +68,7 @@ div.half{
           <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
           <label for="inputConfirmPassword" class="sr-only">Confirm Password</label>
           <input type="confirmPassword" id="inputConfirmPassword" class="form-control" placeholder="Confirm Password" required>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" value="remember-me"> Remember me
-            </label>
-          </div>
+
           <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         </form>
     

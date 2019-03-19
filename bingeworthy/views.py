@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth import authenticate, login, logout
+from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required
 from bingeworthy.models import *
 
 def index(request):
@@ -34,9 +37,9 @@ def user_logout(request):
 	# Don't think it requires changing
 	# Design doesn't show a logout splashscreen, p.inglis says not necessary
 	#
-	# logout(request)
-    # return HttpResponseRedirect(reverse('index'))
-	return HttpResponse("TEST LOGOUT")
+    logout(request)
+    return HttpResponseRedirect(reverse('index'))
+	#return HttpResponse("TEST LOGOUT")
 
 def contact_us(request):
 	context_dict = {}
