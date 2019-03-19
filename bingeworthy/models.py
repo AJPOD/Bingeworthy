@@ -16,16 +16,22 @@ class UserPicture(models.Model):  ## decided to just use main User model for eve
 
     picture = models.ImageField(upload_to='profile_images', blank=True)
 
+class Genre(models.Model):
+    genre = models.CharField(max_length=30)
+
+class Platform(models.Model):
+    platform = models.CharField(max_length=30)
+
 		
 
 class Show(models.Model):
     title = models.CharField(max_length=60)
     slug = models.SlugField(unique=True)
-    genre = models.CharField(max_length=30)
+    genre = models.ForeignKey(Genre, on_delete=models.SET_NULL, null=True)
     blurb = models.CharField(max_length=200)
     starring = models.CharField(max_length=100)
     picture = models.ImageField(upload_to='show_images', blank=True)
-    platform = models.CharField(max_length=30)
+    platform = models.ForeignKey(Platform, on_delete=models.SET_NULL, null=True)
 
     @property
     def star_rating(self):
@@ -67,9 +73,9 @@ class Show(models.Model):
 	    super(Show, self).save(*args, **kwargs)
 
 class Viewership(models.Model):
-    # the whole idea of this and especially models.CASCADE part is from the django docs
-    viewer = models.ForeignKey(User, on_delete = models.CASCADE)
-    show = models.ForeignKey(Show, on_delete=models.CASCADE)
+    # the whole idea of this and especially models.DO_NOTHING part is from the django docs
+    viewer = models.ForeignKey(User, on_delete = models.DO_NOTHING)
+    show = models.ForeignKey(Show, on_delete = models.DO_NOTHING)
     judgement = models.BooleanField()
 
 class Review(models.Model):
@@ -77,13 +83,13 @@ class Review(models.Model):
     # when they're both foreign keys from elsewhere
     auto_increment_id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=30)
-    show = models.ForeignKey(Show)
+    show = models.ForeignKey(Show, on_delete=models.CASCADE)
 
     # note the use of related_name attribute
     # this is because reviewer and votes both refer to the same field, 
     # namely using UserAccount as foreign key.
     # using related_name solves the conflict which stopped the migration working
-    reviewer = models.ForeignKey(User, related_name='reviewer_user')
+    reviewer = models.ForeignKey(User, related_name='reviewer_user', on_delete=models.CASCADE)
     star_rating = models.IntegerField(validators=[MinValueValidator(0),MaxValueValidator(10)])
     review_body = models.CharField(max_length=1000)
     
@@ -110,6 +116,7 @@ class Review(models.Model):
         return self.title
 
 class VotesOnReview(models.Model):
-    voter = models.ForeignKey(User, on_delete = models.CASCADE)
-    review = models.ForeignKey(Review, on_delete = models.CASCADE)
+    voter = models.ForeignKey(User, on_delete = models.DO_NOTHING)
+    review = models.ForeignKey(Review, on_delete = models.DO_NOTHING)
     judgement = models.BooleanField()
+
