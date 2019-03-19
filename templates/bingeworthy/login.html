@@ -2,18 +2,93 @@
 
 {% load staticfiles %}
 
-{% block title_block %}
-    Login
-{% endblock %}
+<html>
+<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="http://v4-alpha.getbootstrap.com/favicon.ico">
+    
+        <title>Signin Template for Bootstrap</title>
+        <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/signin/">
+    
+        <!-- Bootstrap core CSS -->
+        <link href="http://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+        <!-- Custom styles for this template -->
+        <link href="https://v4-alpha.getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+    </head>
 
 {% block body_block %}
-<br /><h1>Login to Bingeworthy</h1>
-<form id="login_form" method="post" action="{% url 'login' %}">
-    {% csrf_token %}
-    Username: <input type="text" name="username" value="" size="50" />
-    <br />
-    Password: <input type="password" name="password" value="" size="50" />
-    <br />
-    <input type="submit" value="submit" />
-</form>
+<style>
+div.half{
+    float:left;
+    width:50%;
+    margin:auto;
+   
+    
+
+
+}
+</style>
+<br>
+<br>
+
+<div class= "half">
+<div class="container">
+
+    <form class="form-signin">
+      <h2 class="form-signin-heading">Please sign in</h2>
+      <label for="inputUsername" class="sr-only">Username</label>
+      <input type="username" id="inputUsername" class="form-control" placeholder="User name" required autofocus>
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+
+  </div> <!-- /container -->
+
+</div>
+
+
+
+
+<div class= "half">
+    <div class="container">
+    
+        <form class="form-signin">
+          <h2 class="form-signin-heading">Sign Up</h2>
+          <label for="inputUsername" class="sr-only">Username</label>
+          <input type="username" id="inputUsername" class="form-control" placeholder="User name" required autofocus>
+          <label for="inputEmail" class="sr-only">Email address</label>
+          <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+          <label for="inputPassword" class="sr-only">Password</label>
+          <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+          <label for="inputConfirmPassword" class="sr-only">Confirm Password</label>
+          <input type="confirmPassword" id="inputConfirmPassword" class="form-control" placeholder="Confirm Password" required>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" value="remember-me"> Remember me
+            </label>
+          </div>
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        </form>
+    
+      </div> <!-- /container -->
+    
+    </div>
+
+
 {% endblock %}
+<!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <script src="http://v4-alpha.getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+</html>

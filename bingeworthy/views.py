@@ -1,9 +1,5 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from django.contrib.auth import authenticate, login, logout
-from django.core.urlresolvers import reverse
-from django.contrib.auth.decorators import login_required
-from bingeworthy.forms import *
 from bingeworthy.models import *
 
 def index(request):
@@ -13,26 +9,26 @@ def index(request):
 def user_login(request):
         	# copied from rango for now
 	# change final line to commented line for proper usage
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+	context_dict = {}
+	if request.method == 'POST':
+		username = request.POST.get('username')
+		password = request.POST.get('password')
 
-        user = authenticate(username=username, password=password)
+		user = authenticate(username=username, password=password)
+		if user:
+			if user.is_active:
+				login(request, user)
+				return HttpResponseRedirect(reverse('index'))
+			else:
+				return HttpResponse("Your Bingeworthy account is disabled.")
+		else:
+			print("Invalid login details: {0}, {1}".format(username, password))
+			return HttpResponse("Invalid login details supplied.")
+	else:
+        #return HttpResponse("TEST login details supplied.")
+		return render(request, 'bingeworthy/login.html', context_dict)
 
-        if user:
-            if user.is_active:
-                login(request, user)
-                return HttpResponseRedirect(reverse('index'))
-            else:
-                return HttpResponse("Your Bingeworthy account is disabled.")
-        else:
-            print("Invalid login details: {0}, {1}".format(username, password))
-            return HttpResponse("Invalid login details supplied.")
-    else:
-        return render(request, 'bingeworthy/login.html', {})
 
-
-@login_required
 def user_logout(request):
 	# PLACEHOLDER - COPIED FROM RANGO
 	# Don't think it requires changing
@@ -40,9 +36,7 @@ def user_logout(request):
 	#
 	# logout(request)
     # return HttpResponseRedirect(reverse('index'))
-	logout(request)
-	return HttpResponseRedirect(reverse('index'))
-	# return HttpResponse("TEST LOGOUT")
+	return HttpResponse("TEST LOGOUT")
 
 def contact_us(request):
 	context_dict = {}
