@@ -7,9 +7,9 @@ from bingeworthy.models import *
 from bingeworthy.forms import *
 
 def index(request):
-        context_dict = {}
-
-        return render(request, 'bingeworthy/index.html', context_dict)
+		show = Show.objects.get(slug="the-office-us")
+		context_dict = {"featured":show}
+		return render(request, 'bingeworthy/index.html', context_dict)
 
 def user_login(request):
 	if request.user.is_authenticated():
