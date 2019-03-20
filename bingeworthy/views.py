@@ -116,24 +116,32 @@ def shows_all(request):
 	shows_list = Show.objects.order_by('-title')
 	context_dict = {'shows': shows_list}
 	return render(request, 'bingeworthy/shows-all', context_dict)
-	# return HttpResponse("TEST ALL SHOWS")
 
 def shows_show(request, show_name_slug):
 	context_dict = {}
-
+	good_items = []
 	try:
 		show = Show.objects.get(slug=show_name_slug)
 		reviews = Review.objects.filter(show=show)
-		
+		shows_like_this = Show.objects.filter(genre=show.genre)
 		context_dict['show'] = show 
-		context_dict['reviews'] = reviews 
+		context_dict['reviews'] = reviews
+		for item in shows_like_this:
+			if item != show:
+				good_items.append(item)
+		context_dict['show1'] = good_items[0]
+		context_dict['show2'] = good_items[1]
+		context_dict['show3'] = good_items[2]
+		context_dict['star_rating'] = show.star_rating
+		context_dict['like_ratio'] = show.like_ratio
 	except Show.DoesNotExist:
 		context_dict['show'] = None 
 		context_dict['reviews'] = None 
 	return render(request, 'bingeworthy/show.html', context_dict)
 
 def make_review(request, show_name_slug):
-	return HttpResponse("TEST MAKE REVIEW OF " + show_name_slug)
+	context_dict = {}
+	return render(request, 'bingeworthy/make_review.html', context_dict)
 
 def user_profile(request, username):
 	# see show_genre

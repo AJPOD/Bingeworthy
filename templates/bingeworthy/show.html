@@ -3,16 +3,349 @@
 
 {% block title_block %}
 {% endblock %}
+
 {% block body_block %}
+
+
+<style>
+body {
+  min-height: 75rem; /* Can be removed; just added for demo purposes */
+}
+
+.navbar {
+  margin-bottom: 0;
+}
+
+.jumbotron {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  margin-bottom: 0;
+  background-color: #fff;
+}
+
+.jumbotron p:last-child {
+  margin-bottom: 0;
+}
+
+.jumbotron-heading {
+  font-weight: 300;
+}
+
+.jumbotron .container {
+  max-width: 40rem;
+}
+
+.album {
+  min-height: 50rem; /* Can be removed; just added for demo purposes */
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  background-color: #f7f7f7;
+}
+
+.card {
+  
+  width: 10%;
+  padding: .75rem;
+  margin-bottom: 2rem;
+    background-color: #f2f2f2;
+  border: 0;
+  border:2px solid blue;
+}
+
+.cardphat{
+  
+  width: 55%;
+  padding: .75rem;
+  margin-bottom: 2rem;
+    background-color: #f2f2f2;
+  border: 0;
+  border:2px solid blue;
+}
+
+.cardphater{
+  
+  width: 35%;
+  padding: .75rem;
+  margin-bottom: 2rem;
+    background-color: #f2f2f2;
+  border: 0;
+  border:2px solid blue;
+}
+div.cardmediumphat{
+  position:absolute;
+  width: 33.33%;
+  height:10%;
+
+  border: 0;
+  border:2px solid pink;
+}
+.card > img {
+  margin-bottom: .75rem;
+}
+
+.card-text {
+  font-size: 85%;
+}
+
+footer {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+footer p {
+  margin-bottom: .25rem;
+}
+.container {
+width:70%;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  border:2px solid red;
+}
+.rowtop{
+  margin-left:auto;
+  margin-right:auto;
+  width:100%;
+  height:10%;
+  border:2px solid orange;
+  margin-bottom:10px;
+}
+.rowmiddle{
+  margin-left:auto;
+  margin-right:auto;
+  width:100%;
+  height:41%;
+  border:2px solid orange;
+  margin-bottom:10px;
+}
+.rowbottom{
+  margin-left:auto;
+  margin-right:auto;
+  width:100%;
+  height:45%;
+  border:2px solid orange;
+}
+.col{
+  position:absolute;
+  border:2px solid pink;
+}
+
+.lcontainer {
+width:100%;
+  
+  height:100%;
+  border:2px solid red;
+}
+.divey {
+width:33.33%;
+  float:left;
+  height:100%;
+  border:2px solid red;
+}
+.diveylad {
+  width:23%;
+  float:left;
+  height:80%;
+  border:2px solid red;
+  margin-top: 4%;
+  margin-bottom:3%;
+  margin-left:5%;
+  margin-right:5%;
+}
+
+</style>
+
+
+<br>
+<br>
+
+
+<div class="container">
+<div style="text-align:center">
+    <h3>{{show.title}}</h3>
+	<hr style="border: 0.25px solid black;" />
+  </div>
+
+
+      <div class="row">
+						<div class="cardphater">
+                <img src={% static "images/the-office-thumb.jpg" %}>
+						</div>
+	
+	
+						<div class="card">
+								
+						</div>
+						
+						<div class="cardphat">
+                <div class="rowtop">
+
+                        <div class="divey">
+                          {{ star_rating }}
+                        </div>
+                        <div class="divey">
+                            {{ like_ratio }}
+                          </div>
+                          <div class="divey">
+                              <form action="/bingeworthy/">
+                                <a class="btn btn-secondary" href="{% url 'make_review' show.slug %}" role="button">Make a review</a>
+                              </form>
+                            </div>
+                  
+                </div>
+                <div class="rowmiddle">
+                    {{show.blurb}}
+                  </div>
+                  <div class="rowbottom">
+                      <div class="diveylad">
+                        {{ show1.title }}
+
+                        </div>
+                        <div class="diveylad">
+                            {{ show2.title }}
+                          </div>
+                          <div class="diveylad">
+                              {{ show3.title }}
+                            </div>
+                    </div>
+              
+              
+						</div>
+						
+						
+					</div>
+</div>
+
+
+
+
+
+<!-- <style>
+  .container{
+  position:relative;
+  border: 2px solid red;
+  width:85%;
+  padding-right:0px;
+  padding-left:0px;		
+}
+.innercontainer{
+  position:relative;
+  border: 2px solid red;
+  padding-right:0px;
+  padding-left:0px;	
+  float:left;
+}
+</style>
+<br>
+<br>
+<div class = "container">
+  <div class = "column">
+      <div class="card">
+          <a href="{% url 'shows_top' %}"><img src={% static "images/the-office-thumb.jpg" %}></a>
+      </div>
+  </div>
+  <div class = "column">
+    <div class = "row">
+        <form action="/bingeworthy/">
+          <a class="btn btn-secondary" href="{% url 'make_review' show.slug %}" role="button">Make a review</a>
+        </form>
+    </div>
+    <div class = "row">
+        {{show.blurb}}
+      </div>
+      <div class = "row">
+
+      </div>
+    
+  </div>
+</div>
+<div class=column>
+<div class="container">
+  <div class = "row">
+    <div class = card>
+    </div>
+    <div class = card>
+    </div>
+    <div class = card>
+        <form action="/bingeworthy/">
+          <a class="btn btn-secondary" href="{% url 'make_review' show.slug %}" role="button">Make a review</a>
+        </form>
+    </div>
+  </div>
+    <div class="row">
+        <div class="col-sm">
+            <div class="card">
+                <a href="{% url 'shows_top' %}"><img src={% static "images/the-office-thumb.jpg" %}></a>
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="card">
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="card">
+                {{show.blurb}}
+            </div>
+          </div>
+        </div>
+      </div>
+  <div class=row>
+  <div class="col">
+  </div>
+  <div class="col">
+  </div>
+  <div class="col">
+    <div class = row>
+      <div class = innercontainer>
+      <form action="/bingeworthy/">
+        <a class="btn btn-secondary" href="{% url 'make_review' show.slug %}" role="button">Make a review</a>
+      </form>
+    </div>
+    </div>
+      <div class = row>
+        <div class = container>
+          {{show.blurb}}
+        </div>
+      </div>
+  </div>
+  </div>
+  <div class=row>
+  <div class="col col-lg-2" style = "float:right">
+    <img src={% static "images/the-office-thumb.jpg" %}>
+    <img src = {{ show.picture }} >
+  </div>
+</div>
+</div> -->
+<!-- <div class = column>
+  <div class = ndcontainer>
+      {{show.blurb}}
+  </div>
+</div> -->
+  <!-- <div class="col col-lg-2">
+    {{show.blurb}}
+  </div> -->
+
+</div>
+</div>
+<br>
 <br>
 <br>
 <div class="container">
-  <div class="col col-lg-2">
-    {{show.title}}
-    {{ show.picture }}
-  </div>
+    <hr style="border: 0.25px solid #909090;" />
+{% for review in reviews %}
+<li class="media">
+    <!-- <img src={% static "images/upvote.png" %} class="mr-3" alt="...">
+    <img src={% static "images/downvote.png" %} class="mr-3" alt="..."> -->
+    <div class="media-body">
+      <h5 class="mt-0 mb-1">{{review.title}}</h5>
+      {{review.review_body}}
+      
+    </div>
+  </li>
+{% endfor %}
 </div>
-<!-- <ul class="list-unstyled">
+<!-- <div class="container">
+<ul class="list-unstyled">
         <li class="media">
           <img src={% static "images/upvote.png" %} class="mr-3" alt="...">
           <div class="media-body">
@@ -34,5 +367,6 @@
             Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
           </div>
         </li>
-      </ul> -->
+      </ul>
+    </div> -->
 {% endblock %}

@@ -47,10 +47,15 @@ def populate():
 		"blurb": "A British, satirical celebrity panel show, where comedians discuss the news events from the week.", 
 		"starring": "Dara O'Briain", "platform": Platform.objects.get(platform = "BBC iPlayer"), "ep_runtime": 30, "num_episodes": 188, 
 		"num_season": 17, "year_released": 2005}
+
+	brooklynNineNine = {"title": "Brooklyn Nine Nine", "genre": Genre.objects.get(genre = "Comedy"), 
+		"blurb": "Follow the happy-go-lucky detective, Jake Peralta, in his shenanigans in New York with his precinct.", 
+		"starring": "Andy Samberg", "platform": Platform.objects.get(platform = "Netflix"), 
+		"ep_runtime": 20, "num_episodes": 122, "num_season": 6, "year_released": 2013}
 		
 	
 	
-	shows = [theOffice, greysAnatomy, friends, supernatural, theVampireDiaries, mockTheWeek]
+	shows = [theOffice, greysAnatomy, friends, supernatural, theVampireDiaries, mockTheWeek, brooklynNineNine]
 	
 	for show in shows:
 		show_added = add_show(show["title"], show["genre"], show["blurb"], show["starring"],
