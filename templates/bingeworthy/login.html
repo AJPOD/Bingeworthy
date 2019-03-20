@@ -38,14 +38,14 @@ div.half{
 <div class= "half">
 <div class="container">
 
-    <form class="form-signin" method="post" action="{% url 'login' %}">
+    <form id="login" class="form-signin" method="post" action="{% url 'login' %}">
       {% csrf_token %}
-      <h2 class="form-signin-heading">Please sign in</h2>
+      <h2 class="form-signin-heading">Sign in</h2>
       <label for="inputUsername" class="sr-only">Username</label>
       <input name="username" type="username" class="form-control" placeholder="User name" required autofocus>
       <label for="inputPassword" class="sr-only">Password</label>
       <input name="password" type="password" class="form-control" placeholder="Password" required>
-      <button class="btn btn-lg btn-primary btn-block" type="submit" value="submit">Sign in</button>
+      <button class="btn btn-lg btn-primary btn-block" type="submit" value="submit" name="login">Sign in</button>
     </form>
 
   </div> <!-- /container -->
@@ -57,19 +57,18 @@ div.half{
 
 <div class= "half">
     <div class="container">
-    
-        <form class="form-signin">
-          <h2 class="form-signin-heading">Sign Up</h2>
-          <label for="inputUsername" class="sr-only">Username</label>
-          <input type="username" id="inputUsername" class="form-control" placeholder="User name" required autofocus>
-          <label for="inputEmail" class="sr-only">Email address</label>
-          <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-          <label for="inputPassword" class="sr-only">Password</label>
-          <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-          <label for="inputConfirmPassword" class="sr-only">Confirm Password</label>
-          <input type="confirmPassword" id="inputConfirmPassword" class="form-control" placeholder="Confirm Password" required>
+        <h2 class="form-signin-heading">Sign up</h2>
+        <form id="signin_form" class="form-signin" method="post" action="{% url 'login' %}" enctype="multipart/form-data">
+          {% csrf_token %}
+          {% for field in user_form.visible_fields %}
+            <div class="form-group">
+            {{ field.errors }}
+            {{ field.label_tag }}
+            {{ field }}
+            </div>
+          {% endfor %}
 
-          <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+          <button class="btn btn-lg btn-primary btn-block" type="submit" name="signup">Register</button>
         </form>
     
       </div> <!-- /container -->

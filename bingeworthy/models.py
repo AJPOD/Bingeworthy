@@ -73,9 +73,9 @@ class Show(models.Model):
 	    super(Show, self).save(*args, **kwargs)
 
 class Viewership(models.Model):
-    # the whole idea of this and especially models.DO_NOTHING part is from the django docs
-    viewer = models.ForeignKey(User, on_delete = models.DO_NOTHING)
-    show = models.ForeignKey(Show, on_delete = models.DO_NOTHING)
+    # the whole idea of this and especially models.CASCADE part is from the django docs
+    viewer = models.ForeignKey(User, on_delete = models.CASCADE)
+    show = models.ForeignKey(Show, on_delete = models.CASCADE)
     judgement = models.BooleanField()
 
 class Review(models.Model):
@@ -116,7 +116,7 @@ class Review(models.Model):
         return self.title
 
 class VotesOnReview(models.Model):
-    voter = models.ForeignKey(User, on_delete = models.DO_NOTHING)
-    review = models.ForeignKey(Review, on_delete = models.DO_NOTHING)
+    voter = models.ForeignKey(User, on_delete = models.CASCADE)
+    review = models.ForeignKey(Review, on_delete = models.CASCADE)
     judgement = models.BooleanField()
 

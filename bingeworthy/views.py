@@ -4,38 +4,61 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from bingeworthy.models import *
+from bingeworthy.forms import *
 
 def index(request):
         context_dict = {}
+
         return render(request, 'bingeworthy/index.html', context_dict)
 
 def user_login(request):
+	if request.user.is_authenticated():
+		return HttpResponseRedirect(reverse('index'))
+	registered = False
         	# copied from rango for now
 	# change final line to commented line for proper usage
 	context_dict = {}
-	if request.method == 'POST':
-		username = request.POST.get('username')
-		password = request.POST.get('password')
+	if 'login' in request.POST:
+		if request.method == 'POST':
+			username = request.POST.get('username')
+			password = request.POST.get('password')
 
-		user = authenticate(username=username, password=password)
-		if user:
-			if user.is_active:
+			user = authenticate(username=username, password=password)
+			if user:
+				if user.is_active:
+					login(request, user)
+					return HttpResponseRedirect(reverse('index'))
+				else:
+					return HttpResponse("Your Bingeworthy account is disabled.")
+			else:
+				print("Invalid login details: {0}, {1}".format(username, password))
+				return HttpResponse("Invalid login details supplied.")
+	elif 'signup' in request.POST:
+		
+		if request.method == 'POST':
+			user_form = UserForm(data = request.POST)
+			print(user_form)
+
+			if user_form.is_valid():
+				user = user_form.save()
+				user.set_password(user.password)
+				user.save()
+				registered = True 
 				login(request, user)
 				return HttpResponseRedirect(reverse('index'))
-			else:
-				return HttpResponse("Your Bingeworthy account is disabled.")
-		else:
-			print("Invalid login details: {0}, {1}".format(username, password))
-			return HttpResponse("Invalid login details supplied.")
 	else:
+		user_form = UserForm()
         #return HttpResponse("TEST login details supplied.")
-		return render(request, 'bingeworthy/login.html', context_dict)
+	return render(request, 'bingeworthy/login.html', {'user_form': user_form, 'registered': registered})
 
 
 def user_logout(request):
 	# PLACEHOLDER - COPIED FROM RANGO
 	# Don't think it requires changing
 	# Design doesn't show a logout splashscreen, p.inglis says not necessary
+	#
+	# UPDATE: think there's no need for @login_required
+	# as it just returns to index regardless
 	#
     logout(request)
     return HttpResponseRedirect(reverse('index'))
