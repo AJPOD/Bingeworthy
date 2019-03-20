@@ -77,7 +77,7 @@ footer p {
 
 .linkscontainer{
   padding-right:30px;
-  padding-left:30px
+  padding-left:80px
 }
 .centreText{
 			
@@ -89,44 +89,38 @@ footer p {
 	margin: auto;
 }
 
-
 </style>
 
 <div class="jumbotron">
 	<div class="container">
-    <div class = col-6>
-        <div class="mx-auto" style="width: -200px;">
-            <a href="{% url 'shows_show' featured.slug %}"><img src={% static "images/officeBanner.jpg" %} ></a>
-          </div>
-      <p class = centreText>Featured Show</p></div>
-    </div>
+			<a href="{% url 'shows_show' featured.slug %}"><img src={% static "images/officeBanner.jpg" %} ></a>
+			<p class="jumbotron-heading">Featured Show</p></div>
 	</div>
 </div>
 <div class = linkscontainer>
-      <div class="row">
-        <div class="col-sm">
-						<div class="card">
-								<a href="{% url 'shows_top' %}"><img src={% static "images/TRSThumb.jpg" %}></a>
-						</div>
-          </div>
-          <div class="col-sm">
-						<div class="card">
-								<a href="{% url 'genres' %}"><img src={% static "images/GThumb.jpg" %}></a>
-            </div>
-          </div>
-          <div class="col-sm">
-						<div class="card">
-								<a href="{% url 'faq' %}"><img src={% static "images/RThumb.jpg" %}></a>
-            </div>
-          </div>
-          <div class="col-sm">
-						<div class="card">
-								<a href="{% url 'shows_all' %}"><img src={% static "images/ASThumb.jpg" %}></a>
-            </div>
-          </div>
+    <div class="row">
+      <div class="col-sm">
+          <div class="card">
+              <a href="{% url 'shows_top' %}"><img src={% static "images/TRSThumb.jpg" %}></a>
           </div>
         </div>
-
+        <div class="col-sm">
+          <div class="card">
+              <a href="{% url 'genres' %}"><img src={% static "images/GThumb.jpg" %}></a>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div class="card">
+              <a href="{% url 'faq' %}"><img src={% static "images/RThumb.jpg" %}></a>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div class="card">
+              <a href="{% url 'shows_all' %}"><img src={% static "images/ASThumb.jpg" %}></a>
+          </div>
+        </div>
+        </div>
+      </div>
 {% endblock %}
 
 

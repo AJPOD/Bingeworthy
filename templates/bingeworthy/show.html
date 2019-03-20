@@ -1,11 +1,20 @@
 {% extends 'bingeworthy/base.html' %}
 {% load staticfiles %}
+
+{% block title_block %}
+{% endblock %}
 {% block body_block %}
 <br>
 <br>
-<ul class="list-unstyled">
+<div class="container">
+  <div class="col col-lg-2">
+    {{show.title}}
+    {{ show.picture }}
+  </div>
+</div>
+<!-- <ul class="list-unstyled">
         <li class="media">
-          <img src="..." class="mr-3" alt="...">
+          <img src={% static "images/upvote.png" %} class="mr-3" alt="...">
           <div class="media-body">
             <h5 class="mt-0 mb-1">List-based media object</h5>
             Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
@@ -25,5 +34,5 @@
             Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
           </div>
         </li>
-      </ul>
+      </ul> -->
 {% endblock %}
