@@ -135,18 +135,59 @@ def populate():
 ######################viewership begins here####################################
 
 	
-	gemma_office = {"viewer": User.objects.get(username = "gemma"), "show": Show.objects.get(title = "The Office (US)"), "judgement": True}
+	ajpod_office = {"viewer": User.objects.get(username = "ajpod"), "show": Show.objects.get(title = "The Office (US)"), "judgement": True}
+	thomas_office = {"viewer": User.objects.get(username = "thomas"), "show": Show.objects.get(title = "The Office (US)"), "judgement": True}
+	gemma_greys = {"viewer": User.objects.get(username = "gemma"), "show": Show.objects.get(title = "Grey's Anatomy"), "judgement": True}
+	zeerak_greys = {"viewer": User.objects.get(username = "zeerak"), "show": Show.objects.get(title = "Grey's Anatomy"), "judgement": False}
+	zeerak_friends = {"viewer": User.objects.get(username = "zeerak"), "show": Show.objects.get(title = "Friends"), "judgement": True}
+	thomas_friends = {"viewer": User.objects.get(username = "thomas"), "show": Show.objects.get(title = "Friends"), "judgement": True}
+	gemma_supernatural = {"viewer": User.objects.get(username = "gemma"), "show": Show.objects.get(title = "Supernatural"), "judgement": True}
+	thomas_supernatural = {"viewer": User.objects.get(username = "thomas"), "show": Show.objects.get(title = "Supernatural"), "judgement": True}
+	gemma_vamp = {"viewer": User.objects.get(username = "gemma"), "show": Show.objects.get(title = "The Vampire Diaries"), "judgement": False}
+	ajpod_vamp = {"viewer": User.objects.get(username = "ajpod"), "show": Show.objects.get(title = "The Vampire Diaries"), "judgement": False}
+	zeerak_mtw = {"viewer": User.objects.get(username = "zeerak"), "show": Show.objects.get(title = "Mock the Week"), "judgement": True}
+	gemma_mtw = {"viewer": User.objects.get(username = "gemma"), "show": Show.objects.get(title = "Mock the Week"), "judgement": True}
 	
-	viewerships = [gemma_office]
+	
+	viewerships = [ajpod_office, thomas_office, gemma_greys, zeerak_greys,
+		zeerak_friends, thomas_friends, gemma_supernatural, thomas_supernatural,
+		gemma_vamp, ajpod_vamp, zeerak_mtw, gemma_mtw]
 	
 	for viewer in viewerships:
 		viewer_added = add_viewership(viewer["viewer"], viewer["show"], viewer["judgement"])
 		
 ######################votes on review#######################################
 
-	gem_office_votes = {"review": Review.objects.get(reviewer = User.objects.get(username = "ajpod"), show = Show.objects.get(title = "The Office (US)")), "voter": User.objects.get(username = "gemma"), "judgement": True}
+	gem_office_ajpod = {"review": Review.objects.get(reviewer = User.objects.get(username = "ajpod"), 
+		show = Show.objects.get(title = "The Office (US)")), "voter": User.objects.get(username = "gemma"), 
+		"judgement": True}
+		
+	zee_office_ajpod = {"review": Review.objects.get(reviewer = User.objects.get(username = "ajpod"), 
+		show = Show.objects.get(title = "The Office (US)")), "voter": User.objects.get(username = "zeerak"), 
+		"judgement": True}
 	
-	votes = [gem_office_votes]
+	thomas_greys_zee= {"review": Review.objects.get(reviewer = User.objects.get(username = "zeerak"), 
+		show = Show.objects.get(title = "Grey's Anatomy")), "voter": User.objects.get(username = "thomas"), 
+		"judgement": True}
+	
+	thomas_greys_gem = {"review": Review.objects.get(reviewer = User.objects.get(username = "gemma"), 
+		show = Show.objects.get(title = "Grey's Anatomy")), "voter": User.objects.get(username = "thomas"), 
+		"judgement": False}
+	
+	thomas_vamp_gem = {"review": Review.objects.get(reviewer = User.objects.get(username = "gemma"), 
+		show = Show.objects.get(title = "The Vampire Diaries")), "voter": User.objects.get(username = "thomas"), 
+		"judgement": True}
+		
+	ajpod_vamp_gem = {"review": Review.objects.get(reviewer = User.objects.get(username = "gemma"), 
+		show = Show.objects.get(title = "The Vampire Diaries")), "voter": User.objects.get(username = "ajpod"), 
+		"judgement": True}
+		
+	zee_vamp_gem = {"review": Review.objects.get(reviewer = User.objects.get(username = "gemma"), 
+		show = Show.objects.get(title = "The Vampire Diaries")), "voter": User.objects.get(username = "zeerak"), 
+		"judgement": False}
+	
+	votes = [gem_office_ajpod, zee_office_ajpod, thomas_greys_zee, thomas_greys_gem,
+	thomas_vamp_gem, ajpod_vamp_gem, zee_vamp_gem]
 	
 	for vote in votes:
 		vote_added = add_vote(vote["review"], vote["voter"], vote["judgement"])
