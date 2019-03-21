@@ -12,6 +12,7 @@ def index(request):
 		return render(request, 'bingeworthy/index.html', context_dict)
 
 def user_login(request):
+	print(request.POST)
 	if request.user.is_authenticated():
 		return HttpResponseRedirect(reverse('index'))
 	registered = False
@@ -117,6 +118,13 @@ def shows_all(request):
 	return render(request, 'bingeworthy/shows-all', context_dict)
 
 def shows_show(request, show_name_slug):
+	print(request.POST)
+	if 'upvote.x' in request.POST:
+		if request.method == 'POST':
+			vote(True, request, show_name_slug)
+	elif 'downvote.x' in request.POST:
+		if request.method == 'POST':
+			vote(False, request, show_name_slug)
 	context_dict = {}
 	good_items = []
 	try:
@@ -137,6 +145,25 @@ def shows_show(request, show_name_slug):
 		context_dict['show'] = None 
 		context_dict['reviews'] = None 
 	return render(request, 'bingeworthy/show.html', context_dict)
+
+def vote(vote, request, show): #helper method for upvoting etc
+	print(request.user.username)
+	reviewer = request.POST.get('author')
+	try: # voteObject is just temporary object, need to change the full thing for it to work
+		voteObject = VotesOnReview.objects.get(voter = User.objects.get(username=request.user.username), review = Review.objects.get(reviewer = User.objects.get(username=reviewer), show = Show.objects.get(slug=show)))
+		if voteObject.judgement == vote: # if vote is same as already voted, delete vote
+			VotesOnReview.objects.get(voter = User.objects.get(username=request.user.username), review = Review.objects.get(reviewer = User.objects.get(username=reviewer), show = Show.objects.get(slug=show))).delete()
+		else: # if vote is different to previous, record is set as new vote
+			voteObject.judgement = vote
+			voteObject.save()
+		return  # i'm sorry about all this, i truly am
+	except VotesOnReview.DoesNotExist: # don't hurt me, it's just the way the models cookie crumbled and they've already hurt me more than any human could
+		VotesOnReview.objects.create(voter = User.objects.get(username=request.user.username), review = Review.objects.get(reviewer = User.objects.get(username=reviewer), show = Show.objects.get(slug=show)), judgement = vote)
+		return
+
+
+
+
 
 def make_review(request, show_name_slug):
 	if not request.user.is_authenticated():
