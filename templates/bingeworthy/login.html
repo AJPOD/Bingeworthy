@@ -60,13 +60,12 @@ div.half{
         <h2 class="form-signin-heading">Sign up</h2>
         <form id="signin_form" class="form-signin" method="post" action="{% url 'login' %}" enctype="multipart/form-data">
           {% csrf_token %}
-          {% for field in user_form.visible_fields %}
-            <div class="form-group">
-            {{ field.errors }}
-            {{ field.label_tag }}
-            {{ field }}
-            </div>
-          {% endfor %}
+          <label for="inputUsername" class="sr-only">Username</label>
+          <input name="username" type="username" id="inputUsername" class="form-control" placeholder="User name" required autofocus>
+          <label for="inputEmail" class="sr-only">Email address</label>
+          <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+          <label for="inputPassword" class="sr-only">Password</label>
+          <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
 
           <button class="btn btn-lg btn-primary btn-block" type="submit" name="signup">Register</button>
         </form>

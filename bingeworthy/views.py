@@ -152,13 +152,11 @@ def make_review(request, show_name_slug):
 		review_title = request.POST.get('title')
 		review_body = request.POST.get('review_body')
 		review_stars = request.POST.get('star_rating')
-		# review_form = ReviewForm(review_title, show, request.user, review_stars, review_body)
-		# review = Review(review_title, show, request.user, review_stars, review_body)
-		#review_form = ReviewForm(data)
+		
 		if review_form.is_valid():
-			review = Review()
-			review.reviewer = request.user
-			review.show = show
+			review = Review() # if the review form is correct, make a new review object 
+			review.reviewer = request.user # as its now safe to put that data in the new object
+			review.show = show # long story why only this works, much late night
 			review.review_body = review_body
 			review.title = review_title
 			review.star_rating = review_stars
@@ -169,13 +167,7 @@ def make_review(request, show_name_slug):
 			print(review_form.as_ul())
 			return HttpResponse("Something went wrong :(")
 
-		# review.save()
-		# print(review)
-		# if review_form.is_valid():
-		# 	print("YA GOT HERE")
-		# 	review = review_form.save()
-		# 	review.save()
-		# 	print("YA GOT HERE")
+
 	return render(request, 'bingeworthy/make_review.html', context_dict)
 
 def user_profile(request, username):
