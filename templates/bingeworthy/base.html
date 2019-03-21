@@ -115,6 +115,8 @@
 				{% if user.is_authenticated %}
 				<form action="/bingeworthy/">
 					<a class="btn btn-secondary" href="/bingeworthy/logout/" role="button">Logout</a>
+					<a class="btn btn-secondary" href="/bingeworthy/user/my-account/" role="button">My Account</a>
+					<a class="btn btn-secondary" href="/bingeworthy/user/profile/{{ user.username }}" role="button">My Profile</a>
 				</form>
 				{% else %}
 				<form action="/bingeworthy/">
