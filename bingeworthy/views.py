@@ -221,8 +221,16 @@ def make_review(request, show_name_slug):
 		show = Show.objects.get(slug=show_name_slug)
 	except Show.DoesNotExist:
 		show = None
+	try:
+		alreadyReviewed = Review.objects.get(reviewer=request.user, show=show)
+	except:
+		alreadyReviewed = None
+	try:
+		viewershipCheck = Viewership.objects.get(viewer=request.user, show=show)
+	except:
+		viewershipCheck = None
 	review_form = ReviewForm()
-	context_dict = {'show': show}
+	context_dict = {'show': show, 'alreadyReviewed': alreadyReviewed, 'viewershipCheck': viewershipCheck}
 	if request.method == 'POST':
 		review_form = ReviewForm(request.POST, request.user, show)
 		review_title = request.POST.get('title')

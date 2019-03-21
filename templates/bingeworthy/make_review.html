@@ -202,10 +202,12 @@ width:50%;
     {{ form.non_field_errors }}
     {% csrf_token %}
         <div style="text-align:center">
-          <h3>{{show.title}}</h3>
+          <h3><a href="{% url 'shows_show' show.slug %}">{{show.title}}</a></h3>
           <hr style="border: 0.25px solid black;" />
         </div>
-
+        {% if alreadyReviewed %}
+        <h2>You have already made a review. You cannot make another.</h2>
+        {% elif viewershipCheck %}
         <div class="row">
 						<div class="cardphater">
               <br>
@@ -241,7 +243,10 @@ width:50%;
                 <br>
 						    <input type="text" name="review_body" class = "yeet" style="width:100%"><br>
               <input type="submit" value="Send" class = "btn btn-secondary">
-            </div>	
+            </div>
+            {% else %}
+            <h2>You have not watched this show. Please judge it first if you wish to review it.</h2>
+            {% endif %}
           </form>
 </div>
 
