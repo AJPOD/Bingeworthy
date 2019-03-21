@@ -18,10 +18,15 @@ class UserPicture(models.Model):  ## decided to just use main User model for eve
 
 class Genre(models.Model):
     genre = models.CharField(max_length=30)
+    
+
+
 
 class Platform(models.Model):
     platform = models.CharField(max_length=30)
 
+
+    
 		
 
 class Show(models.Model):

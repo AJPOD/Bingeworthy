@@ -102,16 +102,22 @@ def addToResults(results, tempResults): # helper method for adding to search res
 	return results
 
 def genres(request):
-	# genres and platforms are not in models, not stored
-	# probably best to just show them front-end
-	return HttpResponse("TEST GENRES")
+	genre_list = Genre.objects.all()
+	shows_list = Show.objects.order_by('-genre')
+	
+	context_dict = {'genres': genre_list, 'shows':shows_list}
+	return render(request, 'bingeworthy/genres.html', context_dict)
 
 def show_genre(request, genre_name_slug):
 	# can confirm it works, for now just makeup a variable in the url for the name
 	return HttpResponse("TEST GENRE PAGE " + genre_name_slug)
 
 def platforms(request):
-	return HttpResponse("TEST PLATFORMS")
+	genre_list = platform.objects.all()
+	shows_list = Show.objects.order_by('-platform')
+	
+	context_dict = {'platform': genre_list, 'shows':shows_list}
+	return render(request, 'bingeworthy/platforms.html', context_dict)
 
 def show_platform(request, platform_name_slug):
 	# see show_genre
