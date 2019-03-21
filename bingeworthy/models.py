@@ -11,16 +11,9 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 # Test it actually works
 # Maybe add Meta subclasses like in Rango
 
-class UserPicture(models.Model):  ## decided to just use main User model for everything
-    user = models.OneToOneField(User, primary_key = True)
-
-    picture = models.ImageField(upload_to='profile_images', blank=True)
-
 class Genre(models.Model):
     genre = models.CharField(max_length=30)
     
-
-
 
 class Platform(models.Model):
     platform = models.CharField(max_length=30)

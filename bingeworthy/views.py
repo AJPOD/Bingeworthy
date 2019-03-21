@@ -278,6 +278,7 @@ def user_profile(request, username):
 	return render(request, 'bingeworthy/user-profile.html', context_dict)
 	# return HttpResponse("TEST USER PROFILE OF " + username)
 
+
 def my_account(request):
 	return HttpResponse("TEST MY ACCOUNT")
 

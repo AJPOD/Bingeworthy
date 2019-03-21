@@ -113,9 +113,9 @@ hr {
 							
 							
 							
-							<h4 class="mt-0 mb-1">{{review.show}}</h4>
+							<h4 class="mt-0 mb-1"><a href="{% url 'shows_show' review.show.slug %}">{{review.show}}</a></h4>
 								
-								<h5 class="mt-0 mb-1">{{review.title}} --  {{review.upvote_count}}</h5>
+								<h5 class="mt-0 mb-1">{{review.title}} -- By <a href="{% url 'user_profile' review.reviewer.username %}">{{ review.reviewer }}</a> ({{review.upvote_count}})</h5>
 								{{review.review_body}}
 									
 							

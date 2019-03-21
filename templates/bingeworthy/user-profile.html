@@ -42,13 +42,10 @@
     }
     
     .card {
-      
-      width: 10%;
-      padding: .75rem;
-      margin-bottom: 2rem;
-        background-color: #f2f2f2;
-      border: 0;
-      /* border:2px solid blue; */
+       
+      width: 100%;
+    	margin-bottom:0px;
+      background-color: #f2f2f2;
     }
     
     .cardphat{
@@ -161,6 +158,44 @@
     
     <div class="container">
     <div style="text-align:center">
+    	{%for review in reviews %}
+      <div class="row">
+	  <hr style="border: 0.25px solid black; width:80%" />
+						<div class="card">
+													
+							
+							
+							<h4 class="mt-0 mb-1"><a href="{% url 'shows_show' review.show.slug %}">{{review.show}}</a></h4>
+								
+								<h5 class="mt-0 mb-1">{{review.title}} -- By {{ review.reviewer }} ({{review.upvote_count}})</h5>
+								{{review.review_body}}
+									
+							
+							
+							
+							
+							
+						
+								
+								
+								
+
+								
+						</div>
+						<hr style="border: 0.25px solid black; width:80%" />
+						
+						
+							    
+								
+								
+								
+								
+								
+								
+								
+								
+	</div>
+	{% endfor %}
       </div>
     
     
@@ -205,6 +240,7 @@
                             
                             
                         </div>
+
     </div>
 
 </div>
