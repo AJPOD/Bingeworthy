@@ -362,7 +362,7 @@ def populate():
 	"review_body": "Pretty gorey but still a really great show"}
 	
 	twd_review3 = {"reviewer": User.objects.get(username = "zeerak"), "title": "Stopped watching", 
-	"show": Show.objects.get(title = "The Walking Dead"), "star_rating": 6,
+	"show": Show.objects.get(title = "The Walking Dead"), "star_rating": 2,
 	"review_body": "Sort of lost interest after a while"}
 	
 	mrRobot_review1 = {"reviewer": User.objects.get(username = "zeerak"), "title": "Lead actor was great", 
@@ -466,7 +466,7 @@ def populate():
 	"review_body": "Something I would watch again, it was a good watch and stayed consistent"}
 	
 	htgawm_review2 = {"reviewer": User.objects.get(username = "gemma"), "title": "Good at start", 
-	"show": Show.objects.get(title = "How to Get Away with Murder"), "star_rating": 5,
+	"show": Show.objects.get(title = "How to Get Away with Murder"), "star_rating": 4,
 	"review_body": "Show was good at the beginning but wore off in later seasons sadly"}
 	
 	htgawm_review3 = {"reviewer": User.objects.get(username = "ajpod"), "title": "Good for law", 
@@ -584,21 +584,151 @@ def populate():
 	
 	ajpod_office = {"viewer": User.objects.get(username = "ajpod"), "show": Show.objects.get(title = "The Office (US)"), "judgement": True}
 	thomas_office = {"viewer": User.objects.get(username = "thomas"), "show": Show.objects.get(title = "The Office (US)"), "judgement": True}
-	gemma_greys = {"viewer": User.objects.get(username = "gemma"), "show": Show.objects.get(title = "Grey's Anatomy"), "judgement": True}
-	zeerak_greys = {"viewer": User.objects.get(username = "zeerak"), "show": Show.objects.get(title = "Grey's Anatomy"), "judgement": False}
+	zeerak_office = {"viewer": User.objects.get(username = "zeerak"), "show": Show.objects.get(title = "The Office (US)"), "judgement": True}
+	
 	zeerak_friends = {"viewer": User.objects.get(username = "zeerak"), "show": Show.objects.get(title = "Friends"), "judgement": True}
 	thomas_friends = {"viewer": User.objects.get(username = "thomas"), "show": Show.objects.get(title = "Friends"), "judgement": True}
-	gemma_supernatural = {"viewer": User.objects.get(username = "gemma"), "show": Show.objects.get(title = "Supernatural"), "judgement": True}
-	thomas_supernatural = {"viewer": User.objects.get(username = "thomas"), "show": Show.objects.get(title = "Supernatural"), "judgement": True}
-	gemma_vamp = {"viewer": User.objects.get(username = "gemma"), "show": Show.objects.get(title = "The Vampire Diaries"), "judgement": False}
-	ajpod_vamp = {"viewer": User.objects.get(username = "ajpod"), "show": Show.objects.get(title = "The Vampire Diaries"), "judgement": False}
+	ajpod_friends = {"viewer": User.objects.get(username = "ajpod"), "show": Show.objects.get(title = "Friends"), "judgement": False}
+	
 	zeerak_mtw = {"viewer": User.objects.get(username = "zeerak"), "show": Show.objects.get(title = "Mock the Week"), "judgement": True}
 	gemma_mtw = {"viewer": User.objects.get(username = "gemma"), "show": Show.objects.get(title = "Mock the Week"), "judgement": True}
+	thomas_mtw = {"viewer": User.objects.get(username = "thomas"), "show": Show.objects.get(title = "Mock the Week"), "judgement": True}
+	
+	gemma_b99 = {"viewer": User.objects.get(username = "gemma"), "show": Show.objects.get(title = "Brooklyn Nine Nine"), "judgement": True}
+	thomas_b99 = {"viewer": User.objects.get(username = "thomas"), "show": Show.objects.get(title = "Brooklyn Nine Nine"), "judgement": True}
+	ajpod_b99 = {"viewer": User.objects.get(username = "ajpod"), "show": Show.objects.get(title = "Brooklyn Nine Nine"), "judgement": False}
+	
+	zeerak_community = {"viewer": User.objects.get(username = "zeerak"), "show": Show.objects.get(title = "Community"), "judgement": True}
+	ajpod_community = {"viewer": User.objects.get(username = "ajpod"), "show": Show.objects.get(title = "Community"), "judgement": True}
+	gemma_community = {"viewer": User.objects.get(username = "gemma"), "show": Show.objects.get(title = "Community"), "judgement": True}
+	
+	gemma_strangerThings = {"viewer": User.objects.get(username = "gemma"), "show": Show.objects.get(title = "Stranger Things"), "judgement": True}
+	thomas_strangerThings = {"viewer": User.objects.get(username = "thomas"), "show": Show.objects.get(title = "Stranger Things"), "judgement": True}
+	ajpod_strangerThings = {"viewer": User.objects.get(username = "ajpod"), "show": Show.objects.get(title = "Stranger Things"), "judgement": True}
+	
+	ajpod_drWho = {"viewer": User.objects.get(username = "ajpod"), "show": Show.objects.get(title = "Doctor Who"), "judgement": True}
+	zeerak_drWho = {"viewer": User.objects.get(username = "zeerak"), "show": Show.objects.get(title = "Doctor Who"), "judgement": False}
+	thomas_drWho = {"viewer": User.objects.get(username = "thomas"), "show": Show.objects.get(title = "Doctor Who"), "judgement": True}
+	
+	gemma_blackMirror = {"viewer": User.objects.get(username = "gemma"), "show": Show.objects.get(title = "Black Mirror"), "judgement": True}
+	thomas_blackMirror = {"viewer": User.objects.get(username = "thomas"), "show": Show.objects.get(title = "Black Mirror"), "judgement": True}
+	zeerak_blackMirror = {"viewer": User.objects.get(username = "zeerak"), "show": Show.objects.get(title = "Black Mirror"), "judgement": True}
+	
+	ajpod_starTrek = {"viewer": User.objects.get(username = "ajpod"), "show": Show.objects.get(title = "Star Trek"), "judgement": True}
+	zeerak_starTrek = {"viewer": User.objects.get(username = "zeerak"), "show": Show.objects.get(title = "Star Trek"), "judgement": False}
+	gemma_starTrek = {"viewer": User.objects.get(username = "gemma"), "show": Show.objects.get(title = "Star Trek"), "judgement": True}
+	
+	gemma_supernatural = {"viewer": User.objects.get(username = "gemma"), "show": Show.objects.get(title = "Supernatural"), "judgement": True}
+	thomas_supernatural = {"viewer": User.objects.get(username = "thomas"), "show": Show.objects.get(title = "Supernatural"), "judgement": True}
+	zeerak_supernatural = {"viewer": User.objects.get(username = "zeerak"), "show": Show.objects.get(title = "Supernatural"), "judgement": True}
+	
+	gemma_vamp = {"viewer": User.objects.get(username = "gemma"), "show": Show.objects.get(title = "The Vampire Diaries"), "judgement": False}
+	ajpod_vamp = {"viewer": User.objects.get(username = "ajpod"), "show": Show.objects.get(title = "The Vampire Diaries"), "judgement": False}
+	thomas_vamp = {"viewer": User.objects.get(username = "thomas"), "show": Show.objects.get(title = "The Vampire Diaries"), "judgement": False}
+	
+	thomas_got = {"viewer": User.objects.get(username = "thomas"), "show": Show.objects.get(title = "Game of Thrones"), "judgement": True}
+	zeerak_got = {"viewer": User.objects.get(username = "zeerak"), "show": Show.objects.get(title = "Game of Thrones"), "judgement": True}
+	ajpod_got = {"viewer": User.objects.get(username = "ajpod"), "show": Show.objects.get(title = "Game of Thrones"), "judgement": True}
+	
+	ajpod_lotr = {"viewer": User.objects.get(username = "ajpod"), "show": Show.objects.get(title = "Lord of the Rings"), "judgement": True}
+	gemma_lotr = {"viewer": User.objects.get(username = "gemma"), "show": Show.objects.get(title = "Lord of the Rings"), "judgement": True}
+	thomas_lotr = {"viewer": User.objects.get(username = "thomas"), "show": Show.objects.get(title = "Lord of the Rings"), "judgement": True}
+	
+	ajpod_twd = {"viewer": User.objects.get(username = "ajpod"), "show": Show.objects.get(title = "The Walking Dead"), "judgement": True}
+	thomas_twd = {"viewer": User.objects.get(username = "thomas"), "show": Show.objects.get(title = "The Walking Dead"), "judgement": True}
+	zeerak_twd = {"viewer": User.objects.get(username = "zeerak"), "show": Show.objects.get(title = "The Walking Dead"), "judgement": False}
+	
+	zeerak_mrRobot = {"viewer": User.objects.get(username = "zeerak"), "show": Show.objects.get(title = "Mr Robot"), "judgement": True}
+	thomas_mrRobot = {"viewer": User.objects.get(username = "thomas"), "show": Show.objects.get(title = "Mr Robot"), "judgement": True}
+	ajpod_mrRobot = {"viewer": User.objects.get(username = "ajpod"), "show": Show.objects.get(title = "Mr Robot"), "judgement": True}
+	
+	zeerak_luther = {"viewer": User.objects.get(username = "zeerak"), "show": Show.objects.get(title = "Luther"), "judgement": False}
+	thomas_luther = {"viewer": User.objects.get(username = "thomas"), "show": Show.objects.get(title = "Luther"), "judgement": False}
+	gemma_luther = {"viewer": User.objects.get(username = "gemma"), "show": Show.objects.get(title = "Luther"), "judgement": False}
+	
+	gemma_you = {"viewer": User.objects.get(username = "gemma"), "show": Show.objects.get(title = "You"), "judgement": True}
+	ajpod_you = {"viewer": User.objects.get(username = "ajpod"), "show": Show.objects.get(title = "You"), "judgement": True}
+	thomas_you = {"viewer": User.objects.get(username = "thomas"), "show": Show.objects.get(title = "You"), "judgement": True}
+	
+	thomas_bll = {"viewer": User.objects.get(username = "thomas"), "show": Show.objects.get(title = "Big Little Lies"), "judgement": False}
+	gemma_bll = {"viewer": User.objects.get(username = "gemma"), "show": Show.objects.get(title = "Big Little Lies"), "judgement": False}
+	zeerak_bll = {"viewer": User.objects.get(username = "zeerak"), "show": Show.objects.get(title = "Big Little Lies"), "judgement": False}
+
+	gemma_greys = {"viewer": User.objects.get(username = "gemma"), "show": Show.objects.get(title = "Grey's Anatomy"), "judgement": True}
+	zeerak_greys = {"viewer": User.objects.get(username = "zeerak"), "show": Show.objects.get(title = "Grey's Anatomy"), "judgement": False}
+	ajpod_greys = {"viewer": User.objects.get(username = "ajpod"), "show": Show.objects.get(title = "Grey's Anatomy"), "judgement": True}
+	
+	zeerak_handmaid = {"viewer": User.objects.get(username = "zeerak"), "show": Show.objects.get(title = "The Handmaids Tale"), "judgement": True}
+	gemma_handmaid = {"viewer": User.objects.get(username = "gemma"), "show": Show.objects.get(title = "The Handmaids Tale"), "judgement": True}
+	thomas_handmaid = {"viewer": User.objects.get(username = "thomas"), "show": Show.objects.get(title = "The Handmaids Tale"), "judgement": True}
+	
+	ajpod_peakyBlinders = {"viewer": User.objects.get(username = "ajpod"), "show": Show.objects.get(title = "Peaky Blinders"), "judgement": True}
+	zeerak_peakyBlinders = {"viewer": User.objects.get(username = "zeerak"), "show": Show.objects.get(title = "Peaky Blinders"), "judgement": True}
+	thomas_peakyBlinders = {"viewer": User.objects.get(username = "thomas"), "show": Show.objects.get(title = "Peaky Blinders"), "judgement": True}
+
+	gemma_dod = {"viewer": User.objects.get(username = "gemma"), "show": Show.objects.get(title = "Dahmer On Dahmer"), "judgement": True}
+	ajpod_dod = {"viewer": User.objects.get(username = "ajpod"), "show": Show.objects.get(title = "Dahmer On Dahmer"), "judgement": True}
+	zeerak_dod = {"viewer": User.objects.get(username = "zeerak"), "show": Show.objects.get(title = "Dahmer On Dahmer"), "judgement": True}
+
+	thomas_htgawm = {"viewer": User.objects.get(username = "thomas"), "show": Show.objects.get(title = "How to Get Away with Murder"), "judgement": True}
+	gemma_htgawm = {"viewer": User.objects.get(username = "gemma"), "show": Show.objects.get(title = "How to Get Away with Murder"), "judgement": False}
+	ajpod_htgawm = {"viewer": User.objects.get(username = "ajpod"), "show": Show.objects.get(title = "How to Get Away with Murder"), "judgement": True}
+
+	zeerak_iicb = {"viewer": User.objects.get(username = "zeerak"), "show": Show.objects.get(title = "In Ice Cold Blood"), "judgement": True}
+	ajpod_iicb = {"viewer": User.objects.get(username = "ajpod"), "show": Show.objects.get(title = "In Ice Cold Blood"), "judgement": True}
+	thomas_iicb = {"viewer": User.objects.get(username = "thomas"), "show": Show.objects.get(title = "In Ice Cold Blood"), "judgement": True}
+
+	gemma_shetland = {"viewer": User.objects.get(username = "gemma"), "show": Show.objects.get(title = "Shetland"), "judgement": False}
+	ajpod_shetland = {"viewer": User.objects.get(username = "ajpod"), "show": Show.objects.get(title = "Shetland"), "judgement": True}
+	zeerak_shetland = {"viewer": User.objects.get(username = "zeerak"), "show": Show.objects.get(title = "Shetland"), "judgement": False}
+
+	gemma_kuwtk = {"viewer": User.objects.get(username = "gemma"), "show": Show.objects.get(title = "Keeping Up with the Kardashians"), "judgement": True}
+	ajpod_kuwtk = {"viewer": User.objects.get(username = "ajpod"), "show": Show.objects.get(title = "Keeping Up with the Kardashians"), "judgement": False}
+	zeerak_kuwtk = {"viewer": User.objects.get(username = "zeerak"), "show": Show.objects.get(title = "Keeping Up with the Kardashians"), "judgement": True}
+
+	ajpod_mm = {"viewer": User.objects.get(username = "ajpod"), "show": Show.objects.get(title = "Millionaire Matchmaker"), "judgement": False}
+	thomas_mm = {"viewer": User.objects.get(username = "thomas"), "show": Show.objects.get(title = "Millionaire Matchmaker"), "judgement": False}
+	zeerak_mm = {"viewer": User.objects.get(username = "zeerak"), "show": Show.objects.get(title = "Millionaire Matchmaker"), "judgement": False}
+	
+	ajpod_apprentice = {"viewer": User.objects.get(username = "ajpod"), "show": Show.objects.get(title = "The Apprentice"), "judgement": True}
+	gemma_apprentice = {"viewer": User.objects.get(username = "gemma"), "show": Show.objects.get(title = "The Apprentice"), "judgement": False}
+	thomas_apprentice = {"viewer": User.objects.get(username = "thomas"), "show": Show.objects.get(title = "The Apprentice"), "judgement": True}
+
+	ajpod_catfish = {"viewer": User.objects.get(username = "ajpod"), "show": Show.objects.get(title = "Catfish"), "judgement": True}
+	gemma_catfish = {"viewer": User.objects.get(username = "gemma"), "show": Show.objects.get(title = "Catfish"), "judgement": True}
+	zeerak_catfish = {"viewer": User.objects.get(username = "zeerak"), "show": Show.objects.get(title = "Catfish"), "judgement": True}
 	
 	
-	viewerships = [ajpod_office, thomas_office, gemma_greys, zeerak_greys,
-		zeerak_friends, thomas_friends, gemma_supernatural, thomas_supernatural,
-		gemma_vamp, ajpod_vamp, zeerak_mtw, gemma_mtw]
+	
+	viewerships = [ajpod_office, thomas_office, zeerak_office, 
+	zeerak_friends, thomas_friends, ajpod_friends,
+	zeerak_mtw, gemma_mtw, thomas_mtw,
+	gemma_b99, thomas_b99, ajpod_b99,
+	zeerak_community, ajpod_community, gemma_community,
+	thomas_strangerThings, ajpod_strangerThings, gemma_strangerThings,
+	ajpod_drWho, zeerak_drWho, thomas_drWho,
+	gemma_blackMirror, thomas_blackMirror, zeerak_blackMirror,
+	ajpod_starTrek, zeerak_starTrek, gemma_starTrek,
+	gemma_supernatural, thomas_supernatural, zeerak_supernatural,
+	gemma_vamp, ajpod_vamp, thomas_vamp,
+	thomas_got, zeerak_got, ajpod_got,
+	ajpod_lotr, gemma_lotr, thomas_lotr,
+	ajpod_twd, thomas_twd, zeerak_twd,
+	zeerak_mrRobot, thomas_mrRobot, ajpod_mrRobot,
+	zeerak_luther, thomas_luther, gemma_luther,
+	gemma_you, ajpod_you, thomas_you,
+	thomas_bll, gemma_bll, zeerak_bll,
+	zeerak_handmaid, gemma_handmaid, thomas_handmaid,
+	ajpod_peakyBlinders, zeerak_peakyBlinders, thomas_peakyBlinders,
+	gemma_dod, ajpod_dod, zeerak_dod,
+	thomas_htgawm, ajpod_htgawm, gemma_htgawm,
+	zeerak_iicb, ajpod_iicb, thomas_iicb,
+	gemma_shetland, ajpod_shetland, zeerak_shetland,
+	gemma_kuwtk, ajpod_kuwtk, zeerak_kuwtk,
+	ajpod_mm, thomas_mm, zeerak_mm,
+	ajpod_apprentice, gemma_apprentice, thomas_apprentice,
+	ajpod_catfish, gemma_catfish, zeerak_catfish
+	]
 	
 	for viewer in viewerships:
 		viewer_added = add_viewership(viewer["viewer"], viewer["show"], viewer["judgement"])
