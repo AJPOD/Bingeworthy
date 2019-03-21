@@ -197,93 +197,54 @@ width:50%;
 
 
 <div class="container">
-<div style="text-align:center">
-    <h3>BOB</h3>
-	<hr style="border: 0.25px solid black;" />
-  </div>
-  <form id="review" method="post" action="{% url 'make_review' show.slug %}">
-  {{ form.errors }}
-  {{ form.non_field_errors }}
-  {% csrf_token %}
+    <form id="review" method="post" action="{% url 'make_review' show.slug %}">
+    {{ form.errors }}
+    {{ form.non_field_errors }}
+    {% csrf_token %}
+        <div style="text-align:center">
+          <h3>{{show.title}}</h3>
+          <hr style="border: 0.25px solid black;" />
+        </div>
 
-
-      <div class="row">
+        <div class="row">
 						<div class="cardphater">
               <br>
               <img src="{{ MEDIA_URL }}{{show.slug}}-thumb.jpg" alt="Show Thumbnail" style="margin-left:5%" a/>
 						</div>
-	
-	
-						<div class="card">
-								
-						</div>
 						
 						<div class="cardphat">
-                <div class="rowtop">
-                        
-                          
-                            
-                  
-                </div>
                 <div class="rowmiddle">
-				<div class="containerbody">
-				
-				<div class="form-group">
-						<label for="exampleFormControlTextarea1">Review title</label>
-						<textarea class="form-control" id="exampleFormControlTextarea1" rows="1" name = "title"></textarea>
-						
-
-					</div>
-					
-					
-					</div>
-					
+				          <div class="containerbody">
+                      <div class="mx-auto" style="width: 200px;">
+                          <h4>Review Title</h4>
+                        <input type="text" name="title" class="yeet">
+                      </div>
+					        </div>
+                </div>
+                <div class="rowbottom">
+                  <div class="mx-auto" style="width: 133px;">
                   </div>
-                  <div class="rowbottom">
-                      <div class="mx-auto" style="width: 133px;">
-                          
-						  
-                        </div>
-                        <hr width=100% color = black>
-                      
-					  
-					 
-					  
-						
-						
-							<div class = "containerbody">
-						<label for="exampleFormControlTextarea1">Star rating</label>
-<br>
-							<input type="number" max=10 min=1 name="star_rating" size="50" class = "yeet" ><br><br>
-
-							</div>
-                        <hr width=100% color = black>
-
-                       
-                          
+                  <hr width=100% color = black>
+                  <div class = "containerbody">
+                    <div class="mx-auto" style="width: 200px;">
+                        <h4>Star rating</h4>
+                      <img src={% static "images/star.png" %} width=40 height=40 style = "float:left">
+							        <input type="number" max=10 min=1 name="star_rating" size="50" class = "yeet" ><br><br>
                     </div>
-              
-              
-						</div>
-						
-						
-					</div>
-					<div class="containerbody">
-					<div class="form-group">
-						<label for="exampleFormControlTextarea1">Review Body</label>
-						<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name = "review_body"></textarea>
-						
-
-					</div>
-					
-					</div>
-
-					
-					
-					<form>
-  
-					
+							    </div>
+                  <hr width=100% color = black>    
+                </div>     
+						  </div>
+            </div>
+					  <div class="containerbody">
+                <h4>Review Body</h4>
+                <br>
+						    <input type="text" name="review_body" class = "yeet" style="width:100%"><br>
+              <input type="submit" value="Send" class = "btn btn-secondary">
+            </div>	
+          </form>
 </div>
+
 
 
 
