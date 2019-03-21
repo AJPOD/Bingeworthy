@@ -152,6 +152,22 @@ width:33.33%;
   margin-left:3%;
   margin-right:7%;
 }
+#viewer {
+   
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 20%;
+  height: auto;
+  margin-left: -200px;
+  margin-top: -150px;
+  background-color: white;
+  padding: 25px;
+  border-radius: 5px;
+  z-index: 10;
+  box-shadow: 0 0 0 9999px rgba(0,0,0,0.5);
+}
 
 </style>
 
@@ -190,6 +206,33 @@ width:33.33%;
                           </div>
                           <div class="divey">
                             <div style="margin-top:5%">
+                            {% if viewed %}
+                              {% if viewed.judgement %}
+                              <button style="float:right" class= "btn btn-secondary btn-lg" onclick="displayV()">I liked it! Vote again?</button>
+                              {% else %}
+                              <button style="float:right" class= "btn btn-secondary btn-lg" onclick="displayV()">I disliked it! Vote again?</button>
+                              {% endif %}
+
+                              {% else %}
+                              <button style="float:right" class= "btn btn-secondary btn-lg" onclick="displayV()">Watched it?</button>
+                              {% endif %}
+                              <div id="viewer">
+                              <button class="close" onclick="hideV()">Close</button>
+                              <h2>Did you like or dislike the show?</h2>
+                              <form id="viewed" method="post" action="{% url 'shows_show' show.slug %}">
+                              {% csrf_token %}
+                              <input name="like" value="submit" style="float: left" type="image" src= {% static "images/thumbsup.png" %} height="100" width="100"/>
+                              <input name="dislike" value="submit" style="float: right" type="image" src= {% static "images/thumbsdown.png" %} height="100" width="100"/>
+                              </form>
+                              </div>
+                              <script>
+                              function displayV() {
+                                document.getElementById("viewer").style.display = "block";
+                              }
+                              function hideV() {
+                                document.getElementById("viewer").style.display = "none";
+                              }
+                              </script>
                               <form action="/bingeworthy/">
                                 <a style = "float:right" class="btn btn-secondary btn-lg" href="{% url 'make_review' show.slug %}" role="button">Make a review</a>
                               </form>

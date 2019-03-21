@@ -137,6 +137,16 @@ def shows_all(request):
 
 def shows_show(request, show_name_slug):
 	print(request.POST)
+	if 'like.x' in request.POST:
+		if request.method == 'POST':
+			if not request.user.is_authenticated():
+				return HttpResponseRedirect(reverse('login'))
+			likeOrDislike(True, request, show_name_slug)
+	if 'dislike.x' in request.POST:
+		if request.method == 'POST':
+			if not request.user.is_authenticated():
+				return HttpResponseRedirect(reverse('login'))
+			likeOrDislike(False, request, show_name_slug)	
 	if 'upvote.x' in request.POST:
 		if request.method == 'POST':
 			if not request.user.is_authenticated():
@@ -163,9 +173,15 @@ def shows_show(request, show_name_slug):
 		context_dict['show3'] = good_items[2]
 		context_dict['star_rating'] = show.star_rating
 		context_dict['like_ratio'] = show.like_ratio
+		try:
+			viewed = Viewership.objects.get(viewer=request.user, show=show)
+		except Viewership.DoesNotExist:
+			viewed = None 
+		context_dict['viewed'] = viewed
 	except Show.DoesNotExist:
 		context_dict['show'] = None 
 		context_dict['reviews'] = None 
+
 	return render(request, 'bingeworthy/show.html', context_dict)
 
 def vote(vote, request, show): #helper method for upvoting etc
@@ -182,6 +198,17 @@ def vote(vote, request, show): #helper method for upvoting etc
 	except VotesOnReview.DoesNotExist: # don't hurt me, it's just the way the models cookie crumbled and they've already hurt me more than any human could
 		VotesOnReview.objects.create(voter = User.objects.get(username=request.user.username), review = Review.objects.get(reviewer = User.objects.get(username=reviewer), show = Show.objects.get(slug=show)), judgement = vote)
 		return
+
+def likeOrDislike(vote, request, show):
+	try:
+		voteObject = Viewership.objects.get(viewer=request.user, show=Show.objects.get(slug=show))
+		voteObject.judgement = vote
+		voteObject.save()
+		return
+	except Viewership.DoesNotExist:
+		Viewership.objects.create(viewer=request.user, show=Show.objects.get(slug=show), judgement = vote)
+		return
+
 
 
 
