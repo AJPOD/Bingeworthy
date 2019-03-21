@@ -1,0 +1,119 @@
+{% extends 'bingeworthy/base.html' %}
+
+{% load staticfiles %}
+
+{% block title_block %}
+{% endblock %}
+
+{% block body_block %}
+<style>
+.cardphaty{
+  
+    width: 400px;
+    height:400px;
+    padding: .75rem;
+    margin-bottom: 2rem;
+    margin-left:39%;
+      background-color: #f2f2f2;
+    border: 0;
+    /* border:2px solid blue; */
+  }
+</style>
+<br>
+<br>
+<br>
+<!-- <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br> -->
+<div class=cardphaty>
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="6"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="7"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="8"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="9"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                    <a href="{% url 'shows_show' shows.0.slug %}"><img src="{{ MEDIA_URL }}{{shows.0.slug}}-thumb.jpg" class="d-block w-100" alt="..."></a>
+                    <div class="carousel-caption d-none d-md-block">       
+                    <h5>{{shows.0.title}}</h5>
+                    </div>
+              </div>
+              <div class="carousel-item">
+                    <a href="{% url 'shows_show' shows.1.slug %}"><img src="{{ MEDIA_URL }}{{shows.1.slug}}-thumb.jpg" class="d-block w-100" alt="..."></a>
+                    <div class="carousel-caption d-none d-md-block">       
+                            <h5>{{shows.1.title}}</h5>
+                            </div>
+              </div>
+              <div class="carousel-item">
+                <a href="{% url 'shows_show' shows.2.slug %}"><img src="{{ MEDIA_URL }}{{shows.2.slug}}-thumb.jpg" class="d-block w-100" alt="..."></a>
+                <div class="carousel-caption d-none d-md-block">       
+                        <h5>{{shows.2.title}}</h5>
+                        </div>
+              </div>
+              <div class="carousel-item">
+                    <a href="{% url 'shows_show' shows.3.slug %}"><img src="{{ MEDIA_URL }}{{shows.3.slug}}-thumb.jpg" class="d-block w-100" alt="..."></a>
+                    <div class="carousel-caption d-none d-md-block">       
+                            <h5>{{shows.3.title}}</h5>
+                            </div>
+                  </div>
+                  <div class="carousel-item">
+                        <a href="{% url 'shows_show' shows.4.slug %}"><img src="{{ MEDIA_URL }}{{shows.4.slug}}-thumb.jpg" class="d-block w-100" alt="..."></a>
+                        <div class="carousel-caption d-none d-md-block">       
+                                <h5>{{shows.4.title}}</h5>
+                                </div>
+                      </div>
+                      <div class="carousel-item">
+                            <a href="{% url 'shows_show' shows.5.slug %}"><img src="{{ MEDIA_URL }}{{shows.5.slug}}-thumb.jpg" class="d-block w-100" alt="..."></a>
+                            <div class="carousel-caption d-none d-md-block">       
+                                    <h5>{{shows.5.title}}</h5>
+                                    </div>
+                          </div>
+                          <div class="carousel-item">
+                                <a href="{% url 'shows_show' shows.6.slug %}"><img src="{{ MEDIA_URL }}{{shows.6.slug}}-thumb.jpg" class="d-block w-100" alt="..."></a>
+                                <div class="carousel-caption d-none d-md-block">       
+                                        <h5>{{shows.6.title}}</h5>
+                                        </div>
+                              </div>
+                              <div class="carousel-item">
+                                    <a href="{% url 'shows_show' shows.7.slug %}"><img src="{{ MEDIA_URL }}{{shows.7.slug}}-thumb.jpg" class="d-block w-100" alt="..."></a>
+                                    <div class="carousel-caption d-none d-md-block">       
+                                            <h5>{{shows.7.title}}</h5>
+                                            </div>
+                                  </div>
+                                  <div class="carousel-item">
+                                        <a href="{% url 'shows_show' shows.8.slug %}"><img src="{{ MEDIA_URL }}{{shows.8.slug}}-thumb.jpg" class="d-block w-100" alt="..."></a>
+                                        <div class="carousel-caption d-none d-md-block">       
+                                                <h5>{{shows.8.title}}</h5>
+                                                </div>
+                                      </div>
+                                      <div class="carousel-item">
+                                            <a href="{% url 'shows_show' shows.9.slug %}"><img src="{{ MEDIA_URL }}{{shows.9.slug}}-thumb.jpg" class="d-block w-100" alt="..."></a>
+                                            <div class="carousel-caption d-none d-md-block">       
+                                                    <h5>{{shows.9.title}}</h5>
+                                                    </div>
+                                          </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>     
+        </div>
+{% endblock %}

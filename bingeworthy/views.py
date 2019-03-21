@@ -129,12 +129,15 @@ def shows(request):
 	return render(request, 'bingeworthy/shows.html', context_dict)
 
 def shows_top(request):
-	# change slicer to get more shows, might need to change to
-	# -Show.like_ratio if it doesn't work as is because calculated field
-	shows_list = Show.objects.order_by('-like_ratio')[:10]
-	context_dict = {'shows': shows_list}
-	return render(request, 'bingeworthy/shows-top', context_dict)
-	# return HttpResponse("TEST TOP SHOWS")
+	shows_list = Show.objects.all()
+	rating_dict = {}
+	for show in shows_list:
+		rating_dict[show] = show.like_ratio
+	
+	sorted_rating_list = sorted(rating_dict,key=rating_dict.__getitem__,reverse=True)
+	new_shows_list = sorted_rating_list[:10]
+	context_dict = {'shows': new_shows_list}
+	return render(request, 'bingeworthy/shows-top.html', context_dict)
 
 def shows_all(request):
 	shows_list = Show.objects.order_by('-title')
