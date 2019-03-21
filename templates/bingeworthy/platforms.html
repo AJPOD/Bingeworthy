@@ -103,18 +103,22 @@ a{
 
 </style>
 
-
+<br><br>
 
 
 <div class = "container">
+    <div style="text-align:center">
+        <h3>Platforms</h3>
+      <hr style="border: 0.25px solid black; width:100%" />
+
     <div class="row">
       <br>
-      {% for platform1 in genres %}
+      {% for platform1 in platform %}
       
       <div class = "container">
         <div class = "big">
           
-            {{platform1.genre}}
+            {{platform1.platform}}
           
 
         </div>
@@ -124,7 +128,7 @@ a{
 
       {% for show in shows %}
 	  
-              {% if genre1.genre == show.genre.genre %}
+              {% if platform1.platform == show.platform.platform %}
               
 				
                   <a href="{% url 'shows_show' show.slug %}"> {{show}}</a>

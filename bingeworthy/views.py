@@ -113,10 +113,10 @@ def show_genre(request, genre_name_slug):
 	return HttpResponse("TEST GENRE PAGE " + genre_name_slug)
 
 def platforms(request):
-	genre_list = platform.objects.all()
+	platform_list = Platform.objects.all()
 	shows_list = Show.objects.order_by('-platform')
 	
-	context_dict = {'platform': genre_list, 'shows':shows_list}
+	context_dict = {'platform': platform_list, 'shows':shows_list}
 	return render(request, 'bingeworthy/platforms.html', context_dict)
 
 def show_platform(request, platform_name_slug):
