@@ -121,9 +121,13 @@ def shows_show(request, show_name_slug):
 	print(request.POST)
 	if 'upvote.x' in request.POST:
 		if request.method == 'POST':
+			if not request.user.is_authenticated():
+				return HttpResponseRedirect(reverse('login'))
 			vote(True, request, show_name_slug)
 	elif 'downvote.x' in request.POST:
 		if request.method == 'POST':
+			if not request.user.is_authenticated():
+				return HttpResponseRedirect(reverse('login'))
 			vote(False, request, show_name_slug)
 	context_dict = {}
 	good_items = []
