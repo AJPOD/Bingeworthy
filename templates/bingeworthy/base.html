@@ -101,7 +101,7 @@
 			
 			left: 5;
 			right: 0;
-				
+			padding-right:1%;	
 			margin: auto;
 				
 			}
@@ -121,10 +121,16 @@
 					<a class="btn btn-secondary" href="/bingeworthy/login/" role="button">Login/Signup</a>
 				</form>
 				{% endif %}
-				<div class = "topright">
+				<!-- <div class = "topright">
 				<input type="text" placeholder="Search">
 				<a class="btn btn-secondary" role="button">Search</a>
-				</div>
+				</div> -->
+				<div class="topright">
+				<form class="form-inline my-2 my-lg-0">
+					<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+					<button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+				</form>
+			</div>
 				<div class="topcentre">
 							<a href="/bingeworthy/"><img src={% static "images/big-logo.png" %} width = "200" ></a>
 						
