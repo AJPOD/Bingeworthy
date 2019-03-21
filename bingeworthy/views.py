@@ -264,7 +264,7 @@ def user_profile(request, username):
 	# see show_genre
 
 	try:
-		user = UserAccount.objects.get(user__username=username)
+		user = User.objects.get(username=username)
 		shows_watched = Viewership.objects.filter(viewer_id=user)
 		reviews = Review.objects.filter(reviewer=user)
 		
