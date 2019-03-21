@@ -39,7 +39,7 @@ class Show(models.Model):
         for r in Review.objects.filter(show__exact=self):
             stars+= r.star_rating
         if Review.objects.filter(show__exact=self).count() > 0:		
-            return stars/Review.objects.filter(show__exact=self).count()
+            return round(stars/Review.objects.filter(show__exact=self).count(), 1)
         else:
             return 0
 
