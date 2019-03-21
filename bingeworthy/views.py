@@ -37,7 +37,6 @@ def user_login(request):
 		
 		if request.method == 'POST':
 			user_form = UserForm(data = request.POST)
-			print(user_form)
 
 			if user_form.is_valid():
 				user = user_form.save()
@@ -140,7 +139,43 @@ def shows_show(request, show_name_slug):
 	return render(request, 'bingeworthy/show.html', context_dict)
 
 def make_review(request, show_name_slug):
-	context_dict = {}
+	if not request.user.is_authenticated():
+		return HttpResponseRedirect(reverse('login'))
+	try:
+		show = Show.objects.get(slug=show_name_slug)
+	except Show.DoesNotExist:
+		show = None
+	review_form = ReviewForm()
+	context_dict = {'show': show}
+	if request.method == 'POST':
+		review_form = ReviewForm(request.POST, request.user, show)
+		review_title = request.POST.get('title')
+		review_body = request.POST.get('review_body')
+		review_stars = request.POST.get('star_rating')
+		# review_form = ReviewForm(review_title, show, request.user, review_stars, review_body)
+		# review = Review(review_title, show, request.user, review_stars, review_body)
+		#review_form = ReviewForm(data)
+		if review_form.is_valid():
+			review = Review()
+			review.reviewer = request.user
+			review.show = show
+			review.review_body = review_body
+			review.title = review_title
+			review.star_rating = review_stars
+
+			review.save()
+			return HttpResponseRedirect(reverse('shows_show', kwargs={'show_name_slug': show.slug}))
+		else:
+			print(review_form.as_ul())
+			return HttpResponse("Something went wrong :(")
+
+		# review.save()
+		# print(review)
+		# if review_form.is_valid():
+		# 	print("YA GOT HERE")
+		# 	review = review_form.save()
+		# 	review.save()
+		# 	print("YA GOT HERE")
 	return render(request, 'bingeworthy/make_review.html', context_dict)
 
 def user_profile(request, username):

@@ -84,16 +84,19 @@ input[type=submit]:hover {
   <div class="row">
     
     <div class="column">
-      <form action="mailto:someone@example.com" method="post" enctype="text/plain">
-First name:<br>
-<input type="text" name="name" class = "yeet"><br>
+      <form id="review" method="post" action="{% url 'make_review' show.slug %}">
+      {{ form.errors }}
+      {{ form.non_field_errors }}
+      {% csrf_token %}
+Title:<br>
+<input type="text" name="title" class = "yeet"><br>
 
 
 
-E-mail:<br>
-<input type="text" name="mail" class = "yeet"><br>
-Comment:<br>
-<input type="text" name="comment" size="50" class = "yeet"><br><br>
+Body:<br>
+<input type="text" name="review_body" class = "yeet"><br>
+Star Rating:<br>
+<input type="number" max=10 min=1 name="star_rating" size="50" class = "yeet"><br><br>
 <input type="submit" value="Send" class = "btn btn-secondary">
 
 </form>

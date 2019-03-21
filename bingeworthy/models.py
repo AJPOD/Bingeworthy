@@ -110,10 +110,12 @@ class Review(models.Model):
             else:
                 down+=1
         return up-down
+    
 
 
     def __str__(self):
-        return self.title
+        return str(self.title)
+
 
 class VotesOnReview(models.Model):
     voter = models.ForeignKey(User, on_delete = models.CASCADE)
