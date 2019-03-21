@@ -209,6 +209,10 @@ def populate():
 	"show": Show.objects.get(title = "The Office (US)"), "star_rating": 9,
 	"review_body": "It takes a while to get into it but it was better than i thought"}
 	
+	office_review4 = {"reviewer": User.objects.get(username = "gemma"), "title": "Super funny", 
+	"show": Show.objects.get(title = "The Office (US)"), "star_rating": 10,
+	"review_body": "I really liked this show, definitely bingeworthy. I could watch this for days."}
+	
 	friends_review1 = {"reviewer": User.objects.get(username = "zeerak"), "title": "Oldy but goody", 
 	"show": Show.objects.get(title = "Friends"), "star_rating": 9,
 	"review_body": "Its a classic show, always good to throw on in the background while you do something."}
@@ -546,7 +550,7 @@ def populate():
 	"review_body": "Its wild to watch the solve these cases"}
 
 
-	reviews = [office_review1, office_review2, office_review3, 
+	reviews = [office_review1, office_review2, office_review3, office_review4,
 	friends_review1, friends_review2, friends_review3, 
 	mtw_review1, mtw_review2, mtw_review3, 
 	b99_review1, b99_review2, b99_review3,
@@ -585,6 +589,7 @@ def populate():
 	ajpod_office = {"viewer": User.objects.get(username = "ajpod"), "show": Show.objects.get(title = "The Office (US)"), "judgement": True}
 	thomas_office = {"viewer": User.objects.get(username = "thomas"), "show": Show.objects.get(title = "The Office (US)"), "judgement": True}
 	zeerak_office = {"viewer": User.objects.get(username = "zeerak"), "show": Show.objects.get(title = "The Office (US)"), "judgement": True}
+	gemma_office = {"viewer": User.objects.get(username = "gemma"), "show": Show.objects.get(title = "The Office (US)"), "judgement": True}
 	
 	zeerak_friends = {"viewer": User.objects.get(username = "zeerak"), "show": Show.objects.get(title = "Friends"), "judgement": True}
 	thomas_friends = {"viewer": User.objects.get(username = "thomas"), "show": Show.objects.get(title = "Friends"), "judgement": True}
@@ -700,7 +705,7 @@ def populate():
 	
 	
 	
-	viewerships = [ajpod_office, thomas_office, zeerak_office, 
+	viewerships = [ajpod_office, thomas_office, zeerak_office, gemma_office,
 	zeerak_friends, thomas_friends, ajpod_friends,
 	zeerak_mtw, gemma_mtw, thomas_mtw,
 	gemma_b99, thomas_b99, ajpod_b99,
@@ -740,6 +745,10 @@ def populate():
 		show = Show.objects.get(title = "The Office (US)")), "voter": User.objects.get(username = "gemma"), 
 		"judgement": True}
 		
+	gem_office_thomas = {"review": Review.objects.get(reviewer = User.objects.get(username = "thomas"), 
+		show = Show.objects.get(title = "The Office (US)")), "voter": User.objects.get(username = "gemma"), 
+		"judgement": True}
+		
 	zeerak_office_ajpod = {"review": Review.objects.get(reviewer = User.objects.get(username = "ajpod"), 
 		show = Show.objects.get(title = "The Office (US)")), "voter": User.objects.get(username = "zeerak"), 
 		"judgement": True}
@@ -747,6 +756,18 @@ def populate():
 	ajpod_office_zeerak = {"review": Review.objects.get(reviewer = User.objects.get(username = "zeerak"), 
 		show = Show.objects.get(title = "The Office (US)")), "voter": User.objects.get(username = "ajpod"), 
 		"judgement": False}
+		
+	zeerak_office_gemma = {"review": Review.objects.get(reviewer = User.objects.get(username = "gemma"), 
+		show = Show.objects.get(title = "The Office (US)")), "voter": User.objects.get(username = "zeerak"), 
+		"judgement": True}
+		
+	thomas_office_gemma = {"review": Review.objects.get(reviewer = User.objects.get(username = "gemma"), 
+		show = Show.objects.get(title = "The Office (US)")), "voter": User.objects.get(username = "thomas"), 
+		"judgement": True}
+		
+	ajpod_office_gemma = {"review": Review.objects.get(reviewer = User.objects.get(username = "gemma"), 
+		show = Show.objects.get(title = "The Office (US)")), "voter": User.objects.get(username = "ajpod"), 
+		"judgement": True}
 		
 	thomas_greys_zee= {"review": Review.objects.get(reviewer = User.objects.get(username = "zeerak"), 
 		show = Show.objects.get(title = "Grey's Anatomy")), "voter": User.objects.get(username = "thomas"), 
@@ -921,7 +942,8 @@ def populate():
 		"judgement": True}
 		
 		
-	votes = [gem_office_ajpod, zeerak_office_ajpod, ajpod_office_zeerak, thomas_greys_zee, thomas_greys_gem, ajpod_greys_gem,
+	votes = [gem_office_ajpod, gem_office_thomas, zeerak_office_ajpod, ajpod_office_zeerak, zeerak_office_gemma, thomas_office_gemma, ajpod_office_gemma,
+	thomas_greys_zee, thomas_greys_gem, ajpod_greys_gem,
 	thomas_vamp_gem, ajpod_vamp_gem, zee_vamp_gem, gemma_mtw_thomas, gemma_friends_ajpod, gemma_friends_zeerak,
 	zeerak_mtw_thomas, zeerak_b99_thomas, zeerak_community_gemma, zeerak_community_ajpod, gemma_drWho_ajpod,
 	thomas_drWho_ajpod, zeerak_bm_gemma, zeerak_bm_thomas, zeerak_st_gemma, ajpod_st_gemma, ajpod_got_thomas,
