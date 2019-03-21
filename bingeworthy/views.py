@@ -78,7 +78,28 @@ def about(request):
 
 def search_results(request):
 	# not sure how we're going to do this one
-	return HttpResponse("TEST SEARCH RESULTS")
+	query = request.POST.get('query')
+	if query == "" or query.isspace():
+		return render(request, 'bingeworthy/search.html', context={})
+	results = []
+	tempResults = Show.objects.filter(title__icontains=query)
+	results = addToResults(results,tempResults)
+	tempResults = Show.objects.filter(starring__icontains=query)
+	results = addToResults(results,tempResults)
+	tempResults = Show.objects.filter(blurb__icontains=query)
+	results = addToResults(results,tempResults)
+	try:
+		tempResults = Show.objects.filter(year_released=int(query))
+		results = addToResults(results,tempResults)
+	except:
+		pass
+	return render(request, 'bingeworthy/search.html', context={'results': results, 'query': query})
+
+def addToResults(results, tempResults): # helper method for adding to search results, keeps it cleaner
+	for r in tempResults:
+		if r not in results:
+			results.append(r)
+	return results
 
 def genres(request):
 	# genres and platforms are not in models, not stored

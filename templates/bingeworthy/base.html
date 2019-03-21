@@ -126,8 +126,9 @@
 				<a class="btn btn-secondary" role="button">Search</a>
 				</div> -->
 				<div class="topright">
-				<form class="form-inline my-2 my-lg-0">
-					<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+				<form method="post" class="form-inline my-2 my-lg-0" action="{% url 'search_results' %}">
+				{% csrf_token %}
+					<input name="query" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
 					<button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
 				</form>
 			</div>
