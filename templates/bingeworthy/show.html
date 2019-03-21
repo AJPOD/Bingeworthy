@@ -244,7 +244,8 @@ width:33.33%;
                   
                 </div>
                 <div class="rowmiddle">
-                    <font size=5>{{show.blurb}}</font>
+                    <font size=5>{{show.blurb}}</font><br />
+                    Starring: {{ show.starring }}   --  Genre: <a href="{% url 'genres' %}#{{ show.genre.genre }}">{{ show.genre.genre }}</a>  --  Platform: <a href="{% url 'platforms' %}#{{ show.platform.platform }}">{{ show.platform.platform }}</a>
                   </div>
                   <div class="rowbottom">
                       <div class="mx-auto" style="width: 133px;">
