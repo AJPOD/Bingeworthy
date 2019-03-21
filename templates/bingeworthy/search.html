@@ -10,6 +10,8 @@
 
 {% block body_block %}
 <br />
+<br/>
+<div class="container">
 <h1>Search: {{ query }}</h1><br />
 {% if results %}
     {% for result in results %}
@@ -18,7 +20,7 @@
 {% else %}
 <h2>No shows here like that!</h2>
 {% endif %}
-
+</div>
 
 
 

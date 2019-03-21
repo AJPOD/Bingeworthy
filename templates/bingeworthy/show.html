@@ -187,6 +187,36 @@ width:33.33%;
 						<div class="cardphater">
               <br>
               <img src="{{ MEDIA_URL }}{{show.slug}}-thumb.jpg" alt="Show Thumbnail" style="margin-left:5%" a/>
+              <div style="margin-top:5%;margin-right:33%">
+                
+                {% if viewed %}
+                  {% if viewed.judgement %}
+                  <button style="float:right" class= "btn btn-secondary btn-lg" onclick="displayV()">I liked it! Vote again?</button>
+                  {% else %}
+                  <button style="float:right" class= "btn btn-secondary btn-lg" onclick="displayV()">I disliked it! Vote again?</button>
+                  {% endif %}
+
+                  {% else %}
+                  <button style="float:right" class= "btn btn-secondary btn-lg" onclick="displayV()">Watched it?</button>
+                  {% endif %}
+                  <div id="viewer">
+                  <button class="close" onclick="hideV()">Close</button>
+                  <h2>Did you like or dislike the show?</h2>
+                  <form id="viewed" method="post" action="{% url 'shows_show' show.slug %}">
+                  {% csrf_token %}
+                  <input name="like" value="submit" style="float: left" type="image" src= {% static "images/thumbsup.png" %} height="100" width="100"/>
+                  <input name="dislike" value="submit" style="float: right" type="image" src= {% static "images/thumbsdown.png" %} height="100" width="100"/>
+                  </form>
+                  </div>
+                  <script>
+                  function displayV() {
+                    document.getElementById("viewer").style.display = "block";
+                  }
+                  function hideV() {
+                    document.getElementById("viewer").style.display = "none";
+                  }
+                  </script>
+                  </div>
 						</div>
 	
 	
@@ -206,33 +236,6 @@ width:33.33%;
                           </div>
                           <div class="divey">
                             <div style="margin-top:5%">
-                            {% if viewed %}
-                              {% if viewed.judgement %}
-                              <button style="float:right" class= "btn btn-secondary btn-lg" onclick="displayV()">I liked it! Vote again?</button>
-                              {% else %}
-                              <button style="float:right" class= "btn btn-secondary btn-lg" onclick="displayV()">I disliked it! Vote again?</button>
-                              {% endif %}
-
-                              {% else %}
-                              <button style="float:right" class= "btn btn-secondary btn-lg" onclick="displayV()">Watched it?</button>
-                              {% endif %}
-                              <div id="viewer">
-                              <button class="close" onclick="hideV()">Close</button>
-                              <h2>Did you like or dislike the show?</h2>
-                              <form id="viewed" method="post" action="{% url 'shows_show' show.slug %}">
-                              {% csrf_token %}
-                              <input name="like" value="submit" style="float: left" type="image" src= {% static "images/thumbsup.png" %} height="100" width="100"/>
-                              <input name="dislike" value="submit" style="float: right" type="image" src= {% static "images/thumbsdown.png" %} height="100" width="100"/>
-                              </form>
-                              </div>
-                              <script>
-                              function displayV() {
-                                document.getElementById("viewer").style.display = "block";
-                              }
-                              function hideV() {
-                                document.getElementById("viewer").style.display = "none";
-                              }
-                              </script>
                               <form action="/bingeworthy/">
                                 <a style = "float:right" class="btn btn-secondary btn-lg" href="{% url 'make_review' show.slug %}" role="button">Make a review</a>
                               </form>

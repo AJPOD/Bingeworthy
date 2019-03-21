@@ -175,7 +175,7 @@ def shows_show(request, show_name_slug):
 		context_dict['like_ratio'] = show.like_ratio
 		try:
 			viewed = Viewership.objects.get(viewer=request.user, show=show)
-		except Viewership.DoesNotExist:
+		except:
 			viewed = None 
 		context_dict['viewed'] = viewed
 	except Show.DoesNotExist:
