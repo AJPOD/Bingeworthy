@@ -219,4 +219,22 @@ def user_profile(request, username):
 def my_account(request):
 	return HttpResponse("TEST MY ACCOUNT")
 
+def show_reviews(request):
+	print(request.POST)
+	if 'upvote.x' in request.POST:
+		if request.method == 'POST':
+			if not request.user.is_authenticated():
+				return HttpResponseRedirect(reverse('login'))
+			vote(True, request, request.POST.get("showname"))
+	elif 'downvote.x' in request.POST:
+		if request.method == 'POST':
+			if not request.user.is_authenticated():
+				return HttpResponseRedirect(reverse('login'))
+			vote(False, request, request.POST.get("showname"))
+	context_dict = {}
+	good_items = []
+	reviews_list = Review.objects.order_by('-title')
+	context_dict = {"reviews":reviews_list}
+	return render(request, 'bingeworthy/reviews.html', context=context_dict)
+
 

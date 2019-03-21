@@ -23,4 +23,5 @@ urlpatterns = [
     # only using /profile/ because without it, you can't access the my-account
     # as it automatically takes you to the page of the user my-account
     url(r'^user/my-account/$', views.my_account, name='my_account'),
+    url(r'^reviews/$', views.show_reviews, name='reviews'),
 ]
