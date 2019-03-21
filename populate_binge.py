@@ -718,6 +718,7 @@ def populate():
 	zeerak_luther, thomas_luther, gemma_luther,
 	gemma_you, ajpod_you, thomas_you,
 	thomas_bll, gemma_bll, zeerak_bll,
+	gemma_greys, zeerak_greys, ajpod_greys,
 	zeerak_handmaid, gemma_handmaid, thomas_handmaid,
 	ajpod_peakyBlinders, zeerak_peakyBlinders, thomas_peakyBlinders,
 	gemma_dod, ajpod_dod, zeerak_dod,
@@ -739,16 +740,24 @@ def populate():
 		show = Show.objects.get(title = "The Office (US)")), "voter": User.objects.get(username = "gemma"), 
 		"judgement": True}
 		
-	zee_office_ajpod = {"review": Review.objects.get(reviewer = User.objects.get(username = "ajpod"), 
+	zeerak_office_ajpod = {"review": Review.objects.get(reviewer = User.objects.get(username = "ajpod"), 
 		show = Show.objects.get(title = "The Office (US)")), "voter": User.objects.get(username = "zeerak"), 
 		"judgement": True}
-	
+		
+	ajpod_office_zeerak = {"review": Review.objects.get(reviewer = User.objects.get(username = "zeerak"), 
+		show = Show.objects.get(title = "The Office (US)")), "voter": User.objects.get(username = "ajpod"), 
+		"judgement": False}
+		
 	thomas_greys_zee= {"review": Review.objects.get(reviewer = User.objects.get(username = "zeerak"), 
 		show = Show.objects.get(title = "Grey's Anatomy")), "voter": User.objects.get(username = "thomas"), 
 		"judgement": True}
 	
 	thomas_greys_gem = {"review": Review.objects.get(reviewer = User.objects.get(username = "gemma"), 
 		show = Show.objects.get(title = "Grey's Anatomy")), "voter": User.objects.get(username = "thomas"), 
+		"judgement": False}
+		
+	ajpod_greys_gem = {"review": Review.objects.get(reviewer = User.objects.get(username = "gemma"), 
+		show = Show.objects.get(title = "Grey's Anatomy")), "voter": User.objects.get(username = "ajpod"), 
 		"judgement": False}
 	
 	thomas_vamp_gem = {"review": Review.objects.get(reviewer = User.objects.get(username = "gemma"), 
@@ -762,14 +771,171 @@ def populate():
 	zee_vamp_gem = {"review": Review.objects.get(reviewer = User.objects.get(username = "gemma"), 
 		show = Show.objects.get(title = "The Vampire Diaries")), "voter": User.objects.get(username = "zeerak"), 
 		"judgement": False}
+		
+	gemma_mtw_thomas = {"review": Review.objects.get(reviewer = User.objects.get(username = "thomas"), 
+		show = Show.objects.get(title = "Mock the Week")), "voter": User.objects.get(username = "gemma"), 
+		"judgement": True}
+		
+	gemma_friends_ajpod = {"review": Review.objects.get(reviewer = User.objects.get(username = "ajpod"), 
+		show = Show.objects.get(title = "Friends")), "voter": User.objects.get(username = "gemma"), 
+		"judgement": True}
+		
+	gemma_friends_zeerak = {"review": Review.objects.get(reviewer = User.objects.get(username = "zeerak"), 
+		show = Show.objects.get(title = "Friends")), "voter": User.objects.get(username = "gemma"), 
+		"judgement": True}
 	
-	votes = [gem_office_ajpod, zee_office_ajpod, thomas_greys_zee, thomas_greys_gem,
-	thomas_vamp_gem, ajpod_vamp_gem, zee_vamp_gem]
+	zeerak_mtw_thomas = {"review": Review.objects.get(reviewer = User.objects.get(username = "thomas"), 
+		show = Show.objects.get(title = "Mock the Week")), "voter": User.objects.get(username = "zeerak"), 
+		"judgement": True}
+		
+	zeerak_b99_thomas = {"review": Review.objects.get(reviewer = User.objects.get(username = "thomas"), 
+		show = Show.objects.get(title = "Brooklyn Nine Nine")), "voter": User.objects.get(username = "zeerak"), 
+		"judgement": True}
+	
+	zeerak_community_gemma = {"review": Review.objects.get(reviewer = User.objects.get(username = "gemma"), 
+		show = Show.objects.get(title = "Community")), "voter": User.objects.get(username = "zeerak"), 
+		"judgement": True}
+		
+	zeerak_community_ajpod = {"review": Review.objects.get(reviewer = User.objects.get(username = "ajpod"), 
+		show = Show.objects.get(title = "Community")), "voter": User.objects.get(username = "zeerak"), 
+		"judgement": False}
+		
+	gemma_drWho_ajpod = {"review": Review.objects.get(reviewer = User.objects.get(username = "ajpod"), 
+		show = Show.objects.get(title = "Doctor Who")), "voter": User.objects.get(username = "gemma"), 
+		"judgement": True}
+		
+	thomas_drWho_ajpod = {"review": Review.objects.get(reviewer = User.objects.get(username = "ajpod"), 
+		show = Show.objects.get(title = "Doctor Who")), "voter": User.objects.get(username = "thomas"), 
+		"judgement": True}
+
+	zeerak_bm_gemma = {"review": Review.objects.get(reviewer = User.objects.get(username = "gemma"), 
+		show = Show.objects.get(title = "Black Mirror")), "voter": User.objects.get(username = "zeerak"), 
+		"judgement": True}
+		
+	zeerak_bm_thomas = {"review": Review.objects.get(reviewer = User.objects.get(username = "thomas"), 
+		show = Show.objects.get(title = "Black Mirror")), "voter": User.objects.get(username = "zeerak"), 
+		"judgement": True}
+
+	zeerak_st_gemma = {"review": Review.objects.get(reviewer = User.objects.get(username = "gemma"), 
+		show = Show.objects.get(title = "Star Trek")), "voter": User.objects.get(username = "zeerak"), 
+		"judgement": True}
+		
+	ajpod_st_gemma = {"review": Review.objects.get(reviewer = User.objects.get(username = "gemma"), 
+		show = Show.objects.get(title = "Star Trek")), "voter": User.objects.get(username = "ajpod"), 
+		"judgement": True} 
+	
+	ajpod_got_thomas = {"review": Review.objects.get(reviewer = User.objects.get(username = "thomas"), 
+		show = Show.objects.get(title = "Game of Thrones")), "voter": User.objects.get(username = "ajpod"), 
+		"judgement": True}
+		
+	thomas_got_ajpod = {"review": Review.objects.get(reviewer = User.objects.get(username = "ajpod"), 
+		show = Show.objects.get(title = "Game of Thrones")), "voter": User.objects.get(username = "thomas"), 
+		"judgement": True}
+	
+	ajpod_lotr_thomas = {"review": Review.objects.get(reviewer = User.objects.get(username = "thomas"), 
+		show = Show.objects.get(title = "Lord of the Rings")), "voter": User.objects.get(username = "ajpod"), 
+		"judgement": False}
+		
+	ajpod_lotr_gemma = {"review": Review.objects.get(reviewer = User.objects.get(username = "gemma"), 
+		show = Show.objects.get(title = "Lord of the Rings")), "voter": User.objects.get(username = "ajpod"), 
+		"judgement": True}
+		
+	zeerak_lotr_gemma = {"review": Review.objects.get(reviewer = User.objects.get(username = "gemma"), 
+		show = Show.objects.get(title = "Lord of the Rings")), "voter": User.objects.get(username = "zeerak"), 
+		"judgement": True}
+		
+	gemma_twd_ajpod = {"review": Review.objects.get(reviewer = User.objects.get(username = "ajpod"), 
+		show = Show.objects.get(title = "The Walking Dead")), "voter": User.objects.get(username = "gemma"), 
+		"judgement": True}
+		
+	gemma_twd_thomas = {"review": Review.objects.get(reviewer = User.objects.get(username = "thomas"), 
+		show = Show.objects.get(title = "The Walking Dead")), "voter": User.objects.get(username = "gemma"), 
+		"judgement": True}
+		
+	thomas_twd_ajpod = {"review": Review.objects.get(reviewer = User.objects.get(username = "ajpod"), 
+		show = Show.objects.get(title = "The Walking Dead")), "voter": User.objects.get(username = "thomas"), 
+		"judgement": True}
+		
+	ajpod_luther_zeerak = {"review": Review.objects.get(reviewer = User.objects.get(username = "zeerak"), 
+		show = Show.objects.get(title = "Luther")), "voter": User.objects.get(username = "ajpod"), 
+		"judgement": True}
+		
+	zeerak_you_gemma = {"review": Review.objects.get(reviewer = User.objects.get(username = "gemma"), 
+		show = Show.objects.get(title = "You")), "voter": User.objects.get(username = "zeerak"), 
+		"judgement": True}
+		
+	ajpod_you_gemma = {"review": Review.objects.get(reviewer = User.objects.get(username = "gemma"), 
+		show = Show.objects.get(title = "You")), "voter": User.objects.get(username = "ajpod"), 
+		"judgement": True}
+	
+	zeerak_you_thomas = {"review": Review.objects.get(reviewer = User.objects.get(username = "thomas"), 
+		show = Show.objects.get(title = "You")), "voter": User.objects.get(username = "zeerak"), 
+		"judgement": True}
+	
+	zeerak_bll_thomas = {"review": Review.objects.get(reviewer = User.objects.get(username = "thomas"), 
+		show = Show.objects.get(title = "Big Little Lies")), "voter": User.objects.get(username = "zeerak"), 
+		"judgement": True}
+		
+	zeerak_bll_gemma = {"review": Review.objects.get(reviewer = User.objects.get(username = "gemma"), 
+		show = Show.objects.get(title = "Big Little Lies")), "voter": User.objects.get(username = "zeerak"), 
+		"judgement": True}
+		
+	gemma_handmaid_zeerak = {"review": Review.objects.get(reviewer = User.objects.get(username = "zeerak"), 
+		show = Show.objects.get(title = "The Handmaids Tale")), "voter": User.objects.get(username = "gemma"), 
+		"judgement": True}
+		
+	gemma_dod_zeerak = {"review": Review.objects.get(reviewer = User.objects.get(username = "zeerak"), 
+		show = Show.objects.get(title = "Dahmer On Dahmer")), "voter": User.objects.get(username = "gemma"), 
+		"judgement": True}
+		
+	ajpod_dod_zeerak = {"review": Review.objects.get(reviewer = User.objects.get(username = "zeerak"), 
+		show = Show.objects.get(title = "Dahmer On Dahmer")), "voter": User.objects.get(username = "ajpod"), 
+		"judgement": True}
+		
+	zeerak_htgawm_thomas = {"review": Review.objects.get(reviewer = User.objects.get(username = "thomas"), 
+		show = Show.objects.get(title = "How to Get Away with Murder")), "voter": User.objects.get(username = "zeerak"), 
+		"judgement": True}
+		
+	zeerak_htgawm_ajpod = {"review": Review.objects.get(reviewer = User.objects.get(username = "ajpod"), 
+		show = Show.objects.get(title = "How to Get Away with Murder")), "voter": User.objects.get(username = "zeerak"), 
+		"judgement": True}
+		
+	thomas_kuwtk_ajpod = {"review": Review.objects.get(reviewer = User.objects.get(username = "ajpod"), 
+		show = Show.objects.get(title = "Keeping Up with the Kardashians")), "voter": User.objects.get(username = "thomas"), 
+		"judgement": True}
+		
+	thomas_kuwtk_zeerak = {"review": Review.objects.get(reviewer = User.objects.get(username = "zeerak"), 
+		show = Show.objects.get(title = "Keeping Up with the Kardashians")), "voter": User.objects.get(username = "thomas"), 
+		"judgement": False}
+		
+	thomas_kuwtk_gemma = {"review": Review.objects.get(reviewer = User.objects.get(username = "gemma"), 
+		show = Show.objects.get(title = "Keeping Up with the Kardashians")), "voter": User.objects.get(username = "thomas"), 
+		"judgement": False}
+		
+	thomas_mm_zeerak = {"review": Review.objects.get(reviewer = User.objects.get(username = "zeerak"), 
+		show = Show.objects.get(title = "Millionaire Matchmaker")), "voter": User.objects.get(username = "thomas"), 
+		"judgement": True}
+		
+	ajpod_mm_zeerak = {"review": Review.objects.get(reviewer = User.objects.get(username = "zeerak"), 
+		show = Show.objects.get(title = "Millionaire Matchmaker")), "voter": User.objects.get(username = "ajpod"), 
+		"judgement": True}
+		
+		
+	votes = [gem_office_ajpod, zeerak_office_ajpod, ajpod_office_zeerak, thomas_greys_zee, thomas_greys_gem, ajpod_greys_gem,
+	thomas_vamp_gem, ajpod_vamp_gem, zee_vamp_gem, gemma_mtw_thomas, gemma_friends_ajpod, gemma_friends_zeerak,
+	zeerak_mtw_thomas, zeerak_b99_thomas, zeerak_community_gemma, zeerak_community_ajpod, gemma_drWho_ajpod,
+	thomas_drWho_ajpod, zeerak_bm_gemma, zeerak_bm_thomas, zeerak_st_gemma, ajpod_st_gemma, ajpod_got_thomas,
+	thomas_got_ajpod, ajpod_lotr_thomas, ajpod_lotr_gemma, zeerak_lotr_gemma, gemma_twd_ajpod, gemma_twd_thomas, 
+	thomas_twd_ajpod, ajpod_luther_zeerak, zeerak_you_gemma, ajpod_you_gemma, zeerak_you_thomas, zeerak_bll_thomas,
+	zeerak_bll_gemma, gemma_handmaid_zeerak, gemma_dod_zeerak, ajpod_dod_zeerak, zeerak_htgawm_thomas, zeerak_htgawm_ajpod, 
+	thomas_kuwtk_ajpod, thomas_kuwtk_zeerak,  thomas_kuwtk_gemma, thomas_mm_zeerak, ajpod_mm_zeerak
+	]
 	
 	for vote in votes:
 		vote_added = add_vote(vote["review"], vote["voter"], vote["judgement"])
 		
 
+################adding to dictionaries################################################
 	
 def add_genre(genre):
 	genre = Genre.objects.get_or_create(genre = genre)[0]
