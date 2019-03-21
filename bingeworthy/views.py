@@ -280,7 +280,14 @@ def user_profile(request, username):
 
 
 def my_account(request):
-	return HttpResponse("TEST MY ACCOUNT")
+	print(request)
+	context_dict = {}
+	if request.method == "POST":
+		delUser = User.objects.get(username = request.user.username)
+		logout(request)
+		delUser.delete()
+		return HttpResponseRedirect(reverse('index'))
+	return render(request, 'bingeworthy/user-account.html', context_dict)
 
 def show_reviews(request):
 	print(request.POST)
