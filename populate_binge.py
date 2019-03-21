@@ -196,22 +196,20 @@ def populate():
 		user_added = add_user(user["username"], user["password"])
 	
 ####################review list begins here####################################
+
+
 	
 	office_review1 = {"reviewer": User.objects.get(username = "ajpod"), "title": "It's good", 
-	"show": Show.objects.get(title = "The Office (US)"), "star_rating": 8,
+	"show": Show.objects.get(title = "The Office (US)"), "star_rating": 10,
 	"review_body": "I thought this show was great, best ive watched in a long time"}
 	
 	office_review2 = {"reviewer": User.objects.get(username = "thomas"), "title": "New fave show", 
 	"show": Show.objects.get(title = "The Office (US)"), "star_rating": 10,
 	"review_body": "This is my new favourite show, I'm going to be quoting this for years!!"}
 	
-	greys_review1 = {"reviewer": User.objects.get(username = "gemma"), "title": "So tense", 
-	"show": Show.objects.get(title = "Grey's Anatomy"), "star_rating": 7,
-	"review_body": "I really liked this, you get very emotionally attatched to the characters"}
-	
-	greys_review2 = {"reviewer": User.objects.get(username = "zeerak"), "title": "Graphic", 
-	"show": Show.objects.get(title = "Grey's Anatomy"), "star_rating": 1,
-	"review_body": "You definitely cant be squeamish for this, its super gorey!"}
+	office_review3 = {"reviewer": User.objects.get(username = "zeerak"), "title": "I liked it", 
+	"show": Show.objects.get(title = "The Office (US)"), "star_rating": 9,
+	"review_body": "It takes a while to get into it but it was better than i thought"}
 	
 	friends_review1 = {"reviewer": User.objects.get(username = "zeerak"), "title": "Oldy but goody", 
 	"show": Show.objects.get(title = "Friends"), "star_rating": 9,
@@ -221,21 +219,9 @@ def populate():
 	"show": Show.objects.get(title = "Friends"), "star_rating": 8,
 	"review_body": "Always liked this show, its a good one to rewatch"}
 	
-	supernatural_review1 = {"reviewer": User.objects.get(username = "gemma"), "title": "So good", 
-	"show": Show.objects.get(title = "Supernatural"), "star_rating": 10,
-	"review_body": "I loved this show, its action filled and scary too"}
-	
-	supernatural_review2 = {"reviewer": User.objects.get(username = "thomas"), "title": "Scary", 
-	"show": Show.objects.get(title = "Supernatural"), "star_rating": 5,
-	"review_body": "Think this is a bit too dark for me, the characters were likable though"}
-	
-	vampDiaries_review1 = {"reviewer": User.objects.get(username = "gemma"), "title": "Too angsty", 
-	"show": Show.objects.get(title = "The Vampire Diaries"), "star_rating": 3,
-	"review_body": "The dialogue in this is pretty bad and the storyline is predictable"}
-	
-	vampDiaries_review2 = {"reviewer": User.objects.get(username = "ajpod"), "title": "Twilight-y", 
-	"show": Show.objects.get(title = "The Vampire Diaries"), "star_rating": 0,
-	"review_body": "Its made for teens, if you enjoyed Twilight then youd like this."}
+	friends_review3 = {"reviewer": User.objects.get(username = "ajpod"), "title": "Wasnt for me", 
+	"show": Show.objects.get(title = "Friends"), "star_rating": 4,
+	"review_body": "Can see why people would like it but it wasnt really my thing"}
 	
 	mtw_review1 = {"reviewer": User.objects.get(username = "zeerak"), "title": "Best panel show", 
 	"show": Show.objects.get(title = "Mock the Week"), "star_rating": 9,
@@ -245,10 +231,352 @@ def populate():
 	"show": Show.objects.get(title = "Mock the Week"), "star_rating": 10,
 	"review_body": "Its the only panel show i watch, i love it"}
 	
+	mtw_review3 = {"reviewer": User.objects.get(username = "thomas"), "title": "Already like it", 
+	"show": Show.objects.get(title = "Mock the Week"), "star_rating": 8,
+	"review_body": "Just started watching it and its really funny"}
 	
-	reviews = [office_review1, office_review2, greys_review1, greys_review2, friends_review1, 
-	friends_review2, supernatural_review1, supernatural_review2, vampDiaries_review1, vampDiaries_review2,
-	mtw_review1, mtw_review2 ]
+	b99_review1 = {"reviewer": User.objects.get(username = "gemma"), "title": "great characters", 
+	"show": Show.objects.get(title = "Brooklyn Nine Nine"), "star_rating": 8,
+	"review_body": "Characters are really funny"}
+	
+	b99_review2 = {"reviewer": User.objects.get(username = "thomas"), "title": "doesnt dry up", 
+	"show": Show.objects.get(title = "Brooklyn Nine Nine"), "star_rating": 7,
+	"review_body": "With shows like this they can dry up but this stays funny"}
+	
+	b99_review3 = {"reviewer": User.objects.get(username = "ajpod"), "title": "dont like it", 
+	"show": Show.objects.get(title = "Brooklyn Nine Nine"), "star_rating": 2,
+	"review_body": "i didnt fiind it very funny to be honest"}
+	
+	community_review1 = {"reviewer": User.objects.get(username = "zeerak"), "title": "its alright", 
+	"show": Show.objects.get(title = "Community"), "star_rating": 5,
+	"review_body": "Its not the best, not the worst"}
+	
+	community_review2 = {"reviewer": User.objects.get(username = "ajpod"), "title": "love it", 
+	"show": Show.objects.get(title = "Community"), "star_rating": 10,
+	"review_body": "This show is great, exactly what ive been looking for"}
+	
+	community_review3 = {"reviewer": User.objects.get(username = "gemma"), "title": "surprisingly good", 
+	"show": Show.objects.get(title = "Community"), "star_rating": 7,
+	"review_body": "Didnt think id like it but it was actually really funny"}
+
+	strangerThings_review1 = {"reviewer": User.objects.get(username = "gemma"), "title": "great theme", 
+	"show": Show.objects.get(title = "Stranger Things"), "star_rating": 7,
+	"review_body": "Really good show but the theme is just perfection"}
+	
+	strangerThings_review2 = {"reviewer": User.objects.get(username = "thomas"), "title": "scary enough", 
+	"show": Show.objects.get(title = "Stranger Things"), "star_rating": 7,
+	"review_body": "Its a good level of scary without being horror"}
+	
+	strangerThings_review3 = {"reviewer": User.objects.get(username = "ajpod"), "title": "80s era", 
+	"show": Show.objects.get(title = "Stranger Things"), "star_rating": 8,
+	"review_body": "its set in the 80s which i love"}
+	
+	docWho_review1 = {"reviewer": User.objects.get(username = "ajpod"), "title": "my favourite", 
+	"show": Show.objects.get(title = "Doctor Who"), "star_rating": 10,
+	"review_body": "All time favourite show"}
+	
+	docWho_review2 = {"reviewer": User.objects.get(username = "zeerak"), "title": "hate it", 
+	"show": Show.objects.get(title = "Doctor Who"), "star_rating": 1,
+	"review_body": "Only good if youre into old shows"}
+	
+	docWho_review3 = {"reviewer": User.objects.get(username = "thomas"), "title": "weird", 
+	"show": Show.objects.get(title = "Doctor Who"), "star_rating": 6,
+	"review_body": "First time watching an old show but its not too bad"}
+	
+	blackMirror_review1 = {"reviewer": User.objects.get(username = "gemma"), "title": "eye opening", 
+	"show": Show.objects.get(title = "Black Mirror"), "star_rating": 9,
+	"review_body": "Really makes you think"}
+	
+	blackMirror_review2 = {"reviewer": User.objects.get(username = "thomas"), "title": "disturbing", 
+	"show": Show.objects.get(title = "Black Mirror"), "star_rating": 6,
+	"review_body": "Quite haunting"}
+	
+	blackMirror_review3 = {"reviewer": User.objects.get(username = "zeerak"), "title": "so cool", 
+	"show": Show.objects.get(title = "Black Mirror"), "star_rating": 9,
+	"review_body": "Never seen a show like this"}
+	
+	starTrek_review1 = {"reviewer": User.objects.get(username = "ajpod"), "title": "good for an old show", 
+	"show": Show.objects.get(title = "Star Trek"), "star_rating": 7,
+	"review_body": "Not as good as doctor who but alright"}
+	
+	starTrek_review2 = {"reviewer": User.objects.get(username = "zeerak"), "title": "new one is better",
+	"show": Show.objects.get(title = "Star Trek"), "star_rating": 6,
+	"review_body": "Its okay but the newer version is better"}
+	
+	starTrek_review3 = {"reviewer": User.objects.get(username = "gemma"), "title": "old school", 
+	"show": Show.objects.get(title = "Star Trek"), "star_rating": 7,
+	"review_body": "Its an old show but its still good to watch"}
+
+	supernatural_review1 = {"reviewer": User.objects.get(username = "gemma"), "title": "So good", 
+	"show": Show.objects.get(title = "Supernatural"), "star_rating": 10,
+	"review_body": "I loved this show, its action filled and scary too"}
+	
+	supernatural_review2 = {"reviewer": User.objects.get(username = "thomas"), "title": "Scary", 
+	"show": Show.objects.get(title = "Supernatural"), "star_rating": 5,
+	"review_body": "Think this is a bit too dark for me, the characters were likable though"}
+
+	supernatural_review3 = {"reviewer": User.objects.get(username = "zeerak"), "title": "its meh", 
+	"show": Show.objects.get(title = "Supernatural"), "star_rating": 6,
+	"review_body": "Similar to other shows in the same vein"}
+	
+	vampDiaries_review1 = {"reviewer": User.objects.get(username = "gemma"), "title": "Too angsty", 
+	"show": Show.objects.get(title = "The Vampire Diaries"), "star_rating": 3,
+	"review_body": "The dialogue in this is pretty bad and the storyline is predictable"}
+	
+	vampDiaries_review2 = {"reviewer": User.objects.get(username = "ajpod"), "title": "Twilight-y", 
+	"show": Show.objects.get(title = "The Vampire Diaries"), "star_rating": 0,
+	"review_body": "Its made for teens, if you enjoyed Twilight then youd like this."}
+	
+	vampDiaries_review3 = {"reviewer": User.objects.get(username = "thomas"), "title": "this is bad", 
+	"show": Show.objects.get(title = "The Vampire Diaries"), "star_rating": 1,
+	"review_body": "Really easy to get bored of it"}
+	
+	got_review1 = {"reviewer": User.objects.get(username = "thomas"), "title": "best show ever", 
+	"show": Show.objects.get(title = "Game of Thrones"), "star_rating": 10,
+	"review_body": "This is one of the best shows ive ever seen"}
+	
+	got_review2 = {"reviewer": User.objects.get(username = "zeerak"), "title": "middle seasons arent great", 
+	"show": Show.objects.get(title = "Game of Thrones"), "star_rating": 8,
+	"review_body": "seasons in the middle arent great but its gets better recently"}
+	
+	got_review3 = {"reviewer": User.objects.get(username = "ajpod"), "title": "this is everything", 
+	"show": Show.objects.get(title = "Game of Thrones"), "star_rating": 10,
+	"review_body": "This show is just everything"}
+	
+	lotr_review1 = {"reviewer": User.objects.get(username = "ajpod"), "title": "not out yet", 
+	"show": Show.objects.get(title = "Lord of the Rings"), "star_rating": 9,
+	"review_body": "Not out yet but i know its gonna be good"}
+	
+	lotr_review2 = {"reviewer": User.objects.get(username = "gemma"), "title": "excited to try it", 
+	"show": Show.objects.get(title = "Lord of the Rings"), "star_rating": 8,
+	"review_body": "Im not a diehard fan but im excited to see this"}
+	
+	lotr_review3 = {"reviewer": User.objects.get(username = "thomas"), "title": "hyped", 
+	"show": Show.objects.get(title = "Lord of the Rings"), "star_rating": 9,
+	"review_body": "So hyped for this to come out in 2020"}
+
+	twd_review1 = {"reviewer": User.objects.get(username = "ajpod"), "title": "good", 
+	"show": Show.objects.get(title = "The Walking Dead"), "star_rating": 9,
+	"review_body": "Really liked this"}
+	
+	twd_review2 = {"reviewer": User.objects.get(username = "thomas"), "title": "gorey", 
+	"show": Show.objects.get(title = "The Walking Dead"), "star_rating": 9,
+	"review_body": "pretty gorey but still really great"}
+	
+	twd_review3 = {"reviewer": User.objects.get(username = "zeerak"), "title": "stopped watching", 
+	"show": Show.objects.get(title = "The Walking Dead"), "star_rating": 6,
+	"review_body": "Sort of lost interest after a while"}
+	
+	mrRobot_review1 = {"reviewer": User.objects.get(username = "zeerak"), "title": "show lead was great", 
+	"show": Show.objects.get(title = "Mr Robot"), "star_rating": 7,
+	"review_body": "Really liked the starring actor"}
+	
+	mrRobot_review2 = {"reviewer": User.objects.get(username = "thomas"), "title": "acting was great", 
+	"show": Show.objects.get(title = "Mr Robot"), "star_rating": 7,
+	"review_body": "The acting was really great in this show"}
+	
+	mrRobot_review3 = {"reviewer": User.objects.get(username = "ajpod"), "title": "rami malek", 
+	"show": Show.objects.get(title = "Mr Robot"), "star_rating": 7,
+	"review_body": "Rami malek is such a great actor"}
+	
+	luther_review1 = {"reviewer": User.objects.get(username = "zeerak"), "title": "its meh", 
+	"show": Show.objects.get(title = "Luther"), "star_rating": 4,
+	"review_body": "Similar to many crime shows"}
+	
+	luther_review2 = {"reviewer": User.objects.get(username = "thomas"), "title": "predictable", 
+	"show": Show.objects.get(title = "Luther"), "star_rating": 4,
+	"review_body": "Youu kinda know whats going to happen in it"}
+	
+	luther_review3 = {"reviewer": User.objects.get(username = "gemma"), "title": "didnt like it", 
+	"show": Show.objects.get(title = "Luther"), "star_rating": 4,
+	"review_body": "Its not very good to be honest"}
+	
+	you_review1 = {"reviewer": User.objects.get(username = "gemma"), "title": "sooo good", 
+	"show": Show.objects.get(title = "You"), "star_rating": 10,
+	"review_body": "So tense and so good, definitely something you can watch in one go"}
+	
+	you_review2 = {"reviewer": User.objects.get(username = "ajpod"), "title": "creepy", 
+	"show": Show.objects.get(title = "You"), "star_rating": 6,
+	"review_body": "This show was kinda creepy and not in a good way"}
+	
+	you_review3 = {"reviewer": User.objects.get(username = "thomas"), "title": "tense", 
+	"show": Show.objects.get(title = "You"), "star_rating": 8,
+	"review_body": "This was super tense at parts, keeps you on edge of your seat"}
+	
+	bll_review1 = {"reviewer": User.objects.get(username = "thomas"), "title": "rubbish", 
+	"show": Show.objects.get(title = "Big Little Lies"), "star_rating": 3,
+	"review_body": "Didnt like this show at all"}
+	
+	bll_review2 = {"reviewer": User.objects.get(username = "gemma"), "title": "hate it", 
+	"show": Show.objects.get(title = "Big Little Lies"), "star_rating": 2,
+	"review_body": "This show was so bad"}
+	
+	bll_review3 = {"reviewer": User.objects.get(username = "zeerak"), "title": "terrible", 
+	"show": Show.objects.get(title = "Big Little Lies"), "star_rating": 2,
+	"review_body": "everything about this show was bad"}
+
+	greys_review1 = {"reviewer": User.objects.get(username = "gemma"), "title": "So tense", 
+	"show": Show.objects.get(title = "Grey's Anatomy"), "star_rating": 7,
+	"review_body": "I really liked this, you get very emotionally attatched to the characters"}
+	
+	greys_review2 = {"reviewer": User.objects.get(username = "zeerak"), "title": "Graphic", 
+	"show": Show.objects.get(title = "Grey's Anatomy"), "star_rating": 1,
+	"review_body": "You definitely cant be squeamish for this, its super gorey!"}
+	
+	greys_review3 = {"reviewer": User.objects.get(username = "ajpod"), "title": "very medical", 
+	"show": Show.objects.get(title = "Grey's Anatomy"), "star_rating": 8,
+	"review_body": "Interesting because it is very medical"}
+	
+	handmaid_review1 = {"reviewer": User.objects.get(username = "zeerak"), "title": "odd", 
+	"show": Show.objects.get(title = "The Handmaids Tale"), "star_rating": 5,
+	"review_body": "This show is a bit weird"}
+	
+	handmaid_review2 = {"reviewer": User.objects.get(username = "gemma"), "title": "didnt mind it", 
+	"show": Show.objects.get(title = "The Handmaids Tale"), "star_rating": 5,
+	"review_body": "Its was okay, i could recommend it"}
+	
+	handmaid_review3 = {"reviewer": User.objects.get(username = "thomas"), "title": "fine", 
+	"show": Show.objects.get(title = "The Handmaids Tale"), "star_rating": 5,
+	"review_body": "It was something to watch i guess"}
+	
+	peakyBlinders_review1 = {"reviewer": User.objects.get(username = "ajpod"), "title": "amazing", 
+	"show": Show.objects.get(title = "Peaky Blinders"), "star_rating": 8,
+	"review_body": "really lovde this show it was great"}
+	
+	peakyBlinders_review2 = {"reviewer": User.objects.get(username = "zeerak"), "title": "fantastic", 
+	"show": Show.objects.get(title = "Peaky Blinders"), "star_rating": 8,
+	"review_body": "this show is so gripping"}
+	
+	peakyBlinders_review3 = {"reviewer": User.objects.get(username = "thomas"), "title": "brilliant", 
+	"show": Show.objects.get(title = "Peaky Blinders"), "star_rating": 8,
+	"review_body": "This show really grabbs you in, would binge this again if i could"}
+	
+	dod_review1 = {"reviewer": User.objects.get(username = "gemma"), "title": "haunting", 
+	"show": Show.objects.get(title = "Dahmer On Dahmer"), "star_rating": 10,
+	"review_body": "This show gives you the chills"}
+	
+	dod_review2 = {"reviewer": User.objects.get(username = "ajpod"), "title": "intense", 
+	"show": Show.objects.get(title = "Dahmer On Dahmer"), "star_rating": 9,
+	"review_body": "This was super intense and eery"}
+	
+	dod_review3 = {"reviewer": User.objects.get(username = "zeerak"), "title": "captivating", 
+	"show": Show.objects.get(title = "Dahmer On Dahmer"), "star_rating": 9,
+	"review_body": "So interesting to really see into the mind of a serial killer"}
+	
+	htgawm_review1 = {"reviewer": User.objects.get(username = "thomas"), "title": "watch again", 
+	"show": Show.objects.get(title = "How to Get Away with Murder"), "star_rating": 8,
+	"review_body": "Something i would watch again"}
+	
+	htgawm_review2 = {"reviewer": User.objects.get(username = "gemma"), "title": "good at start", 
+	"show": Show.objects.get(title = "How to Get Away with Murder"), "star_rating": 5,
+	"review_body": "SHow was good at the beginning but wore off in later seasons"}
+	
+	htgawm_review3 = {"reviewer": User.objects.get(username = "ajpod"), "title": "good for law", 
+	"show": Show.objects.get(title = "How to Get Away with Murder"), "star_rating": 8,
+	"review_body": "Youd enjoy this a lot if youre studying law"}
+	
+	iicb_review1 = {"reviewer": User.objects.get(username = "zeerak"), "title": "love ice t", 
+	"show": Show.objects.get(title = "In Ice Cold Blood"), "star_rating": 7,
+	"review_body": "Love how the show has Ice T"}
+	
+	iicb_review2 = {"reviewer": User.objects.get(username = "ajpod"), "title": "fascinating", 
+	"show": Show.objects.get(title = "In Ice Cold Blood"), "star_rating": 7,
+	"review_body": "So interesting to hear about the cases"}
+	
+	iicb_review3 = {"reviewer": User.objects.get(username = "thomas"), "title": "eery", 
+	"show": Show.objects.get(title = "In Ice Cold Blood"), "star_rating": 7,
+	"review_body": "Some f the cases are pretty dark"}
+	
+	shetland_review1 = {"reviewer": User.objects.get(username = "gemma"), "title": "boring", 
+	"show": Show.objects.get(title = "Shetland"), "star_rating": 2,
+	"review_body": "This show didnt interest me, super boring"}
+	
+	shetland_review2 = {"reviewer": User.objects.get(username = "ajpod"), "title": "scottish", 
+	"show": Show.objects.get(title = "Shetland"), "star_rating": 6,
+	"review_body": "Its quite cool how its filmed in Scotland, nice to see recognisable places"}
+	
+	shetland_review3 = {"reviewer": User.objects.get(username = "zeerak"), "title": "cookie cutter crime", 
+	"show": Show.objects.get(title = "Shetland"), "star_rating": 2,
+	"review_body": "Exactly the same as every crime show on tv"}
+	
+	kuwtk_review1 = {"reviewer": User.objects.get(username = "gemma"), "title": "guilty pleasure", 
+	"show": Show.objects.get(title = "Keeping Up with the Kardashians"), "star_rating": 9,
+	"review_body": "Ashamed to admit i really like this show, good for background watching"}
+	
+	kuwtk_review2 = {"reviewer": User.objects.get(username = "ajpod"), "title": "diabolical", 
+	"show": Show.objects.get(title = "Keeping Up with the Kardashians"), "star_rating": 1,
+	"review_body": "I dont even know why i tried to watch this"}
+	
+	kuwtk_review3 = {"reviewer": User.objects.get(username = "zeerak"), "title": "idk", 
+	"show": Show.objects.get(title = "Keeping Up with the Kardashians"), "star_rating": 6,
+	"review_body": "I like it but i also hate it"}
+	
+	mm_review1 = {"reviewer": User.objects.get(username = "ajpod"), "title": "so crap", 
+	"show": Show.objects.get(title = "Millionaire Matchmaker"), "star_rating": 1,
+	"review_body": "This is so bad do not watch this show"}
+	
+	mm_review2 = {"reviewer": User.objects.get(username = "thomas"), "title": "worst show", 
+	"show": Show.objects.get(title = "Millionaire Matchmaker"), "star_rating": 1,
+	"review_body": "This is the worst show ive ever seen"}
+	
+	mm_review3 = {"reviewer": User.objects.get(username = "zeerak"), "title": "i hate this", 
+	"show": Show.objects.get(title = "Millionaire Matchmaker"), "star_rating": 1,
+	"review_body": "Why does this show have so many seasons"}
+	
+	apprentice_review1 = {"reviewer": User.objects.get(username = "ajpod"), "title": "occasional watch", 
+	"show": Show.objects.get(title = "The Apprentice"), "star_rating": 5,
+	"review_body": "I dont religiously watch this but occasional viewing is okay"}
+	
+	apprentice_review2 = {"reviewer": User.objects.get(username = "gemma"), "title": "unlikeable", 
+	"show": Show.objects.get(title = "The Apprentice"), "star_rating": 3,
+	"review_body": "I find the people in this show to be super unlikeable"}
+	
+	apprentice_review3 = {"reviewer": User.objects.get(username = "thomas"), "title": "pretty mean", 
+	"show": Show.objects.get(title = "The Apprentice"), "star_rating": 5,
+	"review_body": "It can be quite a mean show for the people who are in it"}
+	
+	catfish_review1 = {"reviewer": User.objects.get(username = "ajpod"), "title": "shocking", 
+	"show": Show.objects.get(title = "Catfish"), "star_rating": 6,
+	"review_body": "So crazy what people will do to get someone to date them"}
+	
+	catfish_review2 = {"reviewer": User.objects.get(username = "gemma"), "title": "sad", 
+	"show": Show.objects.get(title = "Catfish"), "star_rating": 6,
+	"review_body": "Quite sad to see what causes people to act like that"}
+	
+	catfish_review3 = {"reviewer": User.objects.get(username = "zeerak"), "title": "crazy", 
+	"show": Show.objects.get(title = "Catfish"), "star_rating": 6,
+	"review_body": "Its wild how far people take these schemes"}
+
+
+	reviews = [office_review1, office_review2, office_review3, 
+	friends_review1, friends_review2, friends_review3, 
+	mtw_review1, mtw_review2, mtw_review3, 
+	b99_review1, b99_review2, b99_review3,
+	community_review1, community_review2, community_review3, 
+	strangerThings_review1, strangerThings_review2, strangerThings_review3, 
+	docWho_review1, docWho_review2, docWho_review3,
+	blackMirror_review1, blackMirror_review2, blackMirror_review3, 
+	starTrek_review1, starTrek_review2, starTrek_review3, 
+	supernatural_review1, supernatural_review2, supernatural_review3,
+	vampDiaries_review1, vampDiaries_review2, vampDiaries_review3, 
+	got_review1, got_review2, got_review3, 
+	lotr_review1, lotr_review2, lotr_review3, 
+	twd_review1, twd_review2, twd_review3,
+	mrRobot_review1, mrRobot_review2, mrRobot_review3, 
+	luther_review1, luther_review2, luther_review3, 
+	you_review1, you_review2, you_review3, 
+	bll_review1, bll_review2, bll_review3,
+	greys_review1, greys_review2, greys_review3, 
+	handmaid_review1, handmaid_review2, handmaid_review3,
+	peakyBlinders_review1, peakyBlinders_review2, peakyBlinders_review3, 
+	dod_review1, dod_review2, dod_review3, 
+	htgawm_review1, htgawm_review2, htgawm_review3, 
+	iicb_review1, iicb_review2, iicb_review3, 
+	shetland_review1, shetland_review2, shetland_review3, 
+	kuwtk_review1, kuwtk_review2, kuwtk_review3, 
+	mm_review1, mm_review2, mm_review3, 
+	apprentice_review1, apprentice_review2, apprentice_review3, 
+	catfish_review1, catfish_review2, catfish_review3]
 	
 	for review in reviews:
 		review_added = add_review(review["reviewer"], review["title"], review["show"], review["star_rating"], review["review_body"])
