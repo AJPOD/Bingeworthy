@@ -97,12 +97,9 @@ def show_platform(request, platform_name_slug):
 	return HttpResponse("TEST PLATFORM PAGE " + platform_name_slug)
 
 def shows(request):
-	# not entirely sure what to put here, every single show?
-	# shows_all covers this
-	# might want to make it a splash page for featured shows,
-	# prefer to keep it as it's in design spec and all show urls
-	# derive from it
-	return HttpResponse("TEST SHOWS")
+	shows_list = Show.objects.order_by('-title')
+	context_dict = {'shows': shows_list}
+	return render(request, 'bingeworthy/shows.html', context_dict)
 
 def shows_top(request):
 	# change slicer to get more shows, might need to change to
