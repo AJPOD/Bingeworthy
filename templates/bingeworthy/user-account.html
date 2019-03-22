@@ -85,7 +85,9 @@ float:right;
                 <input name = "deleteViews" class = "btn" type = "submit" value = "Delete All Viewed Shows"></form><br>
             <form method = "post">
                 {% csrf_token %}
-                <input name = "deleteReviews" class = "btn" type = "submit" value = "Delete Views"></form><br>
+                <input name = "deleteReviews" class = "btn" type = "submit" value = "Delete All Reviews"></form><br>
+
+            {{ message }}
                        
                 
             

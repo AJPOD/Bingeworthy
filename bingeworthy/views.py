@@ -301,10 +301,26 @@ def my_account(request):
 	print(request)
 	context_dict = {}
 	if request.method == "POST":
-		delUser = User.objects.get(username = request.user.username)
-		logout(request)
-		delUser.delete()
-		return HttpResponseRedirect(reverse('index'))
+		if 'deleteReviews' in request.POST:
+			allReviews = Review.objects.filter(reviewer = request.user)
+			for r in allReviews:
+				r.delete()
+			context_dict['message'] = "All of your reviews have been deleted."
+		elif 'deleteViews' in request.POST:
+			allReviews = Review.objects.filter(reviewer = request.user)
+			for r in allReviews:
+				r.delete()
+			allViews = Viewership.objects.filter(viewer=request.user)
+			for v in allViews:
+				v.delete()
+			context_dict['message'] = "All of your show viewing history and the associated reviews have been deleted."
+		elif 'deleteAccount' in request.POST:
+			delUser = User.objects.get(username = request.user.username)
+			logout(request)
+			delUser.delete()
+			return HttpResponseRedirect(reverse('index'))
+		else:
+			context_dict['message'] = ""
 	return render(request, 'bingeworthy/user-account.html', context_dict)
 
 def show_reviews(request):
