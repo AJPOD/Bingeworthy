@@ -6,16 +6,12 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
 
-# TODO
-# Add slugs if deemed necessary for URLs (probs necessary, not sure how to implement yet)
-# Test it actually works
-# Maybe add Meta subclasses like in Rango
 
-class Genre(models.Model):
-    genre = models.CharField(max_length=30)
+class Genre(models.Model):  # mostly uninvolved in the core relationships
+    genre = models.CharField(max_length=30)  # just for convenience of filtering shows by genre
     
 
-class Platform(models.Model):
+class Platform(models.Model): # same reasons as Genre
     platform = models.CharField(max_length=30)
 
 
@@ -31,7 +27,7 @@ class Show(models.Model):
     picture = models.ImageField(upload_to='show_images', blank=True)
     platform = models.ForeignKey(Platform, on_delete=models.SET_NULL, null=True)
 
-    @property
+    @property # for these calculated fields see upvote_count of Review for explanation
     def star_rating(self):
         stars=0
         for r in Review.objects.filter(show__exact=self):

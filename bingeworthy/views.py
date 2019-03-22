@@ -16,8 +16,6 @@ def user_login(request):
 	if request.user.is_authenticated():
 		return HttpResponseRedirect(reverse('index'))
 	registered = False
-        	# copied from rango for now
-	# change final line to commented line for proper usage
 	context_dict = {}
 	if 'login' in request.POST:
 		if request.method == 'POST':
@@ -48,21 +46,16 @@ def user_login(request):
 				return HttpResponseRedirect(reverse('index'))
 	else:
 		user_form = UserForm()
-        #return HttpResponse("TEST login details supplied.")
 	return render(request, 'bingeworthy/login.html', {'user_form': user_form, 'registered': registered})
 
 
 def user_logout(request):
-	# PLACEHOLDER - COPIED FROM RANGO
-	# Don't think it requires changing
-	# Design doesn't show a logout splashscreen, p.inglis says not necessary
-	#
+	# p.inglis says no logout splashscreen necessary
 	# UPDATE: think there's no need for @login_required
 	# as it just returns to index regardless
 	#
     logout(request)
     return HttpResponseRedirect(reverse('index'))
-	#return HttpResponse("TEST LOGOUT")
 
 def contact_us(request):
 	context_dict = {}
@@ -78,6 +71,7 @@ def about(request):
 
 def search_results(request):
 	# not sure how we're going to do this one
+	# UPDATE: guess we did
 	query = request.POST.get('query')
 	if query == "" or query.isspace():
 		return render(request, 'bingeworthy/search.html', context={})
@@ -108,9 +102,6 @@ def genres(request):
 	context_dict = {'genres': genre_list, 'shows':shows_list}
 	return render(request, 'bingeworthy/genres.html', context_dict)
 
-def show_genre(request, genre_name_slug):
-	# can confirm it works, for now just makeup a variable in the url for the name
-	return HttpResponse("TEST GENRE PAGE " + genre_name_slug)
 
 def platforms(request):
 	platform_list = Platform.objects.all()
@@ -118,10 +109,6 @@ def platforms(request):
 	
 	context_dict = {'platform': platform_list, 'shows':shows_list}
 	return render(request, 'bingeworthy/platforms.html', context_dict)
-
-def show_platform(request, platform_name_slug):
-	# see show_genre
-	return HttpResponse("TEST PLATFORM PAGE " + platform_name_slug)
 
 def shows(request):
 	shows_list = Show.objects.order_by('-title')
@@ -250,8 +237,8 @@ def make_review(request, show_name_slug):
 			review = Review() # if the review form is correct, make a new review object 
 			review.reviewer = request.user # as its now safe to put that data in the new object
 			review.show = show # long story why only this works, much late night
-			review.review_body = review_body
-			review.title = review_title
+			review.review_body = review_body # maybe i could use .create but i can't bring myself to
+			review.title = review_title # change it at 4am and it works so who cares
 			review.star_rating = review_stars
 
 			review.save()
@@ -285,7 +272,6 @@ def user_profile(request, username):
 		context_dict = {'user': None, 'shows_watched': None, 'reviews': None}
 	
 	return render(request, 'bingeworthy/user-profile.html', context_dict)
-	# return HttpResponse("TEST USER PROFILE OF " + username)
 
 
 

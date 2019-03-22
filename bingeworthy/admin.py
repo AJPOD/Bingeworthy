@@ -5,7 +5,7 @@ from bingeworthy.models import * # sorry was just easier importing all
 # this stuff lets the admin interface see and interact with models
 
 class ReviewAdmin(admin.ModelAdmin):
-    # mainly made this to test upvote_count works -ajpod
+    # mainly made this to test upvote_count works
     list_display = ('title', 'upvote_count')
 
 class ShowAdmin(admin.ModelAdmin):
