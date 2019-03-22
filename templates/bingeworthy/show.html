@@ -280,12 +280,14 @@ width:33.33%;
 <div class="container">
     <hr style="border: 0.25px solid #909090;" />
 {% for review in reviews %}
+{% for key, values in review_votes.items %}
+{% if key == review %}
 <li class="media">
   <form id="vote" name={{review.reviewer.username}} class="form-inline" method="post" action="{% url 'shows_show' show.slug %}">
   {% csrf_token %}
   <input hidden name="author" value={{review.reviewer.username}}> <!--this is a hidden input so the form can send the name of the reviewer, otherwise you can't get the review object in views-->
-  <input type="image" value="submit" name="upvote" src={% static "images/upvote.png" %} class="mr-3" height="32" width="32">
-    <input type="image" value="submit" src={% static "images/downvote.png" %} class="mr-3" height="32" width="32" name="downvote" style = "margin-top:1.3%">
+  <input type="image" value="submit" name="upvote" src={% static values.0 %} class="mr-3" height="32" width="32">
+  <input type="image" value="submit" src={% static values.1 %} class="mr-3" height="32" width="32" name="downvote" style = "margin-top:1.3%">
   </form>
     <div class="media-body">
       <h5 class="mt-0 mb-1">{{review.title}} -- By <a href="{% url 'user_profile' review.reviewer.username %}">{{ review.reviewer }}</a> ({{review.upvote_count}})</h5>
@@ -294,6 +296,8 @@ width:33.33%;
     </div>
     <br>
   </li>
+{% endif %}
+{% endfor %}
 {% endfor %}
 </div>
 {% endblock %}
