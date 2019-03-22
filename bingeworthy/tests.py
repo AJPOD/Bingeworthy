@@ -154,5 +154,66 @@ class ShowShowViewTests(TestCase):
         self.assertContains(response, "fawlty")
         self.assertContains(response, "father-ted")
         self.assertContains(response, "ofah")
+    
+class MakeReviewViewTests(TestCase):
+    def test_review_redirects_if_user_not_authenticated(self):
+        show = Show(title="The Office (US)", blurb= "s", starring= "Michael Gary Scott", ep_runtime=40, num_episodes=100, num_season=7, year_released=1980)
+        show.save()
+        response = self.client.get(reverse('make_review', kwargs={'show_name_slug': show.slug}), follow=True)
+        self.assertContains(response, "Register")
+
+    def test_review_form_hidden_when_not_viewed(self):
+        show = Show(title="The Office (US)", blurb= "s", starring= "g", ep_runtime=40, num_episodes=100, num_season=7, year_released=1980)
+        show.save()
+        user = User(username="ajpod")
+        user.set_password("testaccount")
+        user.save()
+        self.client.login(username="ajpod", password="testaccount")  
+        response = self.client.get(reverse('make_review', kwargs={'show_name_slug': show.slug}), follow=True)
+        self.assertContains(response, "You have not watched this show.")
+        self.assertNotContains(response, "Review Body")
+
+    def test_review_form_hidden_when_already_reviewed(self):
+        show = Show(title="The Office (US)", blurb= "s", starring= "g", ep_runtime=40, num_episodes=100, num_season=7, year_released=1980)
+        show.save()
+        user = User(username="ajpod")
+        user.set_password("testaccount")
+        user.save()
+        self.client.login(username="ajpod", password="testaccount")  
+        viewer = Viewership(viewer=user, show=show, judgement=True)
+        viewer.save()
+        review = Review(reviewer=user, show=show, title="hello", review_body="hello", star_rating=8)
+        review.save()
+        response = self.client.get(reverse('make_review', kwargs={'show_name_slug': show.slug}), follow=True)
+        self.assertContains(response, "You have already made a review.")
+        self.assertNotContains(response, "Review Body")
+
+    def test_review_form_shows_otherwise(self):
+        show = Show(title="The Office (US)", blurb= "s", starring= "g", ep_runtime=40, num_episodes=100, num_season=7, year_released=1980)
+        show.save()
+        user = User(username="ajpod")
+        user.set_password("testaccount")
+        user.save()
+        self.client.login(username="ajpod", password="testaccount")  
+        viewer = Viewership(viewer=user, show=show, judgement=True)
+        viewer.save()
+        response = self.client.get(reverse('make_review', kwargs={'show_name_slug': show.slug}), follow=True)
+        self.assertContains(response, "Review Body")
+        self.assertNotContains(response, "You have already made a review.")
+        self.assertNotContains(response, "You have not watched this show.")       
+
+    def test_review_form_is_valid(self):
+        show = Show(title="The Office (US)", blurb= "s", starring= "g", ep_runtime=40, num_episodes=100, num_season=7, year_released=1980)
+        show.save()
+        user = User(username="ajpod")
+        user.set_password("testaccount")
+        review = {'title': 'hello', 'review_body': 'ding dong', 'star_rating': 8 }
+        form = ReviewForm(review)
+        self.assertTrue(form.is_valid())  
+
+
+
+    
+
 
 
