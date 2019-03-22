@@ -1,5 +1,6 @@
 from django.test import TestCase, Client
 from bingeworthy.models import *
+from bingeworthy.forms import *
 from django.core.urlresolvers import reverse
 
 # Create your tests here.
@@ -103,4 +104,55 @@ class IndexViewTests(TestCase):
         show.save()
         response = self.client.get(reverse('index'))
         self.assertContains(response, "Featured Show")
+
+class LoginViewTests(TestCase):
+    def test_login_redirects_if_user_authenticated(self):
+        show = Show(title="The Office (US)", blurb= "s", starring= "g", ep_runtime=40, num_episodes=100, num_season=7, year_released=1980)
+        show.save()
+        user = User(username="ajpod")
+        user.set_password("testaccount")
+        user.save()
+        self.client.login(username="ajpod", password="testaccount")
+        response = self.client.get(reverse('login'), follow=True)
+        self.assertContains(response, "Featured Show")
+    
+    def test_signup_form_is_valid(self):
+        self.user = {'email': "solskjaer@gmail.com", 'username': 'ajpod', 'password':'testpassword'}
+        form = UserForm(self.user)
+        self.assertTrue(form.is_valid())   
+
+class LogoutViewTests(TestCase):
+    def test_logout_redirects_if_not_logged_in(self):
+        show = Show(title="The Office (US)", blurb= "s", starring= "g", ep_runtime=40, num_episodes=100, num_season=7, year_released=1980)
+        show.save()
+        response = self.client.get(reverse('logout'), follow=True)
+        self.assertContains(response, "Featured Show")   
+
+    def test_logout_logs_out(self):
+        show = Show(title="The Office (US)", blurb= "s", starring= "g", ep_runtime=40, num_episodes=100, num_season=7, year_released=1980)
+        show.save()
+        user = User(username="ajpod")
+        user.set_password("testaccount")
+        user.save()
+        self.client.login(username="ajpod", password="testaccount")
+        response = self.client.get(reverse('logout'), follow=True)
+        self.assertContains(response, "Featured Show")         
+        self.assertNotIn('_auth_user_id', self.client.session)
+
+class ShowShowViewTests(TestCase):
+    def test_shows_show(self):
+        show1 = Show(title="The Office (US)", blurb= "s", starring= "Michael Gary Scott", ep_runtime=40, num_episodes=100, num_season=7, year_released=1980)
+        show1.save()
+        show2 = Show(title="ofah", blurb= "s", starring= "g", ep_runtime=40, num_episodes=100, num_season=7, year_released=1980)
+        show2.save()
+        show3 = Show(title="father ted", blurb= "s", starring= "g", ep_runtime=40, num_episodes=100, num_season=7, year_released=1980)
+        show3.save()
+        show4 = Show(title="fawlty", blurb= "s", starring= "g", ep_runtime=40, num_episodes=100, num_season=7, year_released=1980)
+        show4.save()              
+        response = self.client.get(reverse('shows_show', kwargs={'show_name_slug': show1.slug}))
+        self.assertContains(response, "Starring: Michael Gary Scott")
+        self.assertContains(response, "fawlty")
+        self.assertContains(response, "father-ted")
+        self.assertContains(response, "ofah")
+
 

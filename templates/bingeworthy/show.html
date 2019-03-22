@@ -245,7 +245,8 @@ width:33.33%;
                 </div>
                 <div class="rowmiddle">
                     <font size=5>{{show.blurb}}</font><br />
-                    Starring: {{ show.starring }}   --  Genre: <a href="{% url 'genres' %}#{{ show.genre.genre }}">{{ show.genre.genre }}</a>  --  Platform: <a href="{% url 'platforms' %}#{{ show.platform.platform }}">{{ show.platform.platform }}</a>
+                    Starring: {{ show.starring }}   --  Genre: <a href="{% url 'genres' %}#{{ show.genre.genre }}">{{ show.genre.genre }}</a>  --  Platform: <a href="{% url 'platforms' %}#{{ show.platform.platform }}">{{ show.platform.platform }}</a><br />
+                    Episodes: {{ show.num_episodes }}  --  Seasons: {{ show.num_season }}  --  Episode Runtime: {{ show.ep_runtime }} minutes
                   </div>
                   <div class="rowbottom">
                       <div class="mx-auto" style="width: 133px;">
