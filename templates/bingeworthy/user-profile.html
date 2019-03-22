@@ -136,6 +136,12 @@
       float:left;
       height: 100%;
     }
+    .halfcontainer {
+    width:80%;
+      position: relative;
+      float:left;
+      height: 100%;
+    }
     .divey {
     width:33.33%;
       float:left;
@@ -161,7 +167,17 @@
       margin-right: auto;
       text-align: center;
     }
-    
+    .containerl{
+text-align: center;
+width:50%;
+float:left;
+}
+.containerr{
+text-align: center;
+width:50%;
+float:right;
+
+}
 
     
     </style>
@@ -173,7 +189,7 @@
      <h3 >User Profile</h3>
     </div>
     <hr style="border: 0.25px solid black;" />
-
+        
       </div>
     
  
@@ -201,21 +217,24 @@
 
 <div class = "containerreview">
   
-  <div class = "rcontainer">
+  <div class = "containerl">
       <h5 class="mt-0 mb-1">Username:</h5>
       <hr style="border: 0.25px solid black;" />
 
-    
+  
     <div class = "rowtop" >
       {{user}}
     </div> 
+  </div>
     <h5 class="mt-0 mb-1">Email Address:</h5>
     <hr style="border: 0.25px solid black;" />
 
     <div class = "rowmiddle" >
       {{user.email}}
     </div> 
-
+    <h5 class="mt-0 mb-1">Total review score:</h5>
+    {{total}}
+<br><br>
     <h5 class="mt-0 mb-1">Recently watched shows:</h5>
     <hr style="border: 0.25px solid black;" />
 

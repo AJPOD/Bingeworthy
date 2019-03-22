@@ -258,7 +258,10 @@ def user_profile(request, username):
 		user_email = user.email
 		shows_watched = Viewership.objects.filter(viewer_id=user)
 		reviews = Review.objects.filter(reviewer=user)
-		print("hi")
+		total = 0
+		for review in reviews:
+			total = review.upvote_count + total
+
 		if user.email == "":
 			
 			user.email = "-No email set-"
@@ -267,7 +270,7 @@ def user_profile(request, username):
 		
 		
 
-		context_dict = {'user': user, 'shows_watched': shows_watched[:3], 'reviews': reviews}
+		context_dict = {'user': user, 'shows_watched': shows_watched[:3], 'reviews': reviews, 'total' : total }
 	except User.DoesNotExist:
 		context_dict = {'user': None, 'shows_watched': None, 'reviews': None}
 	

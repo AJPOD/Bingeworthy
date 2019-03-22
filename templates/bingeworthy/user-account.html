@@ -27,15 +27,55 @@ div.half{
     width:50%;
     margin:auto;
 }
+.container{
+text-align: center;
+width:80%;
+margin-left: auto;
+margin-right: auto;
+background-color: #f2f2f2;
+}
+.containerl{
+text-align: center;
+width:50%;
+float:left;
+}
+.containerr{
+text-align: center;
+width:50%;
+float:right;
+
+}
 </style>
 <br>
 <br>
+<div class = "container">
+    <div style="text-align:center">
+        <h3 >My Account</h3>
+       </div>
+       <hr style="border: 0.25px solid black;" />
+   
+<div class = "containerl">
 
-	<h1>My Account</h1>
-	<h2>{{ user }}</h2>
-	<div>
+    <h5 class="mt-0 mb-1">Username:</h5>
+    {{user}}
+</div>
+<div class = "containerr">
+    <h5 class="mt-0 mb-1">Email:</h5>
+       {{user.email}}
+       
+</div>
+
+
+       
+
+       <div class = "margin">
+           
 		<form name = "delete" method = "post">
 			{% csrf_token %}
-			<input class="btn" type="submit" role="button" value ="Delete">Delete Account</input></form>
-	</div>
+			<input class="btn" type="submit" role="button" value ="Delete Account"></input></form>
+    </div>
+    <br><br>
+    
+</div>
+
 {% endblock %}
