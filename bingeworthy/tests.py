@@ -154,6 +154,64 @@ class ShowShowViewTests(TestCase):
         self.assertContains(response, "fawlty")
         self.assertContains(response, "father-ted")
         self.assertContains(response, "ofah")
+
+    def test_watched_it_button_if_not_watched(self):
+        user = User(username="ajpod")
+        user.set_password("testaccount")
+        user.save()
+        show1 = Show(title="The Office (US)", blurb= "s", starring= "Michael Gary Scott", ep_runtime=40, num_episodes=100, num_season=7, year_released=1980)
+        show1.save()
+        show2 = Show(title="ofah", blurb= "s", starring= "g", ep_runtime=40, num_episodes=100, num_season=7, year_released=1980)
+        show2.save()
+        show3 = Show(title="father ted", blurb= "s", starring= "g", ep_runtime=40, num_episodes=100, num_season=7, year_released=1980)
+        show3.save()
+        show4 = Show(title="fawlty", blurb= "s", starring= "g", ep_runtime=40, num_episodes=100, num_season=7, year_released=1980)
+        show4.save()              
+        response = self.client.get(reverse('shows_show', kwargs={'show_name_slug': show1.slug}))
+        self.assertContains(response, "Watched it?")
+        self.assertNotContains(response, "I liked it!")    
+        self.assertNotContains(response, "I disliked it!")
+
+    def test_disliked_button_if_disliked(self):
+        user = User(username="ajpod")
+        user.set_password("testaccount")
+        user.save()
+        self.client.login(username="ajpod", password="testaccount")
+        show1 = Show(title="The Office (US)", blurb= "s", starring= "Michael Gary Scott", ep_runtime=40, num_episodes=100, num_season=7, year_released=1980)
+        show1.save()
+        show2 = Show(title="ofah", blurb= "s", starring= "g", ep_runtime=40, num_episodes=100, num_season=7, year_released=1980)
+        show2.save()
+        show3 = Show(title="father ted", blurb= "s", starring= "g", ep_runtime=40, num_episodes=100, num_season=7, year_released=1980)
+        show3.save()
+        show4 = Show(title="fawlty", blurb= "s", starring= "g", ep_runtime=40, num_episodes=100, num_season=7, year_released=1980)
+        show4.save()              
+        viewership = Viewership(show=show1, viewer=user, judgement=False)
+        viewership.save()
+        response = self.client.get(reverse('shows_show', kwargs={'show_name_slug': show1.slug}))
+        self.assertNotContains(response, "I liked it!")    
+        self.assertNotContains(response, "Watched it?")
+        self.assertContains(response, "I disliked it!")
+
+    def test_liked_button_if_liked(self):
+        user = User(username="ajpod")
+        user.set_password("testaccount")
+        user.save()
+        self.client.login(username="ajpod", password="testaccount")
+        show1 = Show(title="The Office (US)", blurb= "s", starring= "Michael Gary Scott", ep_runtime=40, num_episodes=100, num_season=7, year_released=1980)
+        show1.save()
+        show2 = Show(title="ofah", blurb= "s", starring= "g", ep_runtime=40, num_episodes=100, num_season=7, year_released=1980)
+        show2.save()
+        show3 = Show(title="father ted", blurb= "s", starring= "g", ep_runtime=40, num_episodes=100, num_season=7, year_released=1980)
+        show3.save()
+        show4 = Show(title="fawlty", blurb= "s", starring= "g", ep_runtime=40, num_episodes=100, num_season=7, year_released=1980)
+        show4.save()              
+        viewership = Viewership(show=show1, viewer=user, judgement=True)
+        viewership.save()
+        response = self.client.get(reverse('shows_show', kwargs={'show_name_slug': show1.slug}))
+        self.assertContains(response, "I liked it!")    
+        self.assertNotContains(response, "Watched it?")
+        self.assertNotContains(response, "I disliked it!")
+
     
 class MakeReviewViewTests(TestCase):
     def test_review_redirects_if_user_not_authenticated(self):
@@ -210,6 +268,7 @@ class MakeReviewViewTests(TestCase):
         review = {'title': 'hello', 'review_body': 'ding dong', 'star_rating': 8 }
         form = ReviewForm(review)
         self.assertTrue(form.is_valid())  
+
 
 
 
