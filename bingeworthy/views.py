@@ -306,5 +306,3 @@ def show_reviews(request):
 	reviews_list = Review.objects.order_by('-title')
 	context_dict = {"reviews":reviews_list}
 	return render(request, 'bingeworthy/reviews.html', context=context_dict)
-
-

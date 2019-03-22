@@ -144,7 +144,7 @@ def populate():
 		"ep_runtime": 40, "num_episodes": 8, "num_season": 1, "year_released": 2018}
 		
 	shetland = {"title": "Shetland", "genre": Genre.objects.get(genre = "Crime"), 
-		"blurb": "Detective helps Steland police solve a myterious murder.", 
+		"blurb": "Detective helps Steland police solve a mysterious murder.", 
 		"starring": "Douglas Henshall", "platform": Platform.objects.get(platform = "BBC iPlayer"), 
 		"ep_runtime": 60, "num_episodes": 26, "num_season": 5, "year_released": 2013}
 		
