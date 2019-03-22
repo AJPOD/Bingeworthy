@@ -55,6 +55,12 @@ body {
   
 }
 
+.rowmid{
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  padding-bottom: 20px;
+}
 
 .card-text {
   font-size: 85%;
@@ -99,50 +105,34 @@ hr {
 	
   </div>
 
-	{%for review in reviews %}
-      <div class="row">
-	  <hr style="border: 0.25px solid black; width:80%" />
-						<div class="card">
+  {%for review in reviews %}
+  {% for key, values in review_votes.items %}
+  {% if key == review %}
+    <div class="row">
+    <hr style="border: 0.25px solid black; width:80%" />
+    <hr style="border: 0.25px solid black; width:80%" />
+						<!-- <div class="card"> -->
+              <li class = "media">
 							<form id="vote" name={{review.reviewer.username}} class="form-inline" method="post" action="{% url 'reviews' %}">
 							{% csrf_token %}
 							<input hidden name="author" value={{review.reviewer.username}}> <!--this is a hidden input so the form can send the name of the reviewer, otherwise you can't get the review object in views-->
 							<input hidden name="showname" value={{review.show.slug}}>
-							<input type="image" value="submit" name="upvote" src={% static "images/upvote.png" %}  height="32" width="32"style = "margin-right:20px">
-							<input type="image" value="submit" src={% static "images/downvote.png" %}  height="32" width="32" name="downvote" >
+							<input type="image" value="submit" name="upvote" src={% static values.0 %}  height="32" width="32"style = "margin-right:20px">
+							<input type="image" value="submit" src={% static values.1 %}  height="32" width="32" name="downvote" style = "margin-right:30%">
 							</form>
-							
-							
-							
-							<h4 class="mt-0 mb-1"><a href="{% url 'shows_show' review.show.slug %}">{{review.show}}</a></h4>
-								
+							<div class="media-body">
+							  <h4 class="mt-0 mb-1"><a href="{% url 'shows_show' review.show.slug %}">{{review.show}}</a></h4>
 								<h5 class="mt-0 mb-1">{{review.title}} -- By <a href="{% url 'user_profile' review.reviewer.username %}">{{ review.reviewer }}</a> ({{review.upvote_count}})</h5>
-								{{review.review_body}}
-									
-							
-							
-							
-							
-							
-						
-								
-								
-								
-
-								
-						</div>
-						<hr style="border: 0.25px solid black; width:80%" />
-						
-						
-							    
-								
-								
-								
-								
-								
-								
-								
-								
-	</div>
+                {{review.review_body}}
+              </div>	
+            </li>		
+						<!-- </div> -->
+            <hr style="border: 0.25px solid black; width:80%" />
+            <hr style="border: 0.25px solid black; width:80%" />
+												
+  </div>
+  {% endif %}
+  {% endfor %}
 	{% endfor %}
 						
 </div>

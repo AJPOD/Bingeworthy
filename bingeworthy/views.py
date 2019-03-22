@@ -325,18 +325,34 @@ def my_account(request):
 
 def show_reviews(request):
 	print(request.POST)
+	context_dict = {}
 	if 'upvote.x' in request.POST:
 		if request.method == 'POST':
 			if not request.user.is_authenticated():
 				return HttpResponseRedirect(reverse('login'))
-			vote(True, request, request.POST.get("showname"))
+			temp =vote(True, request, request.POST.get("showname"))
 	elif 'downvote.x' in request.POST:
 		if request.method == 'POST':
 			if not request.user.is_authenticated():
 				return HttpResponseRedirect(reverse('login'))
-			vote(False, request, request.POST.get("showname"))
-	context_dict = {}
+			temp = vote(False, request, request.POST.get("showname"))
+
 	good_items = []
+	review_votes = {}
 	reviews_list = Review.objects.order_by('-title')
-	context_dict = {"reviews":reviews_list}
+	for ireview in reviews_list:
+		try:
+			votie = VotesOnReview.objects.get(voter = User.objects.get(username=request.user.username), review = ireview)
+		except:
+			votie = None
+		if votie == None:
+			review_votes[ireview] = ["images/upvote.png","images/downvote.png"]
+		elif votie.judgement == True:
+			review_votes[ireview] = ["images/upvotegreen.png","images/downvote.png"]
+		elif votie.judgement == False:
+			review_votes[ireview] = ["images/upvote.png","images/downvotered.png"]
+		else:
+			review_votes[ireview] = ["images/upvote.png","images/downvote.png"]
+	context_dict['review_votes'] = review_votes
+	context_dict["reviews"] = reviews_list
 	return render(request, 'bingeworthy/reviews.html', context=context_dict)
