@@ -44,7 +44,7 @@ class Show(models.Model):
             if v.judgement:
                 likes+=1
         if Viewership.objects.filter(show__exact=self).count() > 0:
-            return round(likes/Viewership.objects.filter(show__exact=self).count(), 2)*100
+            return round(float(likes)/float(Viewership.objects.filter(show__exact=self).count()), 2)*100
         else:
             return 0
 
