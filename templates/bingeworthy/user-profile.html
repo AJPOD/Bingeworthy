@@ -52,7 +52,7 @@
       
       width: 200px;
       margin-right: 5%;
-      margin-left: 3%;
+      margin-left: 4%;
       
       background-color: #f2f2f2;
       border: 0;
@@ -98,14 +98,6 @@
       background-color: #f2f2f2;
       padding: 20px;
       text-align-last: center;
-    }
-    .rcontainer {
-    width:70%;
-      border-radius: 5px;
-      background-color: #f2f2f2;
-      padding: 20px;
-      text-align-last: center;
-      float:left;
     }
     .rowtop{
       margin-left:auto;
@@ -186,7 +178,11 @@ width:50%;
 float:right;
 
 }
-</style>
+
+    
+    </style>
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'css/user-profile.css' %}">
 
     <br>
     <br>
@@ -195,7 +191,31 @@ float:right;
     </div>
     <hr style="border: 0.25px solid black;" />
         
-  
+      </div>
+    
+ 
+    
+    
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
 <div class = "containerreview">
   
   <div class = "containerl">
@@ -223,7 +243,7 @@ float:right;
       {%for shows in shows_watched %}
       
 
-      <div class = "divey">
+      <div class = "cardphat">
         <a href="{% url 'shows_show' shows.show.slug %}"><img src="{{ MEDIA_URL }}{{shows.show.slug}}-thumb.jpg" width = "200" height="200" alt="Show Thumbnail" ></a>
       </div>
 
@@ -232,8 +252,13 @@ float:right;
 
     </div>
     <hr style="border: 0.25px solid black;" />
+ 
+
 
   </div>
+    
+</div>
+
 
 <div class="container">
     <h5 class="mt-0 mb-1">Recent Reviews:</h5>
@@ -246,16 +271,41 @@ float:right;
                       
           
 
-          <a href="{% url 'shows_show' review.show.slug %}"><h5 class="mt-0 mb-1">{{review.show.title}}</h5></a>
+            
             <h5 class="mt-0 mb-1">{{review.title}} -- By {{ review.reviewer }} ({{review.upvote_count}})</h5>
             {{review.review_body}}
-
-        </div>         
+  
+          
+          
+          
+          
+          
+        
             
-  </div>
+            
+            
+
+
+        </div>
+
+        
+        
+              
+            
+            
+            
+            
+            
+            
+            
+            
+</div>
 
 {% endfor %}
-</div> 
+  </div> 
+
+
+
 
 
 <br>

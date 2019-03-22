@@ -1,0 +1,30 @@
+div.half{
+    float:left;
+    width:50%;
+    margin:auto;
+}
+.container{
+text-align: center;
+width:80%;
+margin-left: auto;
+margin-right: auto;
+background-color: #f2f2f2;
+}
+.containerl{
+text-align: center;
+width:50%;
+float:left;
+}
+.containerr{
+text-align: center;
+width:50%;
+float:right;
+
+}
+.smallcontainer{
+    width:50%;
+    margin-left: auto;
+    margin-right: auto;
+
+
+}

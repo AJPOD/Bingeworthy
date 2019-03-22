@@ -1,0 +1,171 @@
+body {
+  min-height: 75rem; /* Can be removed; just added for demo purposes */
+}
+
+.navbar {
+  margin-bottom: 0;
+}
+
+.jumbotron {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  margin-bottom: 0;
+  background-color: #fff;
+}
+
+.jumbotron p:last-child {
+  margin-bottom: 0;
+}
+
+.jumbotron-heading {
+  font-weight: 300;
+}
+
+.jumbotron .container {
+  max-width: 40rem;
+}
+
+.album {
+  min-height: 50rem; /* Can be removed; just added for demo purposes */
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  background-color: #f7f7f7;
+}
+
+.card {
+   
+  width: 100%;
+  margin-bottom:0px;
+  background-color: #f2f2f2;
+}
+
+.cardphat{
+  
+  width: 200px;
+  margin-right: 5%;
+  margin-left: 4%;
+  
+  background-color: #f2f2f2;
+  border: 0;
+  float:left;
+  height:100%;
+}
+
+.cardphater{
+  
+  width: 35%;
+  padding: .75rem;
+  margin-bottom: 2rem;
+    background-color: #f2f2f2;
+  border: 0;
+}
+div.cardmediumphat{
+  position:absolute;
+  width: 33.33%;
+  height:10%;
+
+  border: 0;
+  border:2px solid pink;
+}
+.card > img {
+  margin-bottom: .75rem;
+}
+
+.card-text {
+  font-size: 85%;
+}
+
+footer {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+footer p {
+  margin-bottom: .25rem;
+}
+.container {
+width:70%;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  text-align-last: center;
+}
+.rowtop{
+  margin-left:auto;
+  margin-right:auto;
+  width:100%;
+  height:16%;
+  margin-bottom:10px;
+}
+.rowmiddle{
+  margin-left:auto;
+  margin-right:auto;
+  width:100%;
+  height:16%;
+  margin-bottom:10px;
+}
+.rowbottom{
+  margin-left:auto;
+  margin-right:auto;
+  width:100%;
+  height:50%;
+}
+.col{
+  position:absolute;
+}
+
+.lcontainer {
+width:38%;
+  position: relative;
+  float:left;
+  height: 50%
+  
+}
+.rcontainer {
+width:100%;
+  position: relative;
+  float:left;
+  height: 100%;
+}
+.halfcontainer {
+width:80%;
+  position: relative;
+  float:left;
+  height: 100%;
+}
+.divey {
+width:33.33%;
+  float:left;
+  height:100%;
+}
+.diveylad {
+  width:23%;
+  float:left;
+  height:67%;
+  margin-top: 0.01%;
+  margin-bottom:3%;
+  margin-left:3%;
+  margin-right:7%;
+}
+
+.containerreview{
+  width:70%;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  height:500px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.containerl{
+text-align: center;
+width:50%;
+float:left;
+}
+.containerr{
+text-align: center;
+width:50%;
+float:right;
+
+}

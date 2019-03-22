@@ -1,0 +1,80 @@
+div.topcentre {
+  width: 200px;
+  height: 50px;
+  
+  position: absolute;
+  top:0;
+  
+  left: 0;
+  right: 0;
+    
+  margin: auto;
+}
+  div.middlecenter {
+  min-height: 75rem;
+  width: 1920px;
+  height: 1080px;
+
+  position: absolute;
+  top: 50%;
+  
+  left: 0;
+  right: 0;
+    
+  margin: auto;
+}
+img{
+    border-radius:5%
+  }
+div.whiteout {
+  width: 100%;
+  height: 150px;
+
+  position: absolute;
+  top: 25%;
+  
+  left: 0;
+  right: 0;
+    
+  margin: auto;
+  border: 3px solid #73ad21
+}
+div.bottomrow {
+  width: 60%;
+  height: 20px;
+  
+  position: absolute;
+  top:95%;
+  left:0;
+  right:0;
+  
+  margin: auto;
+
+  
+}
+div.imagegang {
+
+    height: 55px;
+    display:inline-block;
+    width:33.3%;
+    text-align:center;
+    left :0;
+    right:0;
+    
+    margin: auto;
+
+  float:left;
+  }
+
+  div.topright {
+
+  
+  position: absolute;
+  top:5;
+  
+  left: 5;
+  right: 0;
+  padding-right:1%;	
+  margin: auto;
+    
+  }
