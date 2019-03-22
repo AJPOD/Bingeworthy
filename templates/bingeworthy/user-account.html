@@ -45,6 +45,13 @@ width:50%;
 float:right;
 
 }
+.smallcontainer{
+    width:50%;
+    margin-left: auto;
+    margin-right: auto;
+
+
+}
 </style>
 <br>
 <br>
@@ -68,15 +75,22 @@ float:right;
 
        
 
-       <div class = "margin">
-           
-		<form name = "delete" method = "post">
-			{% csrf_token %}
-            <input class="btn" type="submit" role="button" value ="Delete Account"></input></form>
+       <div class = "smallcontainer">
             
+           <form method = "post">
+                {% csrf_token %}
+                <input name = "deleteAccount" class = "btn" type = "submit" value = "Delete Account"></form><br>
+            <form method = "post">
+                {% csrf_token %}
+                <input name = "deleteViews" class = "btn" type = "submit" value = "Delete All Viewed Shows"></form><br>
+            <form method = "post">
+                {% csrf_token %}
+                <input name = "deleteReviews" class = "btn" type = "submit" value = "Delete Views"></form><br>
+                       
+                
             
     </div>
-    <br><br>
+    <br>
     
 </div>
 

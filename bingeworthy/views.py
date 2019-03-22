@@ -133,6 +133,7 @@ def shows_all(request):
 
 def shows_show(request, show_name_slug):
 	print(request.POST)
+	context_dict = {}
 	if 'like.x' in request.POST:
 		if request.method == 'POST':
 			if not request.user.is_authenticated():
@@ -147,14 +148,16 @@ def shows_show(request, show_name_slug):
 		if request.method == 'POST':
 			if not request.user.is_authenticated():
 				return HttpResponseRedirect(reverse('login'))
-			vote(True, request, show_name_slug)
+			temp = vote(True, request, show_name_slug)
 	elif 'downvote.x' in request.POST:
 		if request.method == 'POST':
 			if not request.user.is_authenticated():
 				return HttpResponseRedirect(reverse('login'))
-			vote(False, request, show_name_slug)
-	context_dict = {}
+			temp = vote(False, request, show_name_slug)
+
+	
 	good_items = []
+	review_votes = {}
 	try:
 		show = Show.objects.get(slug=show_name_slug)
 		reviews = Review.objects.filter(show=show)
@@ -164,11 +167,26 @@ def shows_show(request, show_name_slug):
 		for item in shows_like_this:
 			if item != show:
 				good_items.append(item)
+
 		context_dict['show1'] = good_items[0]
 		context_dict['show2'] = good_items[1]
 		context_dict['show3'] = good_items[2]
 		context_dict['star_rating'] = show.star_rating
 		context_dict['like_ratio'] = show.like_ratio
+		for ireview in reviews:
+			try:
+				votie = VotesOnReview.objects.get(voter = User.objects.get(username=request.user.username), review = ireview)
+			except:
+				votie = None
+			if votie == None:
+				review_votes[ireview] = ["images/upvote.png","images/downvote.png"]
+			elif votie.judgement == True:
+				review_votes[ireview] = ["images/upvotegreen.png","images/downvote.png"]
+			elif votie.judgement == False:
+				review_votes[ireview] = ["images/upvote.png","images/downvotered.png"]
+			else:
+				review_votes[ireview] = ["images/upvote.png","images/downvote.png"]
+		context_dict['review_votes'] = review_votes
 		try:
 			viewed = Viewership.objects.get(viewer=request.user, show=show)
 		except:
