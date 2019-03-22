@@ -27,7 +27,7 @@ SECRET_KEY = 'p60xg*9zg7bmn1stcbgok1k6$j#tg%npo_#fyr1y2s30c%_71a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["ajpod.pythonanywhere.com"]
+ALLOWED_HOSTS = ["ajpod.pythonanywhere.com", "127.0.0.1"]
 
 
 # Application definition
