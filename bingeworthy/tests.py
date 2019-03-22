@@ -1,10 +1,10 @@
-from django.test import TestCase
+from django.test import TestCase, Client
 from bingeworthy.models import *
 from django.core.urlresolvers import reverse
 
 # Create your tests here.
 
-class ShowMethodTests(TestCase):
+class ShowModelTests(TestCase):
     def test_show_slug_creation(self):
         show = Show(title="Only Fools and Horses", blurb= "s", starring= "g", ep_runtime=40, num_episodes=100, num_season=7, year_released=1980)
         show.save()
@@ -96,5 +96,11 @@ class ReviewModelTests(TestCase):
         voteonreview = VotesOnReview(review=review, voter=user, judgement=True)
         voteonreview.save()
         self.assertEqual(review.upvote_count==1,True)
-    
-    
+
+class IndexViewTests(TestCase):
+    def test_index_view_loads(self):
+        show = Show(title="The Office (US)", blurb= "s", starring= "g", ep_runtime=40, num_episodes=100, num_season=7, year_released=1980)
+        show.save()
+        response = self.client.get(reverse('index'))
+        self.assertContains(response, "Featured Show")
+

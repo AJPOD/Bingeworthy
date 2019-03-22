@@ -191,13 +191,13 @@ width:33.33%;
                 
                 {% if viewed %}
                   {% if viewed.judgement %}
-                  <button style="float:right" class= "btn btn-secondary btn-lg" onclick="displayV()">I liked it! Vote again?</button>
+                  <button style="margin-left:35%; background-color: #439317; color:white" class= "btn btn-secondary btn-lg" onclick="displayV()">I liked it! Vote again?</button>
                   {% else %}
-                  <button style="float:right" class= "btn btn-secondary btn-lg" onclick="displayV()">I disliked it! Vote again?</button>
+                  <button style="margin-left:32%; background-color: #a30e0e; color:white" class= "btn btn-secondary btn-lg" onclick="displayV()">I disliked it! Vote again?</button>
                   {% endif %}
 
                   {% else %}
-                  <button style="float:right" class= "btn btn-secondary btn-lg" onclick="displayV()">Watched it?</button>
+                  <button style="margin-left:47%" class= "btn btn-secondary btn-lg" onclick="displayV()">Watched it?</button>
                   {% endif %}
                   <div id="viewer">
                   <button class="close" onclick="hideV()">Close</button>
